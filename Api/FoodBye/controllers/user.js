@@ -10,16 +10,26 @@ const User = require('../models/user');
 let controller = {
 
     register: (req, res, next) => {
-
+        let passwordD= req.body.passwordD;
+        let password= req.body.password;
         User.find({ email: req.body.email }, (err, result) => {
             if (result.length > 0) {
                 next(new error_types.InfoError("Este usuario ya existe en nuestra base de datos"));
-            } else {
+            }
+            else if (password!=passwordD) {
+                next(new error_types.Error400("las contraseñas no coinciden"));
+            }
+            else if(password.length < 6){
+                next(new error_types.Error400("la contraseña debe tener más de 6 caracteres"));
+            } 
+            else {
                 let hash = bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS));
                 let user = new User({
                     fullname: req.body.fullname,
                     email: req.body.email,
                     rol: req.body.rol,
+                    avatar: req.body.avatar,
+                    telefono: req.body.telefono,
                     password: hash
                 });
 
@@ -28,6 +38,8 @@ let controller = {
                     res.status(201).json({
                         id: user._id,
                         fullname: user.fullname,
+                        avatar: req.body.avatar,
+                        telefono: req.body.telefono,
                         email: user.email
                     });
                 });
