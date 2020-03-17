@@ -55,14 +55,11 @@ let controller = {
             }
         })(req, res)
     },
-    getUsuarios: async(req, res) => {
-
-        try {
-            let result = null;
-            res.status(200).json(result);
-        } catch (error) {
-            res.send(500, error.message);
-        }
+    getUsuarios: (req, res, next)=>{
+        User.find((err, users)=> {
+        if (err) return console.error(err);
+        res.status(200).json(users);
+    });
     }
 
 }
