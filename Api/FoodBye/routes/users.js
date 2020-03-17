@@ -1,9 +1,13 @@
+'use strict'
+
 const express = require('express')
 const router = express.Router()
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json({users: [{name: 'Timmy'}]})
-})
+const middleware = require('../middleware/index');
+const UserController = require('../controllers/user')
+
+router.post('/login', UserController.login);
+router.post('/register', UserController.register);
+router.get('/users', middleware.ensureAuthenticatedAndAdmin, UserController.getUsuarios);
 
 module.exports = router
