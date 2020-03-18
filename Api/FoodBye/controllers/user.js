@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const error_types = require('./error_types');
 const _ = require('lodash');
 const User = require('../models/user');
+const fs = require("fs");
 
 let controller = {
 
@@ -28,7 +29,10 @@ let controller = {
                     fullname: req.body.fullname,
                     email: req.body.email,
                     rol: "BIKER",
-                    avatar: req.body.avatar,
+                    avatar: {
+                        image:  new Buffer(fs.readFileSync(req.file.path.toString('base64')), 'base64'),
+                        contentType: req.file.mimetype
+                    },
                     phone: req.body.phone,
                     password: hash
                 });
@@ -46,7 +50,11 @@ let controller = {
         passport.authenticate("local", { session: false }, (error, user) => {
             if (error || !user) {
                 next(new error_types.Error404("El email o la contraseña no son correctos."))
-            } else {
+            }
+            else if(user.validated === false){
+                next(new error_types.Error404("No te puedes loguear porque no estás validado"))
+            }
+            else {
                 const payload = {
                     sub: user._id,
                     exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
