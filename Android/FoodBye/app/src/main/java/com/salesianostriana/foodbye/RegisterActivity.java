@@ -98,16 +98,15 @@ public class RegisterActivity extends AppCompatActivity {
                                     RequestBody.create(
                                             baos.toByteArray(), MediaType.parse(getContentResolver().getType(uriSelected)));
 
-                            MultipartBody.Part body =
+                            MultipartBody.Part avatar =
                                     MultipartBody.Part.createFormData("avatar", "avatar", requestFile);
 
                             RequestBody fullname = RequestBody.create(etFullname.getText().toString(), MultipartBody.FORM);
                             RequestBody email = RequestBody.create(etEmail.getText().toString(), MultipartBody.FORM);
                             RequestBody telefono = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
                             RequestBody password = RequestBody.create(etPassword1.getText().toString(), MultipartBody.FORM);
-                            RequestBody rol = RequestBody.create("BIKER", MultipartBody.FORM);
 
-                            Call<ResponseRegister> callRegister = service.register(body, fullname, email, rol, password, telefono);
+                            Call<ResponseRegister> callRegister = service.register(avatar, fullname, email, password, telefono);
 
                             callRegister.enqueue(new Callback<ResponseRegister>() {
                                 @Override
@@ -136,8 +135,8 @@ public class RegisterActivity extends AppCompatActivity {
                         RequestBody email = RequestBody.create(etEmail.getText().toString(), MultipartBody.FORM);
                         RequestBody telefono = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
                         RequestBody password = RequestBody.create(etPassword1.getText().toString(), MultipartBody.FORM);
-                        RequestBody rol = RequestBody.create("BIKER", MultipartBody.FORM);
-                        Call<ResponseRegister> registerWithOutUri = service.register(null, fullname, email,rol, password, telefono);
+
+                        Call<ResponseRegister> registerWithOutUri = service.register(null, fullname, email, password, telefono);
                         registerWithOutUri.enqueue(new Callback<ResponseRegister>() {
                             @Override
                             public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
