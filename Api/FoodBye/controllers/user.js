@@ -27,7 +27,7 @@ let controller = {
                 let user = new User({
                     fullname: req.body.fullname,
                     email: req.body.email,
-                    rol: req.body.rol,
+                    rol: "BIKER",
                     avatar: req.body.avatar,
                     phone: req.body.phone,
                     password: hash
@@ -36,7 +36,6 @@ let controller = {
                 user.save((err, user) => {
                     if (err) next(new error_types.Error400(err.message));
                     res.status(201).json({
-                        id: user._id,
                         user
                     });
                 });
