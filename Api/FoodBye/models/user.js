@@ -3,17 +3,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/*const imgSchema = new Schema({
-    data: String, 
+const imgSchema = new Schema({
+    image: String, 
     contentType: String
-});*/
+});
 
 const userSchema = Schema({
     fullname: String,
     created_date: { type: Date, default: Date.now },
     password: String,
     email: String,
-    avatar: String,
+    avatar: imgSchema,
     rol: { type: String, enum: ['BIKER', 'ADMIN'] },
     phone: String,
     validated: {
