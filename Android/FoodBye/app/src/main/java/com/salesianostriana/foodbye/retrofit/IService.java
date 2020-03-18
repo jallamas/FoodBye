@@ -20,7 +20,7 @@ public interface IService {
     @Multipart
     @POST("/api/register")
     Call<ResponseRegister> register(@Part MultipartBody.Part avatar,
-                                    @Part("fullname") RequestBody name,
+                                    @Part("fullname") RequestBody fullname,
                                     @Part("email") RequestBody email,
                                     @Part("rol") RequestBody password,
                                     @Part("telefono") RequestBody telefono);

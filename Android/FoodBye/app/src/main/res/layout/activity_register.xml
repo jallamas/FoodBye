@@ -6,4 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
+    <ImageButton
+        android:id="@+id/imageButtonRegisterFoto"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="24dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_add_immage" />
+
+    <EditText
+        android:id="@+id/editTextRegisterFullname"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/register_fullname"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonRegisterFoto" />
+
+    <EditText
+        android:id="@+id/editTextRegisterEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/register_email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterFullname"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterFullname"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterFullname" />
+
+    <EditText
+        android:id="@+id/editTextRegisterTelefono"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/register_telefono"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterEmail" />
+
+    <EditText
+        android:id="@+id/editTextRegisterPassword1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/hint_register_pass1"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterTelefono"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterTelefono"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterTelefono" />
+
+    <EditText
+        android:id="@+id/editTextRegisterPassword2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/hint_register_password2"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword1"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterPassword1"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword1" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="@string/button_registro"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword2"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterPassword2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_logo_foodbye" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
