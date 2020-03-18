@@ -101,12 +101,13 @@ public class RegisterActivity extends AppCompatActivity {
                             MultipartBody.Part body =
                                     MultipartBody.Part.createFormData("avatar", "avatar", requestFile);
 
-                            RequestBody fullname = RequestBody.create(MultipartBody.FORM, etFullname.getText().toString());
-                            RequestBody email = RequestBody.create(MultipartBody.FORM, etEmail.getText().toString());
-                            RequestBody telefono = RequestBody.create(MultipartBody.FORM, etTelefono.getText().toString());
-                            RequestBody password = RequestBody.create(MultipartBody.FORM, etPassword1.getText().toString());
+                            RequestBody fullname = RequestBody.create(etFullname.getText().toString(), MultipartBody.FORM);
+                            RequestBody email = RequestBody.create(etEmail.getText().toString(), MultipartBody.FORM);
+                            RequestBody telefono = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
+                            RequestBody password = RequestBody.create(etPassword1.getText().toString(), MultipartBody.FORM);
+                            RequestBody rol = RequestBody.create("BIKER", MultipartBody.FORM);
 
-                            Call<ResponseRegister> callRegister = service.register(body, fullname, email, password, telefono);
+                            Call<ResponseRegister> callRegister = service.register(body, fullname, email, rol, password, telefono);
 
                             callRegister.enqueue(new Callback<ResponseRegister>() {
                                 @Override
@@ -131,12 +132,12 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }else if(uriSelected == null) {
 
-                        RequestBody fullname = RequestBody.create(MultipartBody.FORM, etFullname.getText().toString());
-                        RequestBody email = RequestBody.create(MultipartBody.FORM, etEmail.getText().toString());
-                        RequestBody telefono = RequestBody.create(MultipartBody.FORM, etTelefono.getText().toString());
-                        RequestBody password = RequestBody.create(MultipartBody.FORM, etPassword1.getText().toString());
-
-                        Call<ResponseRegister> registerWithOutUri = service.register(null, fullname, email, password, telefono);
+                        RequestBody fullname = RequestBody.create(etFullname.getText().toString(), MultipartBody.FORM);
+                        RequestBody email = RequestBody.create(etEmail.getText().toString(), MultipartBody.FORM);
+                        RequestBody telefono = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
+                        RequestBody password = RequestBody.create(etPassword1.getText().toString(), MultipartBody.FORM);
+                        RequestBody rol = RequestBody.create("BIKER", MultipartBody.FORM);
+                        Call<ResponseRegister> registerWithOutUri = service.register(null, fullname, email,rol, password, telefono);
                         registerWithOutUri.enqueue(new Callback<ResponseRegister>() {
                             @Override
                             public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {

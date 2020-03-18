@@ -22,6 +22,7 @@ public interface IService {
     Call<ResponseRegister> register(@Part MultipartBody.Part avatar,
                                     @Part("fullname") RequestBody fullname,
                                     @Part("email") RequestBody email,
-                                    @Part("rol") RequestBody password,
+                                    @Part("rol") RequestBody rol,
+                                    @Part("password") RequestBody password,
                                     @Part("telefono") RequestBody telefono);
 }
