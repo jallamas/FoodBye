@@ -29,7 +29,7 @@ let controller = {
                     email: req.body.email,
                     rol: req.body.rol,
                     avatar: req.body.avatar,
-                    telefono: req.body.telefono,
+                    phone: req.body.phone,
                     password: hash
                 });
 
@@ -37,10 +37,7 @@ let controller = {
                     if (err) next(new error_types.Error400(err.message));
                     res.status(201).json({
                         id: user._id,
-                        fullname: user.fullname,
-                        avatar: req.body.avatar,
-                        telefono: req.body.telefono,
-                        email: user.email
+                        user
                     });
                 });
             }

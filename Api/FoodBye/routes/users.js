@@ -17,11 +17,17 @@ let storage = multer.diskStorage({
     }
   })
   
-let upload = multer({ storage: storage });
+let upload = multer({ storage: storage,
+  limits:{fileSize:10000000}
+});
 
 
 router.post('/login', UserController.login);
 router.post('/register', upload.single('avatar'), UserController.register);
 router.get('/users', middleware.ensureAuthenticatedAndAdmin, UserController.getUsuarios);
+router.get('/avatar/:img', (req, res, next) => {
+  let ruta = path.resolve('./','avatars/')
+  res.sendFile(ruta + '/' +  req.params.img);
+});
 
 module.exports = router
