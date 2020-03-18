@@ -1,6 +1,6 @@
 export interface RegisterResponse {
     id: string;
     fullname: string;
-    telefono: string;
+    phone: string;
     email: string;
 }

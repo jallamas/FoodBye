@@ -4,9 +4,14 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://localhost:3000/api/',
-  loginUrl: 'https://localhost:3000/api/login',
-  signinUrl: 'hhttps://localhost:3000/api/register',
+  //serverUrl: 'https://localhost:3000/api/',
+  //loginUrl: ' http://localhost:3000/api/login',
+  //signinUrl: 'https://localhost:3000api/register',
+
+  serverUrl: 'https://foodbye.herokuapp.com/api/',
+  loginUrl: ' https://foodbye.herokuapp.com/api/login',
+  signinUrl: 'https://foodbye.herokuapp.com/api/register',
+
   clientId: 'cemapp',
   clientSecret: 'secret'
 };
