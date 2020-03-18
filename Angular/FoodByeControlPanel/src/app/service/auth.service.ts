@@ -49,22 +49,4 @@ export class AuthService {
     localStorage.removeItem("tokenRefres");
     localStorage.removeItem("token");
   }
-
-  /*Register(registerDto? : RegisterDto): Observable<RegisterResponse> {
-    const params = new HttpParams()
-        .set('fullname', registerDto.fullname)
-        .set('telefono', registerDto.telefono)
-        .set('email', registerDto.email)
-        .set('rol', registerDto.rol)
-        .set('avatar', registerDto.avatar)
-        .set('password', registerDto.password)
-        .set('passwordD', registerDto.passwordD)
-    return this.http.post<RegisterResponse>('http://localhost:9000/oauth/token', params,
-      httpOptionsLogin
-    );
-  }*/
-
-
-
-
 }

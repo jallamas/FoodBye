@@ -16,7 +16,7 @@ export class UploadService {
     private http: HttpClient
   ) { }
 
-  register(formData:FormData) {
+  register(formData:FormData)  {
     return this.http.post<RegisterResponse>('https://foodbye.herokuapp.com/api/register', formData, {  
         reportProgress: true,  
         observe: 'events'  
@@ -28,7 +28,7 @@ export class UploadService {
   }
 
   public setFullname(fullname: string) {
-    localStorage.setFullname("fullname", fullname);
+    localStorage.setItem("fullname", fullname);
   }
 
   public getEmail(): string {
@@ -36,7 +36,7 @@ export class UploadService {
   }
 
   public setEmail(email: string) {
-    localStorage.setEmail("email", email);
+    localStorage.setItem("email", email);
   }
 
   public getPhone(): string {
@@ -44,7 +44,7 @@ export class UploadService {
   }
 
   public setPhone(phone: string) {
-    localStorage.setPhone("phone", phone);
+    localStorage.setItem("phone", phone);
   }
   
 }

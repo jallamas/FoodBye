@@ -11,9 +11,9 @@
             <div fxLayout="column" fxLayoutAlign="space-around">
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Username" [(ngModel)]="loginDto.username" [formControl]="form.controls['uname']">
+                  <input matInput placeholder="Username" [(ngModel)]="loginDto.username" [formControl]="form.controls['username']">
                 </mat-form-field>
-                <small *ngIf="form.controls['uname'].hasError('required') && form.controls['uname'].touched" class="mat-text-warn">Username
+                <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Username
                   is required.</small>
               </div>
               <div class="pb-1">
