@@ -7,6 +7,8 @@ const error_types = require('./error_types');
 const _ = require('lodash');
 const User = require('../models/user');
 const fs = require("fs");
+const { isValidObjectId } = require('mongoose');
+const mongoose = require('mongoose');
 
 let controller = {
 
@@ -92,7 +94,46 @@ let controller = {
         res.status(200).json(users);
         });
     },
-    getAvatar: ({ params }, res, next) =>
+    getUsuariosNoValidados: (req, res, next)=>{
+        User.find({validated:false},(err, users)=> {
+        if (err) return console.error(err);
+        res.status(200).json(users);
+        });
+    },
+    getUsuariosValidados: (req, res, next)=>{
+        User.find({validated:true},(err, users)=> {
+        if (err) return console.error(err);
+        res.status(200).json(users);
+        });
+    },
+    getUsuariosBikers: (req, res, next)=>{
+        User.find({rol:'BIKER'},(err, users)=> {
+        if (err) return console.error(err);
+        res.status(200).json(users);
+        });
+    },
+    putValidarNoValidar: (req,res,next)=>{
+        User.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'validated': req.body.validated}} ,{new: true}, (err, user) => {
+            if (err) next(new error_types.Error500(err.message));
+            else if (user == null) 
+                next(new error_types.Error404("No se ha encontrado ningún usuario con ese ID"))
+            else
+                res.status(200).json(user);
+        });
+    },
+    deleteUser: ({ params },res,next) =>{
+        User.findByIdAndRemove({ _id: mongoose.Types.ObjectId(params.id) }, (err, usuario) => {
+        if (err) return next(new error_types.Error500(err.message));
+        else if(!usuario) return next(new error_types.Error404("No se ha encontrado ningún usuario con ese ID"+params.id))
+        else{
+            const response = {
+                message: "Usuario borrado",
+            };
+            return res.status(200).send(response);
+        }
+        });
+    },
+    getAvatar: ({ params }, res, next) =>{
     User.findById(params.id)
       .then(notFound(res))
       .then((user) => {
@@ -105,6 +146,7 @@ let controller = {
       })
       // .then(success(res, 200))
       .catch(next)
+    }
 }
 
 const notFound = (res) => (entity) => {
