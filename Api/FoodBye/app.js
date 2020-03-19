@@ -24,11 +24,12 @@ db.once('open', () => {
     console.log('Conectado!');
 });
 
-passport.use(new LocalStrategy((email, password, done) => {
-    let busqueda = { email: email };
+passport.use(new LocalStrategy((username, password, done) => {
+    let busqueda = { email: username };
 
     User.findOne(busqueda, (err, user) => {
         if (err) return done(null, false);
+        if(user==null) return done(null, false);
         if (!bcrypt.compareSync(password, user.password)) {
             return done(null, false);
         }
@@ -54,6 +55,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(passport.initialize())
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
 
 app.use('/api/', user_routes);
 app.use(middleware.errorHandler);
