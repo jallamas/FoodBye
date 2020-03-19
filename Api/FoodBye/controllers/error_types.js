@@ -38,7 +38,14 @@ const error_types = {
         this.message = err.message;
         this.stack = err.stack;
         return this;
-    } 
+    },
+    Error500: function(msg){ //bad request
+        let err = Error.apply(this, [msg]);
+        this.name = err.name = "Error500";
+        this.message = err.message;
+        this.stack = err.stack;
+        return this;
+    },
 };
 
 module.exports = error_types;
