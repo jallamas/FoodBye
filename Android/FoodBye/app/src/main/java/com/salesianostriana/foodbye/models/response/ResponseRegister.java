@@ -6,18 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResponseRegister {
 
-    @SerializedName("id")
+    @SerializedName("userResponse")
     @Expose
-    private String id;
-    @SerializedName("fullname")
-    @Expose
-    private String fullname;
-    @SerializedName("telefono")
-    @Expose
-    private String telefono;
-    @SerializedName("email")
-    @Expose
-    private String email;
+    private UserResponse userResponse;
 
     /**
      * No args constructor for use in serialization
@@ -28,49 +19,19 @@ public class ResponseRegister {
 
     /**
      * 
-     * @param id
-     * @param fullname
-     * @param telefono
-     * @param email
+     * @param userResponse
      */
-    public ResponseRegister(String id, String fullname, String telefono, String email) {
+    public ResponseRegister(UserResponse userResponse) {
         super();
-        this.id = id;
-        this.fullname = fullname;
-        this.telefono = telefono;
-        this.email = email;
+        this.userResponse = userResponse;
     }
 
-    public String getId() {
-        return id;
+    public UserResponse getUserResponse() {
+        return userResponse;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserResponse(UserResponse userResponse) {
+        this.userResponse = userResponse;
     }
 
 }

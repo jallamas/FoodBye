@@ -2,7 +2,7 @@ package com.salesianostriana.foodbye.retrofit;
 
 import com.salesianostriana.foodbye.models.request.RequestLogin;
 import com.salesianostriana.foodbye.models.response.ResponseLogin;
-import com.salesianostriana.foodbye.models.response.ResponseRegister;
+import com.salesianostriana.foodbye.models.response.UserResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -19,9 +19,10 @@ public interface IService {
 
     @Multipart
     @POST("/api/register")
-    Call<ResponseRegister> register(@Part MultipartBody.Part avatar,
-                                    @Part("fullname") RequestBody fullname,
-                                    @Part("email") RequestBody email,
-                                    @Part("password") RequestBody password,
-                                    @Part("telefono") RequestBody telefono);
+    Call<UserResponse> register(@Part MultipartBody.Part avatar,
+                                @Part("fullname") RequestBody fullname,
+                                @Part("email") RequestBody email,
+                                @Part("password") RequestBody password,
+                                @Part("passwordD") RequestBody passwordD,
+                                @Part("phone") RequestBody phone);
 }

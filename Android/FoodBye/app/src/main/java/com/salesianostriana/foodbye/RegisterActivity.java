@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salesianostriana.foodbye.models.response.ResponseRegister;
+import com.salesianostriana.foodbye.models.response.UserResponse;
 import com.salesianostriana.foodbye.retrofit.IService;
 import com.salesianostriana.foodbye.retrofit.ServiceGenerator;
 
@@ -26,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -103,14 +103,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                             RequestBody fullname = RequestBody.create(etFullname.getText().toString(), MultipartBody.FORM);
                             RequestBody email = RequestBody.create(etEmail.getText().toString(), MultipartBody.FORM);
-                            RequestBody telefono = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
+                            RequestBody phone = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
                             RequestBody password = RequestBody.create(etPassword1.getText().toString(), MultipartBody.FORM);
+                            RequestBody passwordD = RequestBody.create(etPassword2.getText().toString(), MultipartBody.FORM);
 
-                            Call<ResponseRegister> callRegister = service.register(avatar, fullname, email, password, telefono);
+                            Call<UserResponse> callRegister = service.register(avatar, fullname, email, password, passwordD, phone);
 
-                            callRegister.enqueue(new Callback<ResponseRegister>() {
+                            callRegister.enqueue(new Callback<UserResponse>() {
                                 @Override
-                                public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                     if (response.isSuccessful()) {
                                         Toast.makeText(RegisterActivity.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -120,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                                 @Override
-                                public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                                public void onFailure(Call<UserResponse> call, Throwable t) {
                                     Toast.makeText(RegisterActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -133,20 +134,21 @@ public class RegisterActivity extends AppCompatActivity {
 
                         RequestBody fullname = RequestBody.create(etFullname.getText().toString(), MultipartBody.FORM);
                         RequestBody email = RequestBody.create(etEmail.getText().toString(), MultipartBody.FORM);
-                        RequestBody telefono = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
+                        RequestBody phone = RequestBody.create(etTelefono.getText().toString(), MultipartBody.FORM);
                         RequestBody password = RequestBody.create(etPassword1.getText().toString(), MultipartBody.FORM);
+                        RequestBody passwordD = RequestBody.create(etPassword2.getText().toString(), MultipartBody.FORM);
 
-                        Call<ResponseRegister> registerWithOutUri = service.register(null, fullname, email, password, telefono);
-                        registerWithOutUri.enqueue(new Callback<ResponseRegister>() {
+                        Call<UserResponse> registerWithOutUri = service.register(null, fullname, email, password, passwordD, phone);
+                        registerWithOutUri.enqueue(new Callback<UserResponse>() {
                             @Override
-                            public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 if(response.isSuccessful()){
                                     Toast.makeText(RegisterActivity.this, "Registrado correctamente", Toast.LENGTH_SHORT).show();
                                     onBackPressed();
                                 }
                             }
                             @Override
-                            public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                            public void onFailure(Call<UserResponse> call, Throwable t) {
                                 Toast.makeText(RegisterActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
                             }
                         });
