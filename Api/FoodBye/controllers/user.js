@@ -75,7 +75,6 @@ let controller = {
                     sub: user._id,
                     exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
                     email: user.email,
-
                 };
 
                 const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET, { algorithm: process.env.JWT_ALGORITHM });
@@ -91,9 +90,29 @@ let controller = {
         User.find((err, users)=> {
         if (err) return console.error(err);
         res.status(200).json(users);
-    });
-    }
-
+        });
+    },
+    getAvatar: ({ params }, res, next) =>
+    User.findById(params.id)
+      .then(notFound(res))
+      .then((user) => {
+        if (user.avatar != undefined) {
+            res.contentType(user.avatar.contentType)
+            res.send(Buffer.from(user.avatar.data, 'base64'))
+        }
+        else
+          res.sendStatus(404)
+      })
+      // .then(success(res, 200))
+      .catch(next)
 }
+
+const notFound = (res) => (entity) => {
+    if (entity) {
+      return entity
+    }
+    res.status(404).end()
+    return null
+  }
 
 module.exports = controller;
