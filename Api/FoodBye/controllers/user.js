@@ -43,10 +43,6 @@ let controller = {
                   }
 
                 user.save((err, user) => {
-                    /* if (user.avatar!= undefined){
-                        res.contentType(user.avatar.contentType)
-                        res.send(Buffer.from(user.avatar.data,'base64'))
-                    } */
                     let userResponse={
                         id: user.id,
                         fullname: user.fullname,
@@ -144,8 +140,28 @@ let controller = {
         else
           res.sendStatus(404)
       })
-      // .then(success(res, 200))
       .catch(next)
+    },
+    editUser: function(req, res) {
+        User.findById(req.params.id, function(err, user) {
+            user.fullname   = req.body.fullname;
+            user.email    = req.body.email;
+            user.phone = req.body.phone;
+            
+            let userResponse={
+                id: user.id,
+                fullname: user.fullname,
+                email:  user.email,
+                rol: user.rol,
+                avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                validated: user.validated,
+                phone:user.phone
+            }
+            user.save(function(err) {
+                if(err) return res.status(500).send(err.message);
+            res.status(200).jsonp(userResponse);
+            });
+        });
     }
 }
 
