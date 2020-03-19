@@ -30,7 +30,9 @@
               "src/assets/fonts/pe/css/pe-icon-set-weather.css",
               "src/assets/fonts/data-table/icons.css",
               "src/assets/styles/highlightjs/material-light.css",
-              "src/assets/styles/app.scss"
+              "src/assets/styles/app.scss",
+              "src/assets/styles/scss/custom.scss"
+
             ],
             "scripts": [
               "node_modules/hammerjs/hammer.min.js",
@@ -152,5 +154,8 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "analytics": "49cb5b03-849f-4cad-af18-05d46a8fb92d"
   }
 }

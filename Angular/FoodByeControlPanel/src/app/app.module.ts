@@ -21,7 +21,8 @@ import {
   MatSidenavModule,
   MatSlideToggleModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule
 } from '@angular/material';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -41,6 +42,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { RouterModule } from '@angular/router';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { UsuariosService } from './service/usuarios.service';
+import { AuthService } from './service/auth.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -90,6 +93,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatListModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatTableModule,
     MatProgressBarModule,
     FlexLayoutModule,
     BidiModule,
@@ -103,7 +107,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    UsuariosService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
