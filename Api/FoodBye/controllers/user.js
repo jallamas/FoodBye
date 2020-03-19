@@ -29,18 +29,34 @@ let controller = {
                     fullname: req.body.fullname,
                     email: req.body.email,
                     rol: "BIKER",
-                    avatar: {
-                        image:  new Buffer(fs.readFileSync(req.file.path.toString('base64')), 'base64'),
-                        contentType: req.file.mimetype
-                    },
                     phone: req.body.phone,
                     password: hash
                 });
 
+                if (req.file != undefined) {
+                    user.avatar = {
+                        data: req.file.buffer.toString('base64'),
+                        contentType: req.file.mimetype
+                      }
+                  }
+
                 user.save((err, user) => {
+                    /* if (user.avatar!= undefined){
+                        res.contentType(user.avatar.contentType)
+                        res.send(Buffer.from(user.avatar.data,'base64'))
+                    } */
+                    let userResponse={
+                        id: user.id,
+                        fullname: user.fullname,
+                        email:  user.email,
+                        rol: user.rol,
+                        avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                        validated: user.validated,
+                        phone:user.phone
+                    }
                     if (err) next(new error_types.Error400(err.message));
                     res.status(201).json({
-                        user
+                        userResponse
                     });
                 });
             }
@@ -59,7 +75,6 @@ let controller = {
                     sub: user._id,
                     exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
                     email: user.email,
-
                 };
 
                 const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET, { algorithm: process.env.JWT_ALGORITHM });
@@ -75,9 +90,29 @@ let controller = {
         User.find((err, users)=> {
         if (err) return console.error(err);
         res.status(200).json(users);
-    });
-    }
-
+        });
+    },
+    getAvatar: ({ params }, res, next) =>
+    User.findById(params.id)
+      .then(notFound(res))
+      .then((user) => {
+        if (user.avatar != undefined) {
+            res.contentType(user.avatar.contentType)
+            res.send(Buffer.from(user.avatar.data, 'base64'))
+        }
+        else
+          res.sendStatus(404)
+      })
+      // .then(success(res, 200))
+      .catch(next)
 }
+
+const notFound = (res) => (entity) => {
+    if (entity) {
+      return entity
+    }
+    res.status(404).end()
+    return null
+  }
 
 module.exports = controller;
