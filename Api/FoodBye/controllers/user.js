@@ -112,18 +112,11 @@ let controller = {
         res.status(200).json(users);
         });
     },
-    getUsuariosBikers: (req, res, next)=>{
-        User.find({rol:'BIKER'},(err, users)=> {
-        if (err) return console.error(err);
-        res.status(200).json(users);
-        });
-    },
-    putValidarUsuario: ({ params },res,next)=>{
-        User.findByIdAndUpdate (mongoose.Types.ObjectId(params.id), {$addToSet: {validated:true}} ,{new: true}, (err, user) => {
+    putValidarNoValidar: (req,res,next)=>{
+        User.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'validated': req.body.validated}} ,{new: true}, (err, user) => {
             if (err) next(new error_types.Error500(err.message));
-            if (user == null) 
+            else if (user == null) 
                 next(new error_types.Error404("No se ha encontrado ningún usuario con ese ID"))
-            else if(user.validated==true) next(new error_types.Error400("Ya está validado"))
             else
                 res.status(200).json(user);
         });
