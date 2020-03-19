@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "896ca07f-b8a0-4682-810f-97a1a651db0b",
+		"name": "FoodBye",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registro",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fullname",
+							"value": "jose",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jose5@usuario.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "654654654",
+							"type": "text"
+						},
+						{
+							"key": "passwordD",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/josel/Pictures/san-patricio.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://foodbye.herokuapp.com/api/register/",
+					"protocol": "https",
+					"host": [
+						"foodbye",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin@admin.com\",\n\t\"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://foodbye.herokuapp.com/api/login",
+					"protocol": "https",
+					"host": [
+						"foodbye",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado todos usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ1NjcxNjU5OTUsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.74U26jrBtoSON863_r3DicPFQ7zgHYnJ0UWWFoRL4uk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://foodbye.herokuapp.com/api/users",
+					"protocol": "https",
+					"host": [
+						"foodbye",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

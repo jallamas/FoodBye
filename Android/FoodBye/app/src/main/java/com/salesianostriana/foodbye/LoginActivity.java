@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         if(SharedPreferencesManager.getSomeStringValue("token") != null){
             Intent intentMainActivity = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intentMainActivity);
+            finish();
         }
 
         retrofitInit();
