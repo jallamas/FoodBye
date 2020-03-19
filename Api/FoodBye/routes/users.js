@@ -6,9 +6,11 @@ const router = express.Router()
 const middleware = require('../middleware/index');
 const UserController = require('../controllers/user')
 const path = require('path');
-const multer = require('multer');
+const multer = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({ storage })
 
-let storage = multer.diskStorage({
+/* let storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'avatars/')
     },
@@ -19,7 +21,7 @@ let storage = multer.diskStorage({
   
 let upload = multer({ storage: storage,
   limits:{fileSize:10000000}
-});
+}); */
 
 
 router.post('/login', UserController.login);

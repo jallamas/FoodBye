@@ -29,18 +29,34 @@ let controller = {
                     fullname: req.body.fullname,
                     email: req.body.email,
                     rol: "BIKER",
-                    avatar: {
-                        image:  new Buffer(fs.readFileSync(req.file.path.toString('base64')), 'base64'),
-                        contentType: req.file.mimetype
-                    },
                     phone: req.body.phone,
                     password: hash
                 });
 
+                if (req.file != undefined) {
+                    user.avatar = {
+                        data: req.file.buffer.toString('base64'),
+                        contentType: req.file.mimetype
+                      }
+                  }
+
                 user.save((err, user) => {
+                    /* if (user.avatar!= undefined){
+                        res.contentType(user.avatar.contentType)
+                        res.send(Buffer.from(user.avatar.data,'base64'))
+                    } */
+                    let userResponse={
+                        id: user.id,
+                        fullname: user.fullname,
+                        email:  user.email,
+                        rol: user.rol,
+                        avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                        validated: user.validated,
+                        phone:user.phone
+                    }
                     if (err) next(new error_types.Error400(err.message));
                     res.status(201).json({
-                        user
+                        userResponse
                     });
                 });
             }
