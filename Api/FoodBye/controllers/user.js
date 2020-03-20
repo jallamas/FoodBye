@@ -108,8 +108,17 @@ let controller = {
         res.status(200).json(users);
         });
     },
-    putValidarNoValidar: (req,res,next)=>{
-        User.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'validated': req.body.validated}} ,{new: true}, (err, user) => {
+    putValidarUsuario: (req,res,next)=>{
+        User.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'validated': true}} ,{new: true}, (err, user) => {
+            if (err) next(new error_types.Error500(err.message));
+            else if (user == null) 
+                next(new error_types.Error404("No se ha encontrado ningún usuario con ese ID"))
+            else
+                res.status(200).json(user);
+        });
+    },
+    putInhabilitar: (req,res,next)=>{
+        User.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'validated': false}} ,{new: true}, (err, user) => {
             if (err) next(new error_types.Error500(err.message));
             else if (user == null) 
                 next(new error_types.Error404("No se ha encontrado ningún usuario con ese ID"))
