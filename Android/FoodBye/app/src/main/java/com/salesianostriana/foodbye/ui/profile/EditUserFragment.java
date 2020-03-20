@@ -1,5 +1,6 @@
 package com.salesianostriana.foodbye.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,6 +96,14 @@ public class EditUserFragment extends Fragment {
                             .load(glideUrl)
                             .into(ivFoto);
                 }
+            }
+        });
+
+        tvChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), EditPasswordActivity.class);
+                startActivity(i);
             }
         });
 

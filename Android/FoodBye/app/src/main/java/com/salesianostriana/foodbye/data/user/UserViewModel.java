@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.salesianostriana.foodbye.models.request.RequestEditPassword;
 import com.salesianostriana.foodbye.models.request.RequestEditUser;
 import com.salesianostriana.foodbye.models.response.UserResponse;
 
@@ -31,5 +32,9 @@ public class UserViewModel extends AndroidViewModel {
     public MutableLiveData<UserResponse> getUserById(String userId){
         user = userRepository.getUserById(userId);
         return user;
+    }
+
+    public void updatePassword(String userId, RequestEditPassword req){
+        userRepository.updatePassword(userId, req);
     }
 }
