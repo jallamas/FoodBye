@@ -9,4 +9,5 @@ export interface Usuario{
     rol: string;
     validated: boolean;
     created_date: Date;
+    password:string;
 }

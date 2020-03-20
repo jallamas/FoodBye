@@ -7,6 +7,7 @@ import { Observable, Observer } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { AfterViewInit } from '@angular/core';
+import { UsuarioDto } from 'src/app/dto/usuario-dto';
 
 @Component({
   selector: 'app-todos-usuarios',
@@ -18,12 +19,11 @@ export class TodosUsuariosComponent implements OnInit {
   listadoDeUsuariosBikers: MatTableDataSource<Usuario>;
   listadoDeUsuariosValidados: MatTableDataSource<Usuario>;
   listadoDeUsuariosNoValidados: MatTableDataSource<Usuario>;
-  mySubscription: any;
 
   columsToDisplay: string[] = ['avatar', 'fullname', 'email'];
   columsToDisplayV: string[] = ['avatar', 'fullname','validar', 'email'];
 
-  @ViewChild('paginator', {static: true}) paginator: MatPaginator;
+  @ViewChild('paginatorUsuarios', {static: true}) paginatorUsuarios: MatPaginator;
   @ViewChild('paginatorbikers', {static: true}) paginatorbikers: MatPaginator;
   @ViewChild('paginatorValidados', {static: true}) paginatorValidados: MatPaginator;
   @ViewChild('paginatorSinValidar', {static: true}) paginatorSinValidar: MatPaginator;
@@ -40,7 +40,7 @@ export class TodosUsuariosComponent implements OnInit {
 }
 
 ngAfterViewInit() {
-  this.listadoDeUsuarios.paginator = this.paginator;
+  this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
   this.listadoDeUsuariosBikers.paginator = this.paginatorbikers;
   this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
   this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
@@ -50,7 +50,7 @@ _setDataSource(indexNumber) {
   setTimeout(() => {
     switch (indexNumber) {
       case 0:
-        !this.listadoDeUsuarios.paginator ? this.listadoDeUsuarios.paginator = this.paginator : null;
+        !this.listadoDeUsuarios.paginator ? this.listadoDeUsuarios.paginator = this.paginatorUsuarios : null;
         break;
       case 1:
         !this.listadoDeUsuariosBikers.paginator ? this.listadoDeUsuariosBikers.paginator = this.paginatorbikers : null;
@@ -65,19 +65,13 @@ _setDataSource(indexNumber) {
   });
 }
 
-ngOnDestroy() {
-  if (this.mySubscription) {
-    this.mySubscription.unsubscribe();
-  }
-}
-
 loadUsuariosTotales(){
     this.usuarioService.listarTodosUsuarios().subscribe(resp =>{
       resp.forEach(element=>{
         this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
         });
       this.listadoDeUsuarios = new MatTableDataSource<Usuario>(resp);
-      this.listadoDeUsuarios.paginator = this.paginator;
+      this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
     });
   });
 }
@@ -115,18 +109,15 @@ loadUsuariosSinValidar(){
 });
 }
 
-botonValidar(usuario: Usuario){
-  if (usuario.validated==false){
-    usuario.validated=true;
-    this.usuarioService.ValidarUsuario(usuario).subscribe(resp2=>{
-      window.location.reload();
-    });
+botonValidar(user: Usuario){
+  if (user.validated==false){
+
+    this.usuarioService.validarUsuario(user._id,user.validated).subscribe(resp2=>{
+      });
   }else{
-    usuario.validated=false;
-    this.usuarioService.ValidarUsuario(usuario).subscribe(resp3=>{      
-      window.location.reload();
+    user.validated=false;
+    this.usuarioService.validarUsuario(user._id,user.validated).subscribe(resp3=>{     
     });
   }
 }
-
 }

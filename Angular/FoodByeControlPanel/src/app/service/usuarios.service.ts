@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Usuario } from '../models/usuario.interface';
 import { Observable } from 'rxjs';
 import { Avatar } from '../models/avatar.interface';
+import { UsuarioDto } from '../dto/usuario-dto';
 
 
 const urlUsers = 'https://foodbye.herokuapp.com/api/users/';
-const avatar = 'https://foodbye.herokuapp.com/api/avatar/';
+const urlUser = 'https://foodbye.herokuapp.com/api/user/';
+const urlAvatar = 'https://foodbye.herokuapp.com/api/avatar/';
+const local ="http://localhost:3000/api/users/"
 
 const requestOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json, charset=utf-8',
     'Authorization': 'Bearer '+ localStorage.getItem('token')
-  })
+})
 };
 
 const requestOptions2 = {
   headers: new HttpHeaders({
-    'Content-Type': 'text/xml',
+    'Content-Type': 'image/jpeg, charset=utf-8',
     'Authorization': 'Bearer '+ localStorage.getItem('token')
   })
 };
@@ -28,7 +31,7 @@ const requestOptions2 = {
 })
 
 export class UsuariosService {
-
+idUser:string;
   constructor(
     private config: ConfigService,
     private http: HttpClient
@@ -36,38 +39,52 @@ export class UsuariosService {
 
   listarTodosUsuarios(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers,requestOptions
+      local,requestOptions
     );
   }
 
   listarBikers(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers+"bikers",requestOptions
+      local+"bikers",requestOptions
     );
   }
 
   listarValidados(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers+"validated",requestOptions
+      local+"validated",requestOptions
     );
   }
   listarSinValidar(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers+"unvalidated",requestOptions
+      local+"unvalidated",requestOptions
     );
   }
 
-  ValidarUsuario(usurioValidado:Usuario): Observable<Usuario>{
-    return this.http.put<Usuario>(
-      urlUsers+usurioValidado._id,
-      usurioValidado.validated,
-      requestOptions
+  validarUsuario(usurioValidadoId:String, usuarioValidated:boolean): Observable<Boolean>{
+
+    return this.http.put<Boolean>(
+      local+usurioValidadoId,
+      usuarioValidated,
+      requestOptions,
     );
   }
 
-  getAvatar(_id:string){
-    return this.http.get(
-      avatar+_id,requestOptions2
+  getAvatar(_id:string): Observable<Blob>{
+    return this.http.get<Blob>(
+      urlAvatar+_id,requestOptions2
     );
+  }
+
+  getUsuario(_id:string): Observable<Usuario>{
+    return this.http.get<Usuario>(
+      local+_id,requestOptions
+    );
+  }
+  public getId(): string {
+    return this.idUser;
+  }
+
+  public setId(_id: string) {
+    this.idUser==_id;
   }
 }
