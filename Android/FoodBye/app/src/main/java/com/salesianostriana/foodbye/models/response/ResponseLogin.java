@@ -12,6 +12,10 @@ public class ResponseLogin {
     @SerializedName("token")
     @Expose
     private String token;
+    @SerializedName("userId")
+    @Expose
+    private String userId;
+
 
     /**
      * No args constructor for use in serialization
@@ -24,11 +28,13 @@ public class ResponseLogin {
      * 
      * @param email
      * @param token
+     * @param userId
      */
-    public ResponseLogin(String email, String token) {
+    public ResponseLogin(String email, String token, String userId) {
         super();
         this.email = email;
         this.token = token;
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -45,6 +51,14 @@ public class ResponseLogin {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 }

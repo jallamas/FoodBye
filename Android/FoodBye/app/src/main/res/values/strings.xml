@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">FoodBye</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_mis_pedidos">Mis pedidos</string>
+    <string name="title_pedidos">Pedidos</string>
+    <string name="title_editusers">Mi perfil</string>
     <string name="login_username">Introduzca su email</string>
     <string name="login_password">Password</string>
     <string name="btn_login">LOGIN</string>
@@ -13,4 +13,6 @@
     <string name="hint_register_pass1">Password</string>
     <string name="hint_register_password2">Repita la Password</string>
     <string name="button_registro">REGISTRARSE</string>
+    <string name="btn_profile_save">GUARDAR</string>
+    <string name="profile_password">Cambiar contraseña</string>
 </resources>

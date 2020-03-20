@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private TextView tvRegister;
     private String token = "";
+    private String userId ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                                 if (response.isSuccessful()) {
                                     SharedPreferencesManager.setSomeStringValue("token", response.body().getToken());
+                                    SharedPreferencesManager.setSomeStringValue("userId", response.body().getUserId());
                                     Intent intentMainActivity = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intentMainActivity);
                                     finish();
