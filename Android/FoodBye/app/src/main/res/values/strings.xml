@@ -8,11 +8,15 @@
     <string name="btn_login">LOGIN</string>
     <string name="login_register">Registrarse</string>
     <string name="register_fullname">Nombre completo</string>
-    <string name="register_email" >Email</string>
+    <string name="register_email">Email</string>
     <string name="register_telefono">Teléfono</string>
     <string name="hint_register_pass1">Password</string>
     <string name="hint_register_password2">Repita la Password</string>
     <string name="button_registro">REGISTRARSE</string>
     <string name="btn_profile_save">GUARDAR</string>
     <string name="profile_password">Cambiar contraseña</string>
+    <string name="profile_edit_password">Introduzca la contraseña actual</string>
+    <string name="profile_edit_newpassword1">Nueva contraseña</string>
+    <string name="profile_edit_newpassword2">Repita la contraseña</string>
+    <string name="profile_title_changEpassword">MODIFICAR CONTRASEÑA</string>
 </resources>

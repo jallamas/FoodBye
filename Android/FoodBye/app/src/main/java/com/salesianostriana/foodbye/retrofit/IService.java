@@ -1,5 +1,6 @@
 package com.salesianostriana.foodbye.retrofit;
 
+import com.salesianostriana.foodbye.models.request.RequestEditPassword;
 import com.salesianostriana.foodbye.models.request.RequestEditUser;
 import com.salesianostriana.foodbye.models.request.RequestLogin;
 import com.salesianostriana.foodbye.models.response.ResponseLogin;
@@ -36,4 +37,8 @@ public interface IService {
     @PUT("/api/user/{id}")
     Call<UserResponse> editUser(@Path("id") String idUser,
                                 @Body RequestEditUser requestEditUser);
+
+    @PUT("/api/user/password/{id}")
+    Call<UserResponse> editPassword(@Path("id") String idUser,
+                                    @Body RequestEditPassword requestEditPassword);
 }

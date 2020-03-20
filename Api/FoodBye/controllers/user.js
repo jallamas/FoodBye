@@ -180,6 +180,34 @@ let controller = {
             res.status(200).jsonp(userResponse);
             });
         });
+    },
+    editPassword:function(req, res, next) {
+        User.findById(req.params.id, function(err, user) {
+            let passwordD= req.body.newpasswordD;
+            let password= req.body.newpassword;
+            
+            if (!bcrypt.compareSync(req.body.password, user.password)){
+                next(new error_types.Error400("la contraseña actual no es correcta"));
+            } else if (password!=passwordD){
+                next(new error_types.Error400("Las contraseñas no coinciden"));
+            } else{
+                let hash1 = bcrypt.hashSync(req.body.newpassword, parseInt(process.env.BCRYPT_ROUNDS));
+                user.password = hash1;
+            }
+            let userResponse={
+                id: user.id,
+                fullname: user.fullname,
+                email:  user.email,
+                rol: user.rol,
+                avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                validated: user.validated,
+                phone:user.phone
+            }
+            user.save(function(err) {
+                if(err) return res.status(500).send(err.message);
+            res.status(200).jsonp(userResponse);
+            });
+        });
     }
 }
 
