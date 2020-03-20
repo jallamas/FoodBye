@@ -1,4 +1,4 @@
-package com.salesianostriana.foodbye.ui.notifications;
+package com.salesianostriana.foodbye.ui.pedidos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,18 +13,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.salesianostriana.foodbye.R;
+import com.salesianostriana.foodbye.data.pedidos.PedidosViewModel;
 
-public class NotificationsFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+public class PedidosFragment extends Fragment {
+
+    private PedidosViewModel pedidosViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        pedidosViewModel =
+                ViewModelProviders.of(this).get(PedidosViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        pedidosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

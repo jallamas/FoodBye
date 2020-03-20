@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.salesianostriana.foodbye.models.response.ResponseRegister;
 import com.salesianostriana.foodbye.models.response.UserResponse;
 import com.salesianostriana.foodbye.retrofit.IService;
 import com.salesianostriana.foodbye.retrofit.ServiceGenerator;

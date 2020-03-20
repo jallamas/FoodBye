@@ -78,11 +78,29 @@ let controller = {
                 const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET, { algorithm: process.env.JWT_ALGORITHM });
                 res.json({
                     email: user.email,
-                    token: token
+                    token: token,
+                    userId: user.id
                 })
 
             }
         })(req, res)
+    },
+    getUsuario:({ params },res,next) =>{
+        User.findById(params.id, function(err, user) {
+            if(!user) return next(new error_types.Error404("El usuario no existe"))
+            else{
+                let userResponse={
+                    id: user.id,
+                    fullname: user.fullname,
+                    email:  user.email,
+                    rol: user.rol,
+                    avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                    validated: user.validated,
+                    phone:user.phone
+                };
+                res.status(201).jsonp(userResponse);
+            }
+        });
     },
     getUsuarios: (req, res, next)=>{
         User.find((err, users)=> {
