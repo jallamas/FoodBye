@@ -19,6 +19,7 @@ import { NgModule } from '@angular/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { RouterModule } from '@angular/router';
 import { TodosUsuariosComponent } from './lista-usuarios/todos-usuarios/todos-usuarios.component';
+import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
 
 @NgModule({
   imports: [
@@ -35,8 +36,8 @@ import { TodosUsuariosComponent } from './lista-usuarios/todos-usuarios/todos-us
     ChartsModule,
     NgxDatatableModule,
     FlexLayoutModule,
-    MatTabsModule
+    MatTabsModule,
   ],
-  declarations: [DashboardComponent, TodosUsuariosComponent]
+  declarations: [DashboardComponent, TodosUsuariosComponent, DetalleUsuarioComponent]
 })
 export class DashboardModule {}

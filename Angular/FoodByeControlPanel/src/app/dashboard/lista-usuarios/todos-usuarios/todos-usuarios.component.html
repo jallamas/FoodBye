@@ -4,7 +4,7 @@
     <mat-card-subtitle class="subtitulo">Usuarios</mat-card-subtitle>
 </mat-card-header>
 <mat-card-content>
-  <mat-tab-group>
+  <mat-tab-group #tabGroup (selectedIndexChange)="_setDataSource($event)" >
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="example-tab-icon">group</mat-icon>
@@ -32,7 +32,7 @@
         <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
 
       </mat-table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </mat-tab>
   
     <mat-tab>
@@ -43,26 +43,26 @@
       <mat-table #table [dataSource]="listadoDeUsuariosBikers">
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
-          <mat-cell *matCellDef="let usuario">
+          <mat-cell *matCellDef="let biker">
               <img [src]="mydata">
               </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="fullname">
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-          <mat-cell *matCellDef="let usuario"> {{usuario.fullname}} </mat-cell>
+          <mat-cell *matCellDef="let biker"> {{biker.fullname}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-          <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
+          <mat-cell *matCellDef="let biker"> {{biker.email}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
         <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
 
       </mat-table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginatorbikers [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </mat-tab>
   
     <mat-tab>
@@ -74,26 +74,33 @@
             <mat-table #table [dataSource]="listadoDeUsuariosNoValidados">
               <ng-container matColumnDef="avatar">
                 <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
-                <mat-cell *matCellDef="let usuario">
+                <mat-cell *matCellDef="let usuarioSinValidar">
                     <img [src]="mydata">
                     </mat-cell>
               </ng-container>
       
               <ng-container matColumnDef="fullname">
                 <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-                <mat-cell *matCellDef="let usuario"> {{usuario.fullname}} </mat-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"> {{usuarioSinValidar.fullname}} </mat-cell>
               </ng-container>
       
               <ng-container matColumnDef="email">
                 <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-                <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"> {{usuarioSinValidar.email}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="validar">
+                <mat-header-cell *matHeaderCellDef> Validar </mat-header-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"> 
+                  <button mat-flat-button color="primary" (click)="botonValidar(usuarioSinValidar)">Validar</button>
+                </mat-cell>
               </ng-container>
       
-              <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
+              <mat-header-row *matHeaderRowDef="columsToDisplayV"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
       
             </mat-table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <mat-paginator #paginatorSinValidar [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
               </mat-tab>
 
     <mat-tab>
@@ -105,26 +112,33 @@
       <mat-table #table [dataSource]="listadoDeUsuariosValidados">
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
-          <mat-cell *matCellDef="let usuario">
+          <mat-cell *matCellDef="let usuarioValidado">
               <img [src]="mydata">
               </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="fullname">
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-          <mat-cell *matCellDef="let usuario"> {{usuario.fullname}} </mat-cell>
+          <mat-cell *matCellDef="let usuarioValidado"> {{usuarioValidado.fullname}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-          <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
+          <mat-cell *matCellDef="let usuarioValidado"> {{usuarioValidado.email}} </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
+        <ng-container matColumnDef="validar">
+          <mat-header-cell *matHeaderCellDef> Inhabilitar </mat-header-cell>
+          <mat-cell *matCellDef="let usuarioValidado"> 
+            <button mat-flat-button color="primary" (click)="botonValidar(usuarioValidado)">Inhabilitar</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columsToDisplayV"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
 
       </mat-table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginatorValidados [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </mat-tab>
   </mat-tab-group>
     </mat-card-content>

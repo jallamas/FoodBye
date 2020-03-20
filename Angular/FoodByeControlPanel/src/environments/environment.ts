@@ -8,7 +8,7 @@ export const environment = {
   //loginUrl: ' http://localhost:3000/api/login',
   //signinUrl: 'https://localhost:3000api/register',
 
-  serverUrl: 'https://foodbye.herokuapp.com/api/',
+  serverUrl: 'https://foodbye.herokuapp.com/api',
   loginUrl: ' https://foodbye.herokuapp.com/api/login',
   signinUrl: 'https://foodbye.herokuapp.com/api/register',
 

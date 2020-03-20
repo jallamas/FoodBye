@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { Avatar } from '../models/avatar.interface';
 
 
-const urlUsers = 'https://foodbye.herokuapp.com/api/users';
-const avatar = 'https://foodbye.herokuapp.com/api/avatar';
+const urlUsers = 'https://foodbye.herokuapp.com/api/users/';
+const avatar = 'https://foodbye.herokuapp.com/api/avatar/';
 
 const requestOptions = {
   headers: new HttpHeaders({
@@ -18,6 +18,7 @@ const requestOptions = {
 
 const requestOptions2 = {
   headers: new HttpHeaders({
+    'Content-Type': 'text/xml',
     'Authorization': 'Bearer '+ localStorage.getItem('token')
   })
 };
@@ -41,23 +42,32 @@ export class UsuariosService {
 
   listarBikers(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers+"/bikers",requestOptions
+      urlUsers+"bikers",requestOptions
     );
   }
 
   listarValidados(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers+"/validated",requestOptions
+      urlUsers+"validated",requestOptions
     );
   }
   listarSinValidar(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      urlUsers+"/unvalidated",requestOptions
+      urlUsers+"unvalidated",requestOptions
     );
   }
+
+  ValidarUsuario(usurioValidado:Usuario): Observable<Usuario>{
+    return this.http.put<Usuario>(
+      urlUsers+usurioValidado._id,
+      usurioValidado.validated,
+      requestOptions
+    );
+  }
+
   getAvatar(_id:string){
     return this.http.get(
-      avatar+"/"+_id,requestOptions2
+      avatar+_id,requestOptions2
     );
   }
 }
