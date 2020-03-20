@@ -14,7 +14,7 @@ const local ="http://localhost:3000/api/users/"
 
 const requestOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json, charset=utf-8',
+    'Content-Type': 'application/json; charset=utf-8',
     'Authorization': 'Bearer '+ localStorage.getItem('token')
 })
 };
@@ -60,11 +60,18 @@ idUser:string;
     );
   }
 
-  validarUsuario(usurioValidadoId:String, usuarioValidated:boolean): Observable<Boolean>{
+  validarUsuario(usurioValidadoId:String): Observable<Usuario>{
+    return this.http.put<Usuario>(
+      local+"validar/"+usurioValidadoId,
+      null,
+      requestOptions,
+    );
+  }
 
-    return this.http.put<Boolean>(
-      local+usurioValidadoId,
-      usuarioValidated,
+  inhabilitarUsuario(usurioValidadoId:String): Observable<Usuario>{
+    return this.http.put<Usuario>(
+      local+"inhabilitar/"+usurioValidadoId,
+      null,
       requestOptions,
     );
   }

@@ -1,3 +1,14 @@
+<div class="overlay"  *ngIf="mostrarSpinner" >
+<div class="center">
+  <mat-progress-spinner
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="value">
+    </mat-progress-spinner>
+  </div>
+</div>
+
 <mat-card class="example-card">
 <mat-card-header>
     <mat-card-title class="titulo">Usuarios Totales</mat-card-title>
@@ -22,6 +33,7 @@
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
           <mat-cell *matCellDef="let usuario"> {{usuario.fullname}} </mat-cell>
         </ng-container>
+        
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
@@ -100,7 +112,9 @@
               <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
       
             </mat-table>
-            <mat-paginator #paginatorSinValidar [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <mat-paginator #paginatorSinValidar [pageSizeOptions]="[5, 10, 20]"
+            [pageIndex]="pageIndexInhabilitado"
+            showFirstLastButtons></mat-paginator>
               </mat-tab>
 
     <mat-tab>
@@ -138,7 +152,9 @@
         <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
 
       </mat-table>
-      <mat-paginator #paginatorValidados [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginatorValidados [pageSizeOptions]="[5, 10, 20]" 
+      [pageIndex]="pageIndexValidados"
+      showFirstLastButtons></mat-paginator>
         </mat-tab>
   </mat-tab-group>
     </mat-card-content>

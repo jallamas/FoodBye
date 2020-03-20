@@ -8,6 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { AfterViewInit } from '@angular/core';
 import { UsuarioDto } from 'src/app/dto/usuario-dto';
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-todos-usuarios',
@@ -20,6 +22,10 @@ export class TodosUsuariosComponent implements OnInit {
   listadoDeUsuariosValidados: MatTableDataSource<Usuario>;
   listadoDeUsuariosNoValidados: MatTableDataSource<Usuario>;
 
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  value = 50;
+
   columsToDisplay: string[] = ['avatar', 'fullname', 'email'];
   columsToDisplayV: string[] = ['avatar', 'fullname','validar', 'email'];
 
@@ -27,9 +33,14 @@ export class TodosUsuariosComponent implements OnInit {
   @ViewChild('paginatorbikers', {static: true}) paginatorbikers: MatPaginator;
   @ViewChild('paginatorValidados', {static: true}) paginatorValidados: MatPaginator;
   @ViewChild('paginatorSinValidar', {static: true}) paginatorSinValidar: MatPaginator;
-
+  mostrarSpinner: boolean;
   mydata: any;
+  pageIndexInhabilitado:number;
+  pageIndexValidados:number;
+
   constructor(private usuarioService: UsuariosService, private router: Router) { 
+    this.mostrarSpinner=false;
+
   }
 
   ngOnInit() {
@@ -94,6 +105,7 @@ loadUsuariosValidados(){
       });
     this.listadoDeUsuariosValidados = new MatTableDataSource<Usuario>(resp);
     this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
+    this.pageIndexValidados=0;
   });
 });
 }
@@ -105,18 +117,26 @@ loadUsuariosSinValidar(){
       });
     this.listadoDeUsuariosNoValidados = new MatTableDataSource<Usuario>(resp);
     this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
+    this.pageIndexInhabilitado=0;  
   });
 });
 }
 
 botonValidar(user: Usuario){
   if (user.validated==false){
-
-    this.usuarioService.validarUsuario(user._id,user.validated).subscribe(resp2=>{
+    this.mostrarSpinner=true;
+    this.usuarioService.validarUsuario(user._id).subscribe(resp2=>{
+      this.loadUsuariosValidados();
+      this.loadUsuariosSinValidar();
+      this.mostrarSpinner=false;
       });
   }else{
     user.validated=false;
-    this.usuarioService.validarUsuario(user._id,user.validated).subscribe(resp3=>{     
+    this.mostrarSpinner=true;
+    this.usuarioService.inhabilitarUsuario(user._id).subscribe(resp3=>{   
+      this.loadUsuariosValidados();
+      this.loadUsuariosSinValidar();
+      this.mostrarSpinner=false;
     });
   }
 }

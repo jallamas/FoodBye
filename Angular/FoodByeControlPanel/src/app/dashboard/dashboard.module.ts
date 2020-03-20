@@ -7,7 +7,8 @@ import {
   MatProgressBarModule,
   MatTableModule,
   MatPaginatorModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { ChartsModule } from 'ng2-charts';
@@ -37,6 +38,7 @@ import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.compo
     NgxDatatableModule,
     FlexLayoutModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [DashboardComponent, TodosUsuariosComponent, DetalleUsuarioComponent]
 })
