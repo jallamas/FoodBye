@@ -6,7 +6,8 @@ import {
   MatMenuModule,
   MatProgressBarModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatTabsModule
 } from '@angular/material';
 
 import { ChartsModule } from 'ng2-charts';
@@ -33,7 +34,8 @@ import { TodosUsuariosComponent } from './lista-usuarios/todos-usuarios/todos-us
     MatMenuModule,
     ChartsModule,
     NgxDatatableModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTabsModule
   ],
   declarations: [DashboardComponent, TodosUsuariosComponent]
 })

@@ -1,11 +1,11 @@
 import { Avatar } from './avatar.interface';
 
 export interface Usuario{
-    id: string;
+    _id: string;
     fullname: string;
     phone: string;
     email: string;
-    avatar: Avatar;
+    avatar: string;
     rol: string;
     validated: boolean;
     created_date: Date;
