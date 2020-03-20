@@ -19,7 +19,8 @@ router.get('/users/bikers', middleware.ensureAuthenticatedAndAdmin, UserControll
 router.get('/avatar/:id', middleware.ensureAuthenticated, UserController.getAvatar);
 router.get('/user/:id', middleware.ensureAuthenticated, UserController.getUsuario);
 router.put('/user/:id', middleware.ensureAuthenticated ,UserController.editUser);
-router.put('/users/:id', middleware.ensureAuthenticatedAndAdmin ,UserController.putValidarNoValidar);
+router.put('/users/validar/:id', middleware.ensureAuthenticatedAndAdmin ,UserController.putValidarUsuario);
+router.put('/users/inhabilitar/:id', middleware.ensureAuthenticatedAndAdmin ,UserController.putInhabilitar);
 router.delete('/users/:id', middleware.ensureAuthenticatedAndAdmin ,UserController.deleteUser);
 
 module.exports = router
