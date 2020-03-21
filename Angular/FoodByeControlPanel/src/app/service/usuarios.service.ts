@@ -92,5 +92,9 @@ export class UsuariosService {
       urlUsers+_id,requestOptions
     );
   }
-
+  editUsuario(_id:string): Observable<Usuario>{
+    return this.http.put<Usuario>(
+      urlUsers+_id,requestOptions
+    );
+  }
 }

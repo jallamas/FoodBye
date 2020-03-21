@@ -41,14 +41,16 @@ export class TodosUsuariosComponent implements OnInit {
 
   constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute ) { 
     this.mostrarSpinner=false;
-
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
   }
+}
 
   ngOnInit() {
+    this.loadUsuariosSinValidar();
     this.loadUsuariosTotales();
     this.loadUsuariosBikers();
     this.loadUsuariosValidados();
-    this.loadUsuariosSinValidar();
 }
 
 ngAfterViewInit() {
@@ -106,7 +108,6 @@ loadUsuariosValidados(){
       });
     this.listadoDeUsuariosValidados = new MatTableDataSource<Usuario>(resp);
     this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
-    this.pageIndexValidados=0;
   });
 });
 }
@@ -118,27 +119,28 @@ loadUsuariosSinValidar(){
       });
     this.listadoDeUsuariosNoValidados = new MatTableDataSource<Usuario>(resp);
     this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
-    this.pageIndexInhabilitado=0;  
   });
 });
 }
 
-botonValidar(user: Usuario){
-  if (user.validated==false){
+botonValidar(userV: Usuario){
     this.mostrarSpinner=true;
-    this.usuarioService.validarUsuario(user._id).subscribe(resp2=>{
-      this.loadUsuariosValidados();
-      this.loadUsuariosSinValidar();
+    this.usuarioService.validarUsuario(userV._id).subscribe(resp2=>{
+      this.router.navigated = false;
+      this.router.navigate([this.router.url]);
       this.mostrarSpinner=false;
       });
-  }else{
-    user.validated=false;
+}
+
+botonInhabilitar(userI: Usuario){
     this.mostrarSpinner=true;
-    this.usuarioService.inhabilitarUsuario(user._id).subscribe(resp3=>{   
-      this.loadUsuariosValidados();
-      this.loadUsuariosSinValidar();
+    this.usuarioService.inhabilitarUsuario(userI._id).subscribe(resp3=>{   
+      this.router.navigated = false;
+      this.router.navigate([this.router.url]);
       this.mostrarSpinner=false;
     });
   }
+
+
 }
-}
+
