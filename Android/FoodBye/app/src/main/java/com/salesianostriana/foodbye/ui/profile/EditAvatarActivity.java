@@ -40,7 +40,7 @@ import okhttp3.RequestBody;
 public class EditAvatarActivity extends AppCompatActivity {
 
     private static final int READ_REQUEST_CODE = 42;
-    private String userId;
+    private String userId, name;
     private ImageView ivNewFoto;
     private ImageButton ibNewFoto;
     private Button btnSaveAvatar;
@@ -91,7 +91,9 @@ public class EditAvatarActivity extends AppCompatActivity {
                         MultipartBody.Part avatar =
                                 MultipartBody.Part.createFormData("avatar", "avatar", requestFile);
 
-                        service.editAvatar(userId,requestFile);
+                        RequestBody fullname = RequestBody.create(SharedPreferencesManager.getSomeStringValue("fullname"), MultipartBody.FORM);
+
+                        userViewModel.updateAvatar(userId,avatar,fullname);
                         finish();
 
                     }catch (FileNotFoundException e) {
@@ -105,11 +107,10 @@ public class EditAvatarActivity extends AppCompatActivity {
             }
         });
 
-
-
         userViewModel.getUserById(userId).observe(this, new Observer<UserResponse>() {
             @Override
             public void onChanged(UserResponse userResponse) {
+                SharedPreferencesManager.setSomeStringValue("fullname", userResponse.getFullname());
                 if(userResponse.getAvatar()!=null){
                     GlideUrl glideUrl = new GlideUrl(Constantes.URL_BASE + "/api/avatar/" + userResponse.getId()
                             ,new LazyHeaders.Builder()

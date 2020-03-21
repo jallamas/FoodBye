@@ -18,7 +18,6 @@ router.get('/users/validated', middleware.ensureAuthenticatedAndAdmin, UserContr
 router.get('/users/bikers', middleware.ensureAuthenticatedAndAdmin, UserController.getUsuariosBikers);
 router.put('/user/password/:id', middleware.ensureAuthenticated, UserController.editPassword);
 router.get('/avatar/:id', middleware.ensureAuthenticated, UserController.getAvatar);
-
 router.get('/user/:id', middleware.ensureAuthenticated, UserController.getUsuario);
 router.put('/user/:id', middleware.ensureAuthenticated ,UserController.editUser);
 router.put('/users/validar/:id', middleware.ensureAuthenticatedAndAdmin ,UserController.putValidarUsuario);

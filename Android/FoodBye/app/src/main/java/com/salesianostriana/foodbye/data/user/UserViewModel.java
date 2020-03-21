@@ -41,7 +41,7 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.updatePassword(userId, req);
     }
 
-    public MutableLiveData<UserResponse> updateAvatar(String userId, RequestBody avatar){
-        return userRepository.updateAvatar(userId, avatar);
+    public MutableLiveData<UserResponse> updateAvatar(String userId, MultipartBody.Part avatar, RequestBody fullname){
+        return userRepository.updateAvatar(userId, avatar, fullname);
     }
 }

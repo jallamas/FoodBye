@@ -42,7 +42,9 @@ public interface IService {
     Call<UserResponse> editPassword(@Path("id") String idUser,
                                     @Body RequestEditPassword requestEditPassword);
 
-    @PUT("/api/user/avatar/{id}")
+    @Multipart
+    @PUT("/api/avatar/{id}")
     Call<UserResponse> editAvatar(@Path("id") String idUser,
-                                  @Part MultipartBody.Part avatar);
+                                  @Part MultipartBody.Part avatar,
+                                  @Part("fullname") RequestBody fullname);
 }

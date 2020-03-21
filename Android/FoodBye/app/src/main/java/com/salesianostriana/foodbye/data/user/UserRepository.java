@@ -84,8 +84,8 @@ public class UserRepository {
         });
     }
 
-    public MutableLiveData<UserResponse> updateAvatar(String userId, RequestBody avatar){
-        Call<UserResponse> call = service.editAvatar(userId, avatar);
+    public MutableLiveData<UserResponse> updateAvatar(String userId, MultipartBody.Part avatar, RequestBody fullname){
+        Call<UserResponse> call = service.editAvatar(userId, avatar, fullname);
         call.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
