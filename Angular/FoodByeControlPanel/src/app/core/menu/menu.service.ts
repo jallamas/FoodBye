@@ -9,19 +9,19 @@ export class MenuService {
   getAll() {
     return [
       {
-        link: '/',
-        label: this.translate.instant('HOME'),
-        icon: 'explore'
+        link: '/inicio',
+        label: this.translate.instant('Inicio'),
+        icon: 'home'
       },
       {
-        link: 'http://reactprimer.nyasha.me',
-        label: this.translate.instant('React Version'),
+        link: '/usuarios',
+        label: this.translate.instant('Usuarios'),
         externalRedirect: true,
-        icon: 'bookmark'
+        icon: 'group'
       },
       {
-        link: 'http://primer.nyasha.me/docs',
-        label: this.translate.instant('DOCS'),
+        link: '/',
+        label: this.translate.instant('Pedidos'),
         externalRedirect: true,
         icon: 'local_library'
       }

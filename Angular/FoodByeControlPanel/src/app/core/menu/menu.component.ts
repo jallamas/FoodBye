@@ -13,7 +13,7 @@ export class MenuComponent implements OnChanges, OnInit, OnDestroy {
   @Input() direction: string;
 
   private langChangeSubscription!: Subscription;
-  currentLang = 'en';
+  currentLang = 'es';
   menuItems = [];
 
   config = {
