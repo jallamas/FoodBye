@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_logo_foodbye"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.profile.EditAvatarActivity"></activity>
+        <activity android:name=".ui.profile.EditAvatarActivity" />
         <activity android:name=".ui.profile.EditPasswordActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
