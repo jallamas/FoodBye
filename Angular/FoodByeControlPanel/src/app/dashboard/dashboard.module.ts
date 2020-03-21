@@ -10,7 +10,10 @@ import {
   MatTabsModule,
   MatProgressSpinnerModule,
   MatDialogModule,
-  MatSnackBarModule  
+  MatSnackBarModule,
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatInputModule
 } from '@angular/material';
 
 
@@ -26,6 +29,8 @@ import { TodosUsuariosComponent } from './lista-usuarios/todos-usuarios/todos-us
 import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
 import { DialogBorrarUsuarioComponent } from './dialog-borrar-usuario/dialog-borrar-usuario.component';
 import { SnackBarUsuarioBorradoComponent } from './snack-bar-usuario-borrado/snack-bar-usuario-borrado.component';
+import { DialogAddUsuarioComponent } from './dialog-add-usuario/dialog-add-usuario.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -46,11 +51,17 @@ import { SnackBarUsuarioBorradoComponent } from './snack-bar-usuario-borrado/sna
     MatTabsModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    FormsModule, 
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule
   ],
-  declarations: [DashboardComponent, TodosUsuariosComponent, DetalleUsuarioComponent, DialogBorrarUsuarioComponent, SnackBarUsuarioBorradoComponent],
+  declarations: [DashboardComponent, TodosUsuariosComponent, DetalleUsuarioComponent, DialogBorrarUsuarioComponent, SnackBarUsuarioBorradoComponent, DialogAddUsuarioComponent],
   entryComponents:[
     DialogBorrarUsuarioComponent,
-    SnackBarUsuarioBorradoComponent
+    SnackBarUsuarioBorradoComponent,
+    DialogAddUsuarioComponent
   ],
 })
 export class DashboardModule {}

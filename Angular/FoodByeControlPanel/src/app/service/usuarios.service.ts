@@ -5,6 +5,8 @@ import { Usuario } from '../models/usuario.interface';
 import { Observable } from 'rxjs';
 import { Avatar } from '../models/avatar.interface';
 import { UsuarioDto } from '../dto/usuario-dto';
+import { RegisterDto } from '../dto/register-dto';
+import { RegisterResponse } from '../models/register-response.interface';
 
 
 const urlUsers = 'https://foodbye.herokuapp.com/api/users/';

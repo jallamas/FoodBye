@@ -11,6 +11,7 @@ import { UsuarioDto } from 'src/app/dto/usuario-dto';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 import { element } from 'protractor';
+import { DialogAddUsuarioComponent } from '../../dialog-add-usuario/dialog-add-usuario.component';
 
 @Component({
   selector: 'app-todos-usuarios',
@@ -39,7 +40,9 @@ export class TodosUsuariosComponent implements OnInit {
   pageIndexInhabilitado:number;
   pageIndexValidados:number;
 
-  constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute ) { 
+  constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute,
+    public dialogo: MatDialog,
+    ) { 
     this.mostrarSpinner=false;
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
@@ -78,6 +81,17 @@ _setDataSource(indexNumber) {
     }
   });
 }
+
+mostrarDialogo(): void {
+  const dialogRef = this.dialogo.open(DialogAddUsuarioComponent, {
+    width: '550px',
+   // data: {idUsuarioDetail: this.idUsuarioDetail}
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+  });
+}
+
 
 loadUsuariosTotales(){
     this.usuarioService.listarTodosUsuarios().subscribe(resp =>{

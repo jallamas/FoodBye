@@ -14,6 +14,10 @@
     <mat-card-title class="titulo">Usuarios Totales</mat-card-title>
     <mat-card-subtitle class="subtitulo">Usuarios</mat-card-subtitle>
 </mat-card-header>
+<div>
+  <button mat-raised-button color="primary" (click)="mostrarDialogo()">
+    <mat-icon class="example-tab-icon">add</mat-icon>Nuevo Usuario</button>
+</div>
 <mat-card-content>
   <mat-tab-group #tabGroup (selectedIndexChange)="_setDataSource($event)" >
     <mat-tab>
