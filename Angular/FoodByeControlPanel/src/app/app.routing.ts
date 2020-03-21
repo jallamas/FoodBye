@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import {AuthGuard} from './guards/auth.guard';
 import { AdminLayoutComponent, AuthLayoutComponent } from './core';
 
 export const AppRoutes: Routes = [{
@@ -7,7 +7,7 @@ export const AppRoutes: Routes = [{
   component: AdminLayoutComponent,
   children: [{
     path: '',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
+    loadChildren: './dashboard/dashboard.module#DashboardModule',
   }]
 }, {
   path: '',

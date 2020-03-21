@@ -21,10 +21,13 @@ import {
   MatSidenavModule,
   MatSlideToggleModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
 } from '@angular/material';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -41,6 +44,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { RouterModule } from '@angular/router';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { UsuariosService } from './service/usuarios.service';
+import { AuthService } from './service/auth.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,10 +71,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuthLayoutComponent
   ],
   imports: [
+    MatSnackBarModule,
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     FormsModule,
+    MatDialogModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -90,6 +97,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatListModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatTableModule,
     MatProgressBarModule,
     FlexLayoutModule,
     BidiModule,
@@ -100,10 +108,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgMaterialMultilevelMenuModule
   ],
   providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    UsuariosService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

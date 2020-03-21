@@ -1,0 +1,181 @@
+<div class="overlay"  *ngIf="mostrarSpinner" >
+<div class="center">
+  <mat-progress-spinner
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="value">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<mat-card class="example-card">
+<mat-card-header>
+    <mat-card-title class="titulo">Usuarios Totales</mat-card-title>
+    <mat-card-subtitle class="subtitulo">Usuarios</mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+  <mat-tab-group #tabGroup (selectedIndexChange)="_setDataSource($event)" >
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">group</mat-icon>
+        Todos
+      </ng-template>
+      <mat-table #table [dataSource]="listadoDeUsuarios">
+        <ng-container matColumnDef="avatar">
+          <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
+          <mat-cell *matCellDef="let usuario"
+          [routerLink]="['/usuarios/usuario/',usuario._id]">
+              <img [src]="mydata"> 
+              </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fullname">
+          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let usuario"
+          [routerLink]="['/usuarios/usuario/',usuario._id]"
+          > {{usuario.fullname}} </mat-cell>
+        </ng-container>
+        
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell class="stilo" *matCellDef="let usuario" 
+          [routerLink]="['/usuarios/usuario/',usuario._id]"
+          > {{usuario.email}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columsToDisplay;"
+        ></mat-row>
+
+      </mat-table>
+      <mat-paginator #paginatorUsuarios [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">directions_bike</mat-icon>
+        Bikers
+      </ng-template>
+      <mat-table #table [dataSource]="listadoDeUsuariosBikers">
+        <ng-container matColumnDef="avatar">
+          <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
+          <mat-cell *matCellDef="let biker"
+          [routerLink]="['/usuarios/usuario/',biker._id]">
+              <img [src]="mydata">
+              </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fullname">
+          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let biker"
+          [routerLink]="['/usuarios/usuario/',biker._id]">
+          {{biker.fullname}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let biker"
+          [routerLink]="['/usuarios/usuario/',biker._id]">
+           {{biker.email}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columsToDisplay;"
+        ></mat-row>
+
+      </mat-table>
+      <mat-paginator #paginatorbikers [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">close</mat-icon>
+          Sin Validar
+            </ng-template>
+  
+            <mat-table #table [dataSource]="listadoDeUsuariosNoValidados">
+              <ng-container matColumnDef="avatar">
+                <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"
+                [routerLink]="['/usuarios/usuario/',usuarioSinValidar._id]">
+                  <img [src]="mydata">
+                    </mat-cell>
+              </ng-container>
+      
+              <ng-container matColumnDef="fullname">
+                <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"
+                [routerLink]="['/usuarios/usuario/',usuarioSinValidar._id]">
+                 {{usuarioSinValidar.fullname}} </mat-cell>
+              </ng-container>
+      
+              <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"
+                [routerLink]="['/usuarios/usuario/',usuarioSinValidar._id]">
+                 {{usuarioSinValidar.email}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="validar">
+                <mat-header-cell *matHeaderCellDef> Validar </mat-header-cell>
+                <mat-cell *matCellDef="let usuarioSinValidar"> 
+                  <button mat-flat-button color="primary" (click)="botonValidar(usuarioSinValidar)">Validar</button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="columsToDisplayV"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
+      
+            </mat-table>
+            <mat-paginator #paginatorSinValidar [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons></mat-paginator>
+              </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">check</mat-icon>
+        Validados
+      </ng-template>
+
+      <mat-table #table [dataSource]="listadoDeUsuariosValidados">
+        <ng-container matColumnDef="avatar">
+          <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
+          <mat-cell *matCellDef="let usuarioValidado"
+          [routerLink]="['/usuarios/usuario/',usuarioValidado._id]">
+              <img [src]="mydata">
+              </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fullname">
+          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let usuarioValidado"
+          [routerLink]="['/usuarios/usuario/',usuarioValidado._id]">
+          {{usuarioValidado.fullname}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let usuarioValidado"
+          [routerLink]="['/usuarios/usuario/',usuarioValidado._id]">
+          {{usuarioValidado.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="validar">
+          <mat-header-cell *matHeaderCellDef> Inhabilitar </mat-header-cell>
+          <mat-cell *matCellDef="let usuarioValidado"> 
+            <button mat-flat-button color="primary" (click)="botonInhabilitar(usuarioValidado)">Inhabilitar</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columsToDisplayV"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
+      </mat-table>
+      <mat-paginator #paginatorValidados [pageSizeOptions]="[5, 10, 20]" 
+      showFirstLastButtons></mat-paginator>
+        </mat-tab>
+  </mat-tab-group>
+    </mat-card-content>
+</mat-card>
+

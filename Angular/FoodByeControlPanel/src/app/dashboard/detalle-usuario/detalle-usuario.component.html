@@ -1,0 +1,62 @@
+<div class="overlay"  *ngIf="mostrarSpinner" >
+    <div class="center">
+      <mat-progress-spinner
+            class="example-margin"
+            [color]="color"
+            [mode]="mode"
+            [value]="value">
+        </mat-progress-spinner>
+      </div>
+    </div>
+    <div fxFlex
+    class="fxClass-all"
+    ngClass.xs="fxClass-xs"
+    [ngClass.sm]="{'fxClass-sm': hasStyle}"
+    [ngClass.md]="{'fxClass-md': hasStyle, 'fxClass-md2': hasStyle}"
+    [ngClass.lg]="['fxClass-lg', 'fxClass-lg2']">
+    <mat-card>
+    <mat-card-header>
+        <mat-card-title class="titulo">Detalle de Usuario</mat-card-title>
+        <mat-card-subtitle class="subtitulo">Usuarios</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="none" >
+            <div id="divFotoPerfil">
+                <img src="https://i.pinimg.com/originals/2e/b4/d3/2eb4d3dc14f3445522cc9c5be1d2a1f3.jpg">
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start" >
+                <div>
+                    <h1>Nombre y apellidos</h1>
+                    <p>
+                        {{usuarioD.fullname}}
+                    </p>
+                </div>
+                <div>
+                    <h1>Email</h1>
+                    <p>
+                        {{usuarioD.email}}
+                    </p>
+                </div>
+                <div>
+                    <h1>Rol</h1>
+                    <p>
+                        {{usuarioD.rol}}
+                    </p>
+                </div>
+                <div>
+                    <h1>Teléfono</h1>
+                   <p>{{usuarioD.phone}}</p> 
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-icon-button color="primary">
+                <mat-icon class="icon-display">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="mostrarDialogo()">
+                <mat-icon class="icon-display">delete</mat-icon>
+            </button>
+        </div>
+    </mat-card-content>
+    </mat-card>
+    </div>
