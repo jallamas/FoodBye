@@ -6,210 +6,323 @@
 	},
 	"item": [
 		{
-			"name": "Registro",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "fullname",
-							"value": "jose",
-							"type": "text"
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullname",
+									"value": "jose",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jose5@usuario.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "654654654",
+									"type": "text"
+								},
+								{
+									"key": "passwordD",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/josel/Pictures/san-patricio.jpg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "email",
-							"value": "jose5@usuario.com",
-							"type": "text"
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/register/",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
 						},
-						{
-							"key": "password",
-							"value": "12345678",
-							"type": "text"
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin@admin.com\",\n\t\"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "telefono",
-							"value": "654654654",
-							"type": "text"
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/login",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listado todos usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ1NjcxNjU5OTUsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.74U26jrBtoSON863_r3DicPFQ7zgHYnJ0UWWFoRL4uk",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "passwordD",
-							"value": "12345678",
-							"type": "text"
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/users",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener avatar de un usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ2MzQ1MTU2NjMsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.1t0VAfMwl9pqJdJYZD_CfuwXDnc8X6M0XiNCBAJ7x24",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "avatar",
-							"type": "file",
-							"src": "/C:/Users/josel/Pictures/san-patricio.jpg"
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/avatar/5e735cf1138f1226d025cb9c",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"avatar",
+								"5e735cf1138f1226d025cb9c"
+							]
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://foodbye.herokuapp.com/api/register/",
-					"protocol": "https",
-					"host": [
-						"foodbye",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"api",
-						"register",
-						""
-					]
+				{
+					"name": "Editar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ2NTQ1ODMyODAsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.-owdA2OPbmxGrnUpyiCLr3E6fdCM0g-AVZh5svdCSR0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fullname\": \"José Antonio Llamas\",\n\t\"email\": \"josellamas@usuario.com\",\n\t\"phone\": \"654654654\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/user/5e735cf1138f1226d025cb9c",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"user",
+								"5e735cf1138f1226d025cb9c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuario por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ2NTQ1ODMyODAsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.-owdA2OPbmxGrnUpyiCLr3E6fdCM0g-AVZh5svdCSR0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/user/5e735cf1138f1226d025cb9c",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"user",
+								"5e735cf1138f1226d025cb9c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTczNWJhYzRmOWRkZTE0NmMzZGZkZWMiLCJleHAiOjE1ODQ3MzA0OTcyNDIsImVtYWlsIjoiam9zZUB1c3VhcmlvLmNvbSJ9.QLUYrawLo-pb-dTMLX-N5fiKqwT2onX6QBhCtYK21Fk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"1234567\",\n\t\"newpassword\": \"12345678\",\n\t\"newpasswordD\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/user/password/5e735bac4f9dde146c3dfdec",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"user",
+								"password",
+								"5e735bac4f9dde146c3dfdec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ3MzQwNTM5ODgsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.c7_4vjljZT7hPuyXyuYsG2xP99294Q7q0BO1Um9CWTs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/api/users/validar/5e735cf1138f1226d025cb9c",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"validar",
+								"5e735cf1138f1226d025cb9c"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"admin@admin.com\",\n\t\"password\": \"123456\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://foodbye.herokuapp.com/api/login",
-					"protocol": "https",
-					"host": [
-						"foodbye",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Listado todos usuarios",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ1NjcxNjU5OTUsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.74U26jrBtoSON863_r3DicPFQ7zgHYnJ0UWWFoRL4uk",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://foodbye.herokuapp.com/api/users",
-					"protocol": "https",
-					"host": [
-						"foodbye",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"api",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener avatar de un usuario",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ2MzQ1MTU2NjMsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.1t0VAfMwl9pqJdJYZD_CfuwXDnc8X6M0XiNCBAJ7x24",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://foodbye.herokuapp.com/api/avatar/5e739b526356c4001754f38c",
-					"protocol": "https",
-					"host": [
-						"foodbye",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"api",
-						"avatar",
-						"5e739b526356c4001754f38c"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar usuario",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ2NTQ1ODMyODAsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.-owdA2OPbmxGrnUpyiCLr3E6fdCM0g-AVZh5svdCSR0",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"fullname\": \"José Antonio Llamas\",\n\t\"email\": \"josellamas@usuario.com\",\n\t\"phone\": \"654654654\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://foodbye.herokuapp.com/api/user/5e735cf1138f1226d025cb9c",
-					"protocol": "https",
-					"host": [
-						"foodbye",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"api",
-						"user",
-						"5e735cf1138f1226d025cb9c"
-					]
-				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
