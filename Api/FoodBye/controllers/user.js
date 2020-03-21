@@ -208,6 +208,30 @@ let controller = {
             res.status(200).jsonp(userResponse);
             });
         });
+    },
+    editAvatar: function(req, res, next) {
+        User.findById(req.params.id, function(err, user) {
+            if (req.file != undefined) {
+                user.avatar = {
+                    data: req.file.buffer.toString('base64'),
+                    contentType: req.file.mimetype
+                }
+            }
+            let userResponse={
+                id: user.id,
+                fullname: user.fullname,
+                email:  user.email,
+                rol: user.rol,
+                avatar: user.avatar != null ? '/avatar/' + user.id : null,
+                validated: user.validated,
+                phone:user.phone
+            }
+            user.save(function(err) {
+                if(err) return res.status(500).send(err.message);
+            res.status(200).jsonp(userResponse);
+            });
+        });
+
     }
 }
 
