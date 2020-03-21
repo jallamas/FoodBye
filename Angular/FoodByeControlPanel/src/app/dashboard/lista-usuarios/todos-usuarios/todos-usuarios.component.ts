@@ -5,11 +5,12 @@ import { Usuario } from 'src/app/models/usuario.interface';
 import { Avatar } from 'src/app/models/avatar.interface';
 import { Observable, Observer } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AfterViewInit } from '@angular/core';
 import { UsuarioDto } from 'src/app/dto/usuario-dto';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-todos-usuarios',
@@ -38,7 +39,7 @@ export class TodosUsuariosComponent implements OnInit {
   pageIndexInhabilitado:number;
   pageIndexValidados:number;
 
-  constructor(private usuarioService: UsuariosService, private router: Router) { 
+  constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute ) { 
     this.mostrarSpinner=false;
 
   }

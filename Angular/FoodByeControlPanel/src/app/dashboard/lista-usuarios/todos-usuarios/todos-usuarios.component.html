@@ -25,7 +25,7 @@
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
           <mat-cell *matCellDef="let usuario">
-              <img [src]="mydata">
+              <img [src]="mydata"> 
               </mat-cell>
         </ng-container>
 
@@ -37,11 +37,13 @@
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-          <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
+          <mat-cell class="stilo" *matCellDef="let usuario" > {{usuario.email}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
+        <mat-row *matRowDef="let usuario; columns: columsToDisplay;"
+        [routerLink]="['/usuarios/usuario/',usuario._id]"
+        ></mat-row>
 
       </mat-table>
       <mat-paginator #paginatorUsuarios [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
@@ -71,7 +73,9 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
+        <mat-row *matRowDef="let usuario; columns: columsToDisplay;"
+        [routerLink]="['/usuarios/usuario/',usuario._id]"
+        ></mat-row>
 
       </mat-table>
       <mat-paginator #paginatorbikers [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
@@ -109,7 +113,9 @@
               </ng-container>
       
               <mat-header-row *matHeaderRowDef="columsToDisplayV"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
+              <mat-row *matRowDef="let usuario; columns: columsToDisplayV;"
+              [routerLink]="['/usuarios/usuario/',usuario._id]"
+              ></mat-row>
       
             </mat-table>
             <mat-paginator #paginatorSinValidar [pageSizeOptions]="[5, 10, 20]"
@@ -149,7 +155,9 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columsToDisplayV"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columsToDisplayV;"></mat-row>
+        <mat-row *matRowDef="let usuario; columns: columsToDisplayV;"
+        [routerLink]="['/usuarios/usuario/',usuario._id]"
+        ></mat-row>
 
       </mat-table>
       <mat-paginator #paginatorValidados [pageSizeOptions]="[5, 10, 20]" 

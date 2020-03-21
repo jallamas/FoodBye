@@ -31,7 +31,6 @@ const requestOptions2 = {
 })
 
 export class UsuariosService {
-idUser:string;
   constructor(
     private config: ConfigService,
     private http: HttpClient
@@ -39,30 +38,30 @@ idUser:string;
 
   listarTodosUsuarios(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      local,requestOptions
+      urlUsers,requestOptions
     );
   }
 
   listarBikers(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      local+"bikers",requestOptions
+      urlUsers+"bikers",requestOptions
     );
   }
 
   listarValidados(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      local+"validated",requestOptions
+      urlUsers+"validated",requestOptions
     );
   }
   listarSinValidar(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(
-      local+"unvalidated",requestOptions
+      urlUsers+"unvalidated",requestOptions
     );
   }
 
   validarUsuario(usurioValidadoId:String): Observable<Usuario>{
     return this.http.put<Usuario>(
-      local+"validar/"+usurioValidadoId,
+      urlUsers+"validar/"+usurioValidadoId,
       null,
       requestOptions,
     );
@@ -70,7 +69,7 @@ idUser:string;
 
   inhabilitarUsuario(usurioValidadoId:String): Observable<Usuario>{
     return this.http.put<Usuario>(
-      local+"inhabilitar/"+usurioValidadoId,
+      urlUsers+"inhabilitar/"+usurioValidadoId,
       null,
       requestOptions,
     );
@@ -84,14 +83,14 @@ idUser:string;
 
   getUsuario(_id:string): Observable<Usuario>{
     return this.http.get<Usuario>(
-      local+_id,requestOptions
+      urlUser+_id,requestOptions
     );
   }
-  public getId(): string {
-    return this.idUser;
+
+  deleteUsuario(_id:string): Observable<Usuario>{
+    return this.http.delete<Usuario>(
+      urlUsers+_id,requestOptions
+    );
   }
 
-  public setId(_id: string) {
-    this.idUser==_id;
-  }
 }

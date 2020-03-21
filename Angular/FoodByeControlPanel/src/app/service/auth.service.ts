@@ -32,8 +32,8 @@ export class AuthService {
     const params = new HttpParams()
         .set('username', loginDto.username)
         .set('password', loginDto.password)
-//    return this.http.post<LoginResponse>('https://foodbye.herokuapp.com/api/login', params
-    return this.http.post<LoginResponse>('http://localhost:3000/api/login', params
+    return this.http.post<LoginResponse>('https://foodbye.herokuapp.com/api/login', params
+    //return this.http.post<LoginResponse>('http://localhost:3000/api/login', params
 
     );
   }
