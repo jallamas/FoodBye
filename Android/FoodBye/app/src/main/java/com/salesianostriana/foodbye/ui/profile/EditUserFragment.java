@@ -79,6 +79,14 @@ public class EditUserFragment extends Fragment {
             }
         });
 
+        ivFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), EditAvatarActivity.class);
+                startActivity(i);
+            }
+        });
+
         userViewModel.getUserById(userId).observe(getActivity(), new Observer<UserResponse>() {
             @Override
             public void onChanged(UserResponse userResponse) {
@@ -94,6 +102,11 @@ public class EditUserFragment extends Fragment {
                     Glide
                             .with(MyApp.getContext())
                             .load(glideUrl)
+                            .into(ivFoto);
+                } else {
+                    Glide
+                            .with(MyApp.getContext())
+                            .load(R.drawable.ic_account_circle_white_24dp)
                             .into(ivFoto);
                 }
             }

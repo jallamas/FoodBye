@@ -74,6 +74,11 @@ public class EditPasswordActivity extends AppCompatActivity {
                             .with(MyApp.getContext())
                             .load(glideUrl)
                             .into(ivFoto);
+                } else {
+                    Glide
+                            .with(MyApp.getContext())
+                            .load(getDrawable(R.drawable.ic_account_circle_white_24dp))
+                            .into(ivFoto);
                 }
             }
         });

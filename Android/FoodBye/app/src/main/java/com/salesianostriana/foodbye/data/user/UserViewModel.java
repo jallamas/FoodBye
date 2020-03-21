@@ -12,6 +12,9 @@ import com.salesianostriana.foodbye.models.request.RequestEditPassword;
 import com.salesianostriana.foodbye.models.request.RequestEditUser;
 import com.salesianostriana.foodbye.models.response.UserResponse;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 public class UserViewModel extends AndroidViewModel {
 
     MutableLiveData<String> idUser;
@@ -36,5 +39,9 @@ public class UserViewModel extends AndroidViewModel {
 
     public void updatePassword(String userId, RequestEditPassword req){
         userRepository.updatePassword(userId, req);
+    }
+
+    public MutableLiveData<UserResponse> updateAvatar(String userId, RequestBody avatar){
+        return userRepository.updateAvatar(userId, avatar);
     }
 }

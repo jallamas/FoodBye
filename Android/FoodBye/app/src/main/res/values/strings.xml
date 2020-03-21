@@ -19,4 +19,6 @@
     <string name="profile_edit_newpassword1">Nueva contraseña</string>
     <string name="profile_edit_newpassword2">Repita la contraseña</string>
     <string name="profile_title_changEpassword">MODIFICAR CONTRASEÑA</string>
+    <string name="profile_title_changeavatar">MODIFICAR AVATAR</string>
+    <string name="btn_save_newavatar">GUARDAR</string>
 </resources>

@@ -11,6 +11,8 @@ import com.salesianostriana.foodbye.models.response.UserResponse;
 import com.salesianostriana.foodbye.retrofit.IService;
 import com.salesianostriana.foodbye.retrofit.ServiceGenerator;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,7 +72,6 @@ public class UserRepository {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
-//                    user.setValue(response.body());
                     Toast.makeText(MyApp.getContext(), "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
@@ -83,4 +84,23 @@ public class UserRepository {
         });
     }
 
+    public MutableLiveData<UserResponse> updateAvatar(String userId, RequestBody avatar){
+        Call<UserResponse> call = service.editAvatar(userId, avatar);
+        call.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    user.setValue(response.body());
+                    Toast.makeText(MyApp.getContext(), "Avatar cambiado correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return user;
+    }
 }
