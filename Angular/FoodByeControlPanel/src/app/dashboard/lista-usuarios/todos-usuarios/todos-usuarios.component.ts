@@ -85,10 +85,8 @@ _setDataSource(indexNumber) {
 mostrarDialogo(): void {
   const dialogRef = this.dialogo.open(DialogAddUsuarioComponent, {
     width: '550px',
-   // data: {idUsuarioDetail: this.idUsuarioDetail}
   });
   dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
   });
 }
 

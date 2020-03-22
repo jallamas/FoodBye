@@ -8,6 +8,7 @@ import { SnackBarUsuarioBorradoComponent } from '../snack-bar-usuario-borrado/sn
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { RegisterDto } from 'src/app/dto/register-dto';
 import { CustomValidators } from 'ng2-validation';
+import { SnackBarUsuarioAgregadoComponent } from '../snack-bar-usuario-agregado/snack-bar-usuario-agregado.component';
 
 const password = new FormControl('', Validators.required);
 const passwordD = new FormControl('', CustomValidators.equalTo(password));
@@ -22,6 +23,8 @@ export class DialogAddUsuarioComponent implements OnInit {
   public form: FormGroup;
   registerDto : RegisterDto;
   existeFoto: boolean;
+  url: string | ArrayBuffer;
+  roles: string[] = ['ADMIN', 'BIKER'];
   constructor(
     public dialogo: MatDialogRef<DialogAddUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -35,6 +38,7 @@ export class DialogAddUsuarioComponent implements OnInit {
       return false;
   }
     this.registerDto = new RegisterDto ("","","","",",","","");
+    this.url = "https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg";
   }
 
   ngOnInit() {
@@ -49,24 +53,29 @@ export class DialogAddUsuarioComponent implements OnInit {
         null,
         Validators.compose([Validators.required])
       ],
-      telephone: [
+      phone: [
         null,
         Validators.compose([Validators.required])
       ],
-      avatar: [null]
+      avatar: [null],
+      rol:[null,
+        Validators.compose([Validators.required])
+      ]
     });
   }
 
   uploadFile(event) {
+    if (event.target.files && event.target.files[0]) {
+    var reader = new FileReader();
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({
       avatar: file
     });
-    this.form.get('avatar').updateValueAndValidity()
-    if(this.form.get('avatar').value){
-      this.existeFoto==true;
-    }else{
-      this.existeFoto==false;
+    this.form.get('avatar').updateValueAndValidity();
+    reader.readAsDataURL(event.target.files[0]); 
+      reader.onload=()=> {
+        this.url = reader.result;
+      }
     }
   }
 
@@ -76,21 +85,21 @@ export class DialogAddUsuarioComponent implements OnInit {
     formData.append("email", this.form.get('email').value);
     formData.append("password", this.form.get('password').value);
     formData.append("passwordD", this.form.get('passwordD').value);
-    formData.append("telephone", this.form.get('telephone').value);
+    formData.append("phone", this.form.get('phone').value);
     formData.append("avatar", this.form.get('avatar').value);
+    formData.append("rol", this.form.get('rol').value);
       this.uploadService.register(formData).subscribe(
         (response) => {console.log(response); 
           this.router.navigated = false;
           this.router.navigate([this.router.url]);
-          this._snackBar.openFromComponent(SnackBarUsuarioBorradoComponent, {
-            duration: this.durationInSeconds * 1000,
-          });
         },
         (error) => console.log(error)
       );
+      this._snackBar.openFromComponent(SnackBarUsuarioAgregadoComponent, {
+        duration: this.durationInSeconds * 1000,
+      });
   this.dialogo.close();
 }
-
 onNoClick(): void {
   this.dialogo.close();
 }
