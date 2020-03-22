@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const bcrypt = require('bcryptjs');
 const user_routes = require('./routes/users');
+const pedido_routes = require('./routes/pedido');
 const middleware = require('./middleware/index');
 const User = require('./models/user');
 const cors = require('cors')
@@ -23,6 +24,17 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', () => {
     console.log('Conectado!');
+    db.collection('sequences').countDocuments()
+      .then((c) => {
+        if (c < 1) {
+          const tipos = ['Pedido']
+          const array = tipos.map((tipo) => { return {
+                _id: tipo,
+                sequence_value: 1
+          }})
+          db.collection('sequences').insertMany(array)
+        }
+      })
 });
 
 passport.use(new LocalStrategy((username, password, done) => {
@@ -59,6 +71,7 @@ app.use(cookieParser())
 app.use(passport.initialize())
 
 app.use('/api/', user_routes);
+app.use('/pedido/', pedido_routes);
 app.use(middleware.errorHandler);
 app.use(middleware.notFoundHandler);
 
