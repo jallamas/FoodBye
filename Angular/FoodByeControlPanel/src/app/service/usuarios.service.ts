@@ -3,8 +3,6 @@ import { ConfigService } from './config.service';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Usuario } from '../models/usuario.interface';
 import { Observable } from 'rxjs';
-import { Avatar } from '../models/avatar.interface';
-import { UsuarioDto } from '../dto/usuario-dto';
 
 
 const urlUsers = 'https://foodbye.herokuapp.com/api/users/';

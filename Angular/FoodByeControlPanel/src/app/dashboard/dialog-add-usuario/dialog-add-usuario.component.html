@@ -1,0 +1,72 @@
+            <form [formGroup]="form" (ngSubmit)="confirmado()">
+              <div class="text-xs-center pb-1">
+              <div fxLayout="column" fxLayoutAlign="space-around">
+
+                <div class="pb-1">
+                  <img [src]="url" class="center">
+                  <br>
+                  <button mat-button style="width: 100%" type="button" mat-raised-button color="primary" (click)="imgFileInput.click()">
+                  <mat-icon>attachment</mat-icon>
+                  Subir Foto de Perfil
+                </button> 
+                  <input hidden type="file" #imgFileInput (change)="uploadFile($event)" />
+                 </div>
+                <div class="pb-1">
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Email" type="email" [(ngModel)]="registerDto.email" [formControl]="form.controls['email']">
+                  </mat-form-field>
+                  <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">Debes añadir un correo electrónico</small>
+                  <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Debes añadir un correo válido</small>
+                </div>
+  
+                <div class="pb-1">
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Nombre Completo" type="name"  [(ngModel)]="registerDto.fullname" [formControl]="form.controls['fullname']">
+                  </mat-form-field>
+                  <small *ngIf="form.controls['fullname'].hasError('required') && form.controls['fullname'].touched" class="mat-text-warn">Debes rellenar este campo con tu nombre.</small>
+                </div>
+  
+                <div class="pb-1">
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Número de Teléfono" type="tel"  [(ngModel)]="registerDto.phone" [formControl]="form.controls['phone']">
+                  </mat-form-field>
+                  <small *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched" class="mat-text-warn">Debes rellenar este campo con tu número de teléfono.</small>
+                </div>
+  
+                <div class="pb-1">
+                  <mat-form-field style="width: 100%">
+                    <input matInput type="password" placeholder="Contraseña"  [(ngModel)]="registerDto.password" [formControl]="form.controls['password']">
+                  </mat-form-field>
+                  <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"
+                    class="mat-text-warn">Debes incluir una contraseña</small>
+                </div>
+                <div class="pb-1">
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Confirmar Contraseña"  [(ngModel)]="registerDto.passwordD" [formControl]="form.controls['passwordD']" type="password">
+                  </mat-form-field>
+                  <small *ngIf="form.controls['passwordD'].hasError('required') && form.controls['passwordD'].touched"
+                    class="mat-text-warn">Debes confirmar tu contraseña</small>
+                  <small *ngIf="form.controls['passwordD'].errors?.equalTo" class="mat-text-warn">Las contraseñas no son iguales</small>
+                </div>
+                <div class="pb-1">
+                  <section class="example-section">
+                    <label class="example-margin">Rol:</label>
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)]="registerDto.rol" [ngModelOptions]="{standalone: true}" >
+                      <mat-radio-button class="example-margin" *ngFor="let rol of roles" ngDefaultControl [formControl]="form.controls['rol']"  [checked]="$first" [value]="rol">
+                        {{rol}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </section>             
+                  <small *ngIf="form.controls['rol'].hasError('required') && form.controls['rol'].touched"
+                  class="mat-text-warn">Debes indicar el tipo de usuario</small>  
+                </div>
+                <div class="pb-1">
+                </div>
+                <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">Crear Usuario</button>
+              </div>
+              </div>
+            </form>
+  
