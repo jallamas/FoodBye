@@ -30,10 +30,14 @@ let controller = {
                 let user = new User({
                     fullname: req.body.fullname,
                     email: req.body.email,
-                    rol: "BIKER",
+                    rol: req.body.rol,
                     phone: req.body.phone,
                     password: hash
                 });
+
+                if (user.rol == undefined || user.rol==null || user.rol=="") {
+                    user.rol= "BIKER"
+                  }
 
                 if (req.file != undefined) {
                     user.avatar = {
