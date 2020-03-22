@@ -24,7 +24,7 @@ let controller = {
                     numero_pedido: pedido.numero_pedido,
                     titulo: pedido.titulo,
                     descripcion: pedido.descripcion,
-                    origen: pedido.descripcion,
+                    origen: pedido.origen,
                     destino: pedido.destino,
                     client_phone: pedido.client_phone,
                     asignacion: pedido.populate('asignacion').execPopulate(),
