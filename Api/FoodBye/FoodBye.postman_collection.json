@@ -190,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"fullname\": \"José Antonio Llamas\",\n\t\"email\": \"josellamas@usuario.com\",\n\t\"phone\": \"654654654\"\n}",
+							"raw": "{\n\t\"fullname\": \"José Antonio Llamas Álvarez\",\n\t\"email\": \"josellamas@usuario.com\",\n\t\"phone\": \"654654654\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,7 +230,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://foodbye.herokuapp.com/api/user/5e735cf1138f1226d025cb9c",
+							"raw": "https://foodbye.herokuapp.com/api/user/5e74e3dc19dd5d0017ad8e33",
 							"protocol": "https",
 							"host": [
 								"foodbye",
@@ -240,7 +240,7 @@
 							"path": [
 								"api",
 								"user",
-								"5e735cf1138f1226d025cb9c"
+								"5e74e3dc19dd5d0017ad8e33"
 							]
 						}
 					},
@@ -271,7 +271,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://foodbye.herokuapp.com/api/user/password/5e735bac4f9dde146c3dfdec",
+							"raw": "https://foodbye.herokuapp.com/api/user/password/5e74e3dc19dd5d0017ad8e33",
 							"protocol": "https",
 							"host": [
 								"foodbye",
@@ -282,7 +282,7 @@
 								"api",
 								"user",
 								"password",
-								"5e735bac4f9dde146c3dfdec"
+								"5e74e3dc19dd5d0017ad8e33"
 							]
 						}
 					},
@@ -304,7 +304,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://foodbye.herokuapp.com/api/users/validar/5e735cf1138f1226d025cb9c",
+							"raw": "https://foodbye.herokuapp.com/api/users/validar/5e74e3dc19dd5d0017ad8e33",
 							"protocol": "https",
 							"host": [
 								"foodbye",
@@ -315,7 +315,156 @@
 								"api",
 								"users",
 								"validar",
+								"5e74e3dc19dd5d0017ad8e33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTczNWNmMTEzOGYxMjI2ZDAyNWNiOWMiLCJleHAiOjE1ODQ3OTU1NDgzNTUsImVtYWlsIjoiam9zZWxsYW1hc0B1c3VhcmlvLmNvbSJ9.NlCASCWMjCU9FEeJXSJNI8j71HT9BFa4MF6aglr0KE4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/josel/Pictures/mapa-politico-inglaterra-gales-irlanda-norte-esocia-diario-londinense.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/avatar/5e735cf1138f1226d025cb9c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"avatar",
 								"5e735cf1138f1226d025cb9c"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Nuevo pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ4ODA3NDA3NzEsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.qqT_fPTkaMWoFVTnDCdTIpqA21l4pLrmqjmS8vMmvow",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"titulo\": \"PruebaPedido1-Otra vez\",\n\t\"descripcion\": \"Probando a ver\",\n\t\"origen\": \"Avenida Kansas City, 18\",\n\t\"destino\": \"Calle Parras, 14\",\n\t\"client_phone\": \"987987987\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/pedido/nuevo",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pedido",
+								"nuevo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedidos sin asignar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ5NTg5NTQ4MDEsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.1v-9aPS1FEqGpibeZvNZ9yvZRfE7vD4z7c8GNh009AU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/pedido/sinasignar",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pedido",
+								"sinasignar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedidos de un usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTcyNmJmOGIwMTQ5MjMwMjhlMDEwODQiLCJleHAiOjE1ODQ5NTg5NTQ4MDEsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.1v-9aPS1FEqGpibeZvNZ9yvZRfE7vD4z7c8GNh009AU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://foodbye.herokuapp.com/pedido/usuario/5e74e3dc19dd5d0017ad8e33",
+							"protocol": "https",
+							"host": [
+								"foodbye",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pedido",
+								"usuario",
+								"5e74e3dc19dd5d0017ad8e33"
 							]
 						}
 					},
