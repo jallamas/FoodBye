@@ -25,7 +25,9 @@ const requestOptions = {
 
 const requestOptions2 = {
   headers: new HttpHeaders({
-    'responseType': 'arraybuffer, blob, json, text',
+    //'Content-Type': 'application/json',
+    'charset': 'UTF-8',
+    'responseType': 'arraybuffer, blob',
     'Authorization': 'Bearer '+ localStorage.getItem('token')
   })
 };
@@ -85,9 +87,9 @@ export class UsuariosService {
     );
   }
 
-  getAvatar(_id:string): Observable<Blob>{
-    return this.http.get<Blob>(
-      localAvatar+_id,requestOptions2
+  getAvatar(_id:string): Observable<ArrayBuffer>{
+    return this.http.get<ArrayBuffer>(
+      urlAvatar+_id,requestOptions2
     );
   }
 

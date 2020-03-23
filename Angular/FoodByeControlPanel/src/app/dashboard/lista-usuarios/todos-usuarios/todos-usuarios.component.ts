@@ -100,7 +100,7 @@ loadUsuariosTotales(){
     this.usuarioService.listarTodosUsuarios().subscribe(resp =>{
       resp.forEach(element=>{
         this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
-          console.log(resp2);
+            this.mydata==resp2.byteLength.toString
         });
         });
       this.listadoDeUsuarios = new MatTableDataSource<Usuario>(resp);
@@ -158,5 +158,6 @@ botonInhabilitar(userI: Usuario){
       this.mostrarSpinner=false;
     });
   }
+
 }
 

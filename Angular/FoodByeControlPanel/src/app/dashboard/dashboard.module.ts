@@ -34,6 +34,7 @@ import { DialogAddUsuarioComponent } from './dialog-add-usuario/dialog-add-usuar
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SnackBarUsuarioAgregadoComponent } from './snack-bar-usuario-agregado/snack-bar-usuario-agregado.component';
 import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-editar-usuario.component';
+import { SnackBarUsuarioEditadoComponent } from './snack-bar-usuario-editado/snack-bar-usuario-editado.component';
 
 @NgModule({
   imports: [
@@ -69,14 +70,16 @@ import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-edi
     SnackBarUsuarioBorradoComponent, 
     DialogAddUsuarioComponent, 
     SnackBarUsuarioAgregadoComponent, 
-    DialogEditarUsuarioComponent
+    DialogEditarUsuarioComponent,
+    SnackBarUsuarioEditadoComponent
   ],
   entryComponents:[
     DialogBorrarUsuarioComponent,
     SnackBarUsuarioBorradoComponent,
     DialogAddUsuarioComponent,
     SnackBarUsuarioAgregadoComponent,
-    DialogEditarUsuarioComponent
+    DialogEditarUsuarioComponent,
+    SnackBarUsuarioEditadoComponent
   ],
 })
 export class DashboardModule {}

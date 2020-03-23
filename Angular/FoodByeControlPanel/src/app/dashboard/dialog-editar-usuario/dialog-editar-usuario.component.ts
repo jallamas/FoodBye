@@ -12,6 +12,7 @@ import { UsuariosService } from 'src/app/service/usuarios.service';
 import { UsuarioDto } from 'src/app/dto/usuario-dto';
 import { EditUserDto } from 'src/app/dto/edit-dto';
 import { EditUserPasswordDto } from 'src/app/dto/usuario-edit-password.dto';
+import { SnackBarUsuarioEditadoComponent } from '../snack-bar-usuario-editado/snack-bar-usuario-editado.component';
 
 const password = new FormControl(null, Validators.required);
 const newpassword = new FormControl(null, Validators.required);
@@ -33,6 +34,7 @@ export class DialogEditarUsuarioComponent implements OnInit {
   url: string | ArrayBuffer;
   idUsuarioDetail: string;
   roles: string[] = ['ADMIN', 'BIKER'];
+  base64xdata: string | ArrayBuffer;
   constructor(
     public dialogo: MatDialogRef<DialogAddUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -105,7 +107,7 @@ export class DialogEditarUsuarioComponent implements OnInit {
         },
         (error) => console.log(error)
       );
-      this._snackBar.openFromComponent(SnackBarUsuarioAgregadoComponent, {
+      this._snackBar.openFromComponent(SnackBarUsuarioEditadoComponent, {
         duration: this.durationInSeconds * 1000,
       });
   this.dialogo.close();
@@ -121,7 +123,7 @@ confirmadoCambioAvatar(): void{
       },
       (error) => console.log(error)
     );
-    this._snackBar.openFromComponent(SnackBarUsuarioAgregadoComponent, {
+    this._snackBar.openFromComponent(SnackBarUsuarioEditadoComponent, {
       duration: this.durationInSeconds * 1000,
     });
 this.dialogo.close();
@@ -135,7 +137,7 @@ confirmadoCambioPassword(): void{
     },
     (error) => console.log(error)
   );
-  this._snackBar.openFromComponent(SnackBarUsuarioAgregadoComponent, {
+  this._snackBar.openFromComponent(SnackBarUsuarioEditadoComponent, {
     duration: this.durationInSeconds * 1000,
   });
 this.dialogo.close();
@@ -146,7 +148,5 @@ onNoClick(): void {
   this.router.navigated = false;
 this.router.navigate([this.router.url]);
 }
-
-
 
 }
