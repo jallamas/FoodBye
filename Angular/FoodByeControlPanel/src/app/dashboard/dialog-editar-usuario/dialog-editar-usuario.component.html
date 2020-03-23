@@ -1,0 +1,104 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="formAvatar">
+    <form [formGroup]="formAvatar" (ngSubmit)="confirmadoCambioAvatar()">
+      <ng-template matStepLabel>Cambiar Avatar</ng-template>
+          <div class="pb-1">
+          <img [src]="url" class="center">
+          <br>
+          <button mat-button style="width: 100%" type="button" mat-raised-button color="primary" (click)="imgFileInput.click()">
+          <mat-icon>attachment</mat-icon>
+          Subir Foto de Perfil
+        </button> 
+          <input hidden type="file" #imgFileInput (change)="uploadFile($event)" />
+       </div>
+      <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!formAvatar.valid">Cambiar avatar</button>
+      <div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="firstFormGroup">
+<form [formGroup]="form" (ngSubmit)="confirmado()">
+    <div class="text-xs-center pb-1">
+    <div fxLayout="column" fxLayoutAlign="space-around">
+      <div class="pb-1">
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Email" value="{{usuarioD.email}}" type="email" [(ngModel)]="usuarioEdit.email" [formControl]="form.controls['email']">
+        </mat-form-field>
+        <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">Debes añadir un correo electrónico</small>
+        <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Debes añadir un correo válido</small>
+      </div>
+
+      <div class="pb-1">
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Nombre Completo" type="name" value="{{usuarioD.fullname}}"  [(ngModel)]="usuarioEdit.fullname" [formControl]="form.controls['fullname']">
+        </mat-form-field>
+        <small *ngIf="form.controls['fullname'].hasError('required') && form.controls['fullname'].touched" class="mat-text-warn">Debes rellenar este campo con tu nombre.</small>
+      </div>
+
+      <div class="pb-1">
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Número de Teléfono" type="tel" value="{{usuarioD.phone}}" [(ngModel)]="usuarioEdit.phone" [formControl]="form.controls['phone']">
+        </mat-form-field>
+        <small *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched" class="mat-text-warn">Debes rellenar este campo con tu número de teléfono.</small>
+      </div>
+      <!--<div class="pb-1">
+        <section class="example-section">
+          <label class="example-margin">Rol:</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="registerDto.rol" value="{{usuarioD.rol}}" [ngModelOptions]="{standalone: true}" >
+            <mat-radio-button class="example-margin" *ngFor="let rol of roles" ngDefaultControl [formControl]="form.controls['rol']"  [checked]="$first" [value]="rol">
+              {{rol}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </section>             
+        <small *ngIf="form.controls['rol'].hasError('required') && form.controls['rol'].touched"
+        class="mat-text-warn">Debes indicar el tipo de usuario</small>  
+      </div>-->
+      <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">Editar Usuario</button>
+    </div>
+    </div>
+  </form>
+</mat-step>
+<mat-step [stepControl]="formPassword">
+  <form [formGroup]="formPassword" (ngSubmit)="confirmadoCambioPassword()">
+    <ng-template matStepLabel>Cambiar Contraseña</ng-template>
+    <div class="pb-1">
+      <mat-form-field style="width: 100%">
+        <input matInput  type="password" placeholder="Contraseña Actual"
+        value="{{usuarioD.password}}" [(ngModel)]="usuarioEditPassword.password" [formControl]="formPassword.controls['password']"
+              required>
+      </mat-form-field>
+      <small *ngIf="formPassword.controls['password'].hasError('required') && formPassword.controls['password'].touched" class="mat-text-warn">
+        Debes rellenar con su contraseña actual
+      </small>
+    </div>   
+    <div class="pb-1">
+      <mat-form-field style="width: 100%">
+        <input matInput type="password" placeholder="Nueva Contraseña" value="{{usuarioD.password}}" [(ngModel)]="usuarioEditPassword.newpassword" [formControl]="formPassword.controls['newpassword']"
+              required>
+      </mat-form-field>
+      <small *ngIf="formPassword.controls['newpassword'].hasError('required') && formPassword.controls['newpassword'].touched" class="mat-text-warn">
+        Debes rellenar este con su nueva contraseña
+      </small>
+    </div>                
+    <div class="pb-1">
+      <mat-form-field style="width: 100%">
+        <input matInput placeholder="Confirmar Contraseña"  [(ngModel)]="usuarioEditPassword.newpasswordD" [formControl]="formPassword.controls['newpasswordD']" type="password">
+      </mat-form-field>
+      <small *ngIf="formPassword.controls['newpasswordD'].hasError('required') && formPassword.controls['newpasswordD'].touched"
+        class="mat-text-warn">Debes confirmar tu contraseña</small>
+      <small *ngIf="formPassword.controls['newpasswordD'].errors?.equalTo" class="mat-text-warn">Las contraseñas no son iguales</small>
+    </div>
+    <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!formPassword.valid">Cambiar Contraseña</button>
+    <div>
+    </div>
+  </form>
+</mat-step>
+</mat-vertical-stepper>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()"  color="primary" cdkFocusInitial>Cancelar</button>
+</div>

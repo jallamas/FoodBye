@@ -20,7 +20,8 @@ export class UploadService {
   ) { }
 
   register(formData:FormData)  {
-    return this.http.post<RegisterResponse>(urlRegister, formData, {  
+    return this.http.post<RegisterResponse>(urlRegister, formData,
+       {  
         reportProgress: true,  
         observe: 'events'  
       });  

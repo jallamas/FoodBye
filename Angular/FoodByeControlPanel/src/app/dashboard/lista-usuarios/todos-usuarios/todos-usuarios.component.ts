@@ -39,8 +39,11 @@ export class TodosUsuariosComponent implements OnInit {
   mydata: any;
   pageIndexInhabilitado:number;
   pageIndexValidados:number;
+  imageBlobUrl: string | ArrayBuffer;
+  imageToShow: any;
+  isImageLoading: boolean;
 
-  constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute,
+  constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute,private sanitizer: DomSanitizer,
     public dialogo: MatDialog,
     ) { 
     this.mostrarSpinner=false;
@@ -50,6 +53,8 @@ export class TodosUsuariosComponent implements OnInit {
 }
 
   ngOnInit() {
+    var reader = new FileReader();
+
     this.loadUsuariosSinValidar();
     this.loadUsuariosTotales();
     this.loadUsuariosBikers();
@@ -88,19 +93,20 @@ mostrarDialogo(): void {
   });
   dialogRef.afterClosed().subscribe(result => {
   });
-}
+} 
 
 
 loadUsuariosTotales(){
     this.usuarioService.listarTodosUsuarios().subscribe(resp =>{
       resp.forEach(element=>{
         this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
+          console.log(resp2);
+        });
         });
       this.listadoDeUsuarios = new MatTableDataSource<Usuario>(resp);
       this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
     });
-  });
-}
+  }
 
 loadUsuariosBikers(){
   this.usuarioService.listarBikers().subscribe(resp =>{
@@ -152,7 +158,5 @@ botonInhabilitar(userI: Usuario){
       this.mostrarSpinner=false;
     });
   }
-
-
 }
 

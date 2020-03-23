@@ -14,10 +14,10 @@ import {
   MatFormFieldModule,
   MatCheckboxModule,
   MatInputModule,
-  MatRadioModule,
+  MatRadioModule
 } from '@angular/material';
 
-
+import {MatStepperModule} from '@angular/material/stepper';
 import { ChartsModule } from 'ng2-charts';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
@@ -33,6 +33,7 @@ import { SnackBarUsuarioBorradoComponent } from './snack-bar-usuario-borrado/sna
 import { DialogAddUsuarioComponent } from './dialog-add-usuario/dialog-add-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SnackBarUsuarioAgregadoComponent } from './snack-bar-usuario-agregado/snack-bar-usuario-agregado.component';
+import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-editar-usuario.component';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { SnackBarUsuarioAgregadoComponent } from './snack-bar-usuario-agregado/s
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatStepperModule
   ],
   declarations: [DashboardComponent, 
     TodosUsuariosComponent, 
@@ -66,13 +68,15 @@ import { SnackBarUsuarioAgregadoComponent } from './snack-bar-usuario-agregado/s
     DialogBorrarUsuarioComponent, 
     SnackBarUsuarioBorradoComponent, 
     DialogAddUsuarioComponent, 
-    SnackBarUsuarioAgregadoComponent
+    SnackBarUsuarioAgregadoComponent, 
+    DialogEditarUsuarioComponent
   ],
   entryComponents:[
     DialogBorrarUsuarioComponent,
     SnackBarUsuarioBorradoComponent,
     DialogAddUsuarioComponent,
-    SnackBarUsuarioAgregadoComponent
+    SnackBarUsuarioAgregadoComponent,
+    DialogEditarUsuarioComponent
   ],
 })
 export class DashboardModule {}
