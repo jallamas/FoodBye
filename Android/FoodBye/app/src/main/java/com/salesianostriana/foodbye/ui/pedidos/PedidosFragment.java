@@ -13,25 +13,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.salesianostriana.foodbye.R;
-import com.salesianostriana.foodbye.data.pedidos.PedidosViewModel;
+import com.salesianostriana.foodbye.data.pedidos.PedidoViewModel;
 
 
 public class PedidosFragment extends Fragment {
 
-    private PedidosViewModel pedidosViewModel;
+    private PedidoViewModel pedidoViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        pedidosViewModel =
-                ViewModelProviders.of(this).get(PedidosViewModel.class);
+        pedidoViewModel =
+                ViewModelProviders.of(this).get(PedidoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
-        pedidosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 }

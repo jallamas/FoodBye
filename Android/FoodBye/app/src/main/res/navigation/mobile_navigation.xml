@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_mis_pedidos"
-        android:name="com.salesianostriana.foodbye.ui.mispedidos.HomeFragment"
+        android:name="com.salesianostriana.foodbye.ui.mispedidos.MyPedidosListFragment"
         android:label="@string/title_mis_pedidos"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_mis_pedidos" />
 
     <fragment
         android:id="@+id/navigation_pedidos"

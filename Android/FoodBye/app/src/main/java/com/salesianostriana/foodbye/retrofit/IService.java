@@ -3,8 +3,11 @@ package com.salesianostriana.foodbye.retrofit;
 import com.salesianostriana.foodbye.models.request.RequestEditPassword;
 import com.salesianostriana.foodbye.models.request.RequestEditUser;
 import com.salesianostriana.foodbye.models.request.RequestLogin;
+import com.salesianostriana.foodbye.models.response.PedidoResponse;
 import com.salesianostriana.foodbye.models.response.ResponseLogin;
 import com.salesianostriana.foodbye.models.response.UserResponse;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,4 +50,7 @@ public interface IService {
     Call<UserResponse> editAvatar(@Path("id") String idUser,
                                   @Part MultipartBody.Part avatar,
                                   @Part("fullname") RequestBody fullname);
+
+    @GET("/pedido/usuario/{id}")
+    Call<List<PedidoResponse>> getPedidosUsuario(@Path("id") String idUser);
 }
