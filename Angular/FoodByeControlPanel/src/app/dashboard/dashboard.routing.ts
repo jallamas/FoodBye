@@ -11,7 +11,7 @@ export const DashboardRoutes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard]
   },
-  { path:'usuarios', component:TodosUsuariosComponent},
-  { path:'usuarios/usuario/:id', component:DetalleUsuarioComponent},
+  { path:'usuarios', component:TodosUsuariosComponent, canActivate: [AuthGuard]},
+  { path:'usuarios/usuario/:id', component:DetalleUsuarioComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/inicio', pathMatch: 'full',}
 ];

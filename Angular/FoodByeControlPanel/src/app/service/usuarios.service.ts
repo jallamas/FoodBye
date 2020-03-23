@@ -26,8 +26,7 @@ const requestOptions = {
 const requestOptions2 = {
   headers: new HttpHeaders({
     //'Content-Type': 'application/json',
-    'charset': 'UTF-8',
-    'responseType': 'arraybuffer, blob',
+    'responseType': 'arraybuffer, blob, json, text',
     'Authorization': 'Bearer '+ localStorage.getItem('token')
   })
 };
