@@ -17,10 +17,9 @@ let controller = {
                 descripcion: req.body.descripcion,
                 origen: req.body.origen,
                 destino: req.body.destino,
-                asignacion: mongoose.Types.ObjectId(req.body.asignacion._id),
+                // asignacion: mongoose.Types.ObjectId(req.body.asignacion._id),
                 client_phone: req.body.client_phone
             })
-
 
             pedido.save((err, pedido) => {
                 let pedidoResponse={
@@ -54,12 +53,12 @@ let controller = {
         res.status(200).json(pedidos);
         });
     },
-    getListaPedidosUsuario: (req, res, next)=>{
-            Pedido.find({asignacion:mongoose.Types.ObjectId(req.params.id)},(err,pedidos)=>{
+    getListaPedidosUsuario: ({ params }, res, next)=>{
+            Pedido.find({'asignacion._id': params.id},(err,pedidos)=>{
                 if (err) return console.error(err);
                 res.status(200).json(pedidos);
-    });
-},
+        });
+    },
     putAsignarPedido: (req,res,next)=>{
         Pedido.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'asignacion': mongoose.Types.ObjectId(req.body.asignacion)}} ,{new: true}, (err, pedido) => {
             if (err) next(new error_types.Error500(err.message));
@@ -68,7 +67,7 @@ let controller = {
             else
                 res.status(200).json(pedido);
         });
-    },
+    }
 }
 
 const notFound = (res) => (entity) => {
