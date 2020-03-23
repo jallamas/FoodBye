@@ -107,28 +107,94 @@ let controller = {
         });
     },
     getUsuarios: (req, res, next)=>{
+        const usersResponse = [];
         User.find((err, users)=> {
         if (err) return console.error(err);
-        res.status(200).json(users);
+        else{
+            users.forEach(user=>{
+                let userResponse={
+                    id: user.id,
+                    fullname: user.fullname,
+                    email:  user.email,
+                    rol: user.rol,
+                    avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                    validated: user.validated,
+                    phone:user.phone,
+                    created_date: user.created_date
+                }
+                usersResponse.push(userResponse);
+            });        
+                res.status(200).json(usersResponse);
+
+        }
         });
     },
     getUsuariosNoValidados: (req, res, next)=>{
+        const usersResponse = [];
         User.find({validated:false},(err, users)=> {
         if (err) return console.error(err);
-        res.status(200).json(users);
-        });
+        else{
+            users.forEach(user=>{
+                let userResponse={
+                    id: user.id,
+                    fullname: user.fullname,
+                    email:  user.email,
+                    rol: user.rol,
+                    avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                    validated: user.validated,
+                    phone:user.phone,
+                    created_date: user.created_date
+                }
+                usersResponse.push(userResponse);
+            });        
+                res.status(200).json(usersResponse);
+
+        }
+      });
     },
     getUsuariosValidados: (req, res, next)=>{
+        const usersResponse = [];
         User.find({validated:true},(err, users)=> {
         if (err) return console.error(err);
-        res.status(200).json(users);
-        });
+        else{
+            users.forEach(user=>{
+                let userResponse={
+                    id: user.id,
+                    fullname: user.fullname,
+                    email:  user.email,
+                    rol: user.rol,
+                    avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                    validated: user.validated,
+                    phone:user.phone,
+                    created_date: user.created_date
+                }
+                usersResponse.push(userResponse);
+            });        
+                res.status(200).json(usersResponse);
+        }        
+    });
     },
     getUsuariosBikers: (req, res, next)=>{
+        const usersResponse = [];
         User.find({rol:'BIKER'},(err, users)=> {
         if (err) return console.error(err);
-        res.status(200).json(users);
-        });
+        else{
+            users.forEach(user=>{
+                let userResponse={
+                    id: user.id,
+                    fullname: user.fullname,
+                    email:  user.email,
+                    rol: user.rol,
+                    avatar: user.avatar != null ? '/avatars/' + user.id : null,
+                    validated: user.validated,
+                    phone:user.phone,
+                    created_date: user.created_date
+                }
+                usersResponse.push(userResponse);
+            });        
+                res.status(200).json(usersResponse);
+        }
+       });
     },
     putValidarUsuario: (req,res,next)=>{
         User.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'validated': true}} ,{new: true}, (err, user) => {
