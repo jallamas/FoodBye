@@ -33,7 +33,6 @@ export class DialogAddUsuarioComponent implements OnInit {
     public uploadService:UploadService,
     private _snackBar: MatSnackBar
   ) { 
-    this.existeFoto=false
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
   }

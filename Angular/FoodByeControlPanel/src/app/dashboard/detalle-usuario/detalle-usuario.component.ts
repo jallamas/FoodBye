@@ -5,6 +5,7 @@ import { UsuariosService } from 'src/app/service/usuarios.service';
 import { Route } from '@angular/compiler/src/core';
 import { DialogBorrarUsuarioComponent } from '../dialog-borrar-usuario/dialog-borrar-usuario.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogEditarUsuarioComponent } from '../dialog-editar-usuario/dialog-editar-usuario.component';
 
 export interface DialogData {
   idUsuarioDetail: string;
@@ -52,7 +53,17 @@ export class DetalleUsuarioComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.idUsuarioDetail = result;
+
+    });
+  }
+
+  mostrarDialogoToEdit(): void {
+    const dialogRef = this.dialogo.open(DialogEditarUsuarioComponent, {
+      width: '500px',
+      data: {idUsuarioDetail: this.idUsuarioDetail}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 }
