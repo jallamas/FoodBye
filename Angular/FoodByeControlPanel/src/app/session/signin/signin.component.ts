@@ -38,8 +38,6 @@ export class SigninComponent implements OnInit {
     this.authentication.login(this.loginDto).subscribe(result => {
       this.authentication.setToken(result.token);
       localStorage.setItem('token',result.token);
-      console.log(result.token);
-      //console.log(this.jwtHelper.decodeToken(this.authentication.getToken()));
     this.router.navigate(['/inicio']);
     },
     error => {
