@@ -22,6 +22,8 @@ import com.salesianostriana.foodbye.models.response.PedidoResponse;
 import com.salesianostriana.foodbye.retrofit.IService;
 import com.salesianostriana.foodbye.retrofit.ServiceGenerator;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MyPedidosListFragment extends Fragment {
@@ -91,6 +93,7 @@ public class MyPedidosListFragment extends Fragment {
         pedidoViewModel.getPedidosByUser(userId).observe(getActivity(), new Observer<List<PedidoResponse>>() {
             @Override
             public void onChanged(List<PedidoResponse> listaPedidos) {
+                Collections.sort(listaPedidos, new ordenPedidos());
                 adapter.setData(listaPedidos);
             }
         });
@@ -99,5 +102,11 @@ public class MyPedidosListFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    class ordenPedidos implements Comparator<PedidoResponse> {
+        public int compare(PedidoResponse a, PedidoResponse b) {
+            return a.getRealizado().compareTo(b.getRealizado());
+        }
     }
 }

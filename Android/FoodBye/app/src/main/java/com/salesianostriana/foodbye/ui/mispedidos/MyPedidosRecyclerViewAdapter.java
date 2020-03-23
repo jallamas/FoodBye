@@ -45,6 +45,7 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
             holder.tvTitle.setText(holder.mItem.getTitulo());
             holder.tvOrigen.setText(holder.mItem.getOrigen());
             holder.tvDestino.setText(holder.mItem.getDestino());
+            holder.tvCodigo.setText(holder.mItem.getNumeroPedido());
 
             if (holder.mItem.getRealizado()==true){
                 holder.ivRealizado.setVisibility(View.GONE);
@@ -76,7 +77,7 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public PedidoResponse mItem;
-        public TextView tvTitle, tvOrigen, tvDestino, tvRealizado;
+        public TextView tvTitle, tvOrigen, tvDestino, tvRealizado, tvCodigo;
         public ImageView ivMenu, ivRealizado;
 
         public ViewHolder(View view) {
@@ -88,7 +89,7 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
             ivMenu = view.findViewById(R.id.imageViewPedidoMenu);
             tvRealizado = view.findViewById(R.id.textViewPendiente);
             ivRealizado = view.findViewById(R.id.imageViewPendiente);
-
+            tvCodigo = view.findViewById(R.id.textViewMyPedidoCodigo);
         }
     }
 

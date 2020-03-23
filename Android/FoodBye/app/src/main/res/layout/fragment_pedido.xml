@@ -11,18 +11,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="175dp">
 
         <TextView
             android:id="@+id/textViewMyPedidoTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="TextView"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/holo_orange_dark"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/textViewMyPedidoOrigen"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +78,6 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/textViewPendiente"
             app:layout_constraintEnd_toStartOf="@+id/textViewPendiente"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/imageViewPedidoFoto"
             app:layout_constraintTop_toTopOf="@+id/textViewPendiente"
             app:srcCompat="@android:drawable/ic_notification_overlay" />
 
@@ -87,11 +85,41 @@
             android:id="@+id/textViewPendiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/pedido_list_alert"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewPedidoMenu"
             app:layout_constraintEnd_toStartOf="@+id/imageViewPedidoMenu"
             app:layout_constraintTop_toTopOf="@+id/imageViewPedidoMenu" />
+
+        <TextView
+            android:id="@+id/textViewMyPedidoCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewMyPedidoTitle"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPedidoFoto"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewPendiente" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="De:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewMyPedidoOrigen"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPedidoFoto"
+            app:layout_constraintTop_toTopOf="@+id/textViewMyPedidoOrigen" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="a:"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPedidoFoto"
+            app:layout_constraintTop_toTopOf="@+id/textViewMyPedidoDestino" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
