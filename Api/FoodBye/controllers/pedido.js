@@ -30,6 +30,8 @@ let controller = {
                     origen: pedido.origen,
                     destino: pedido.destino,
                     client_phone: pedido.client_phone,
+                    time_recogido: pedido.time_recogido,
+                    time_entregado: pedido.time_entregado,
                     asignacion: pedido.asignacion,
                     realizado: pedido.realizado
                 }
@@ -57,6 +59,64 @@ let controller = {
             Pedido.find({'asignacion._id': params.id},(err,pedidos)=>{
                 if (err) return console.error(err);
                 res.status(200).json(pedidos);
+        });
+    },
+    putPedidoRecogido: function(req, res, next) {
+        Pedido.findById(req.params.id, function(err, pedido) {
+            if (err) return next(new error_types.Error404("El pedido con esta ID no existe"));
+            pedido.time_recogido.recogido  = true;
+            if(pedido.time_recogido.recogido==true){
+                pedido.time_recogido.hora_recogida=  Date.now()
+                            let pedidoResponse={
+                id: pedido.id,
+                numero_pedido: pedido.numero_pedido,
+                titulo:  pedido.titulo,
+                descripcion: pedido.descripcion,
+                origen: pedido.origen,
+                destino: pedido.destino,
+                realizado: pedido.realizado,
+                created_date: pedido.created_date,
+                time_recogido: pedido.time_recogido.hora_recogida,
+                time_entregado: pedido.time_entregado.hora_entregada,
+                asignacion: pedido.asignacion,
+                client_phone:pedido.client_phone
+            }
+            pedido.save(function(err) {
+                if(err) return res.status(500).send(err.message);
+            res.status(200).jsonp(pedidoResponse);
+            });
+            }
+        });
+    },
+    putPedidoEntregado: function(req, res, next) {
+        Pedido.findById(req.params.id, function(err, pedido) {
+            if (err) return next(new error_types.Error404("El pedido con esta ID no existe"));
+            else if(pedido.time_recogido.recogido==true){
+                pedido.time_entregado.entregado  = true;
+                if(pedido.time_entregado.entregado==true){
+                    pedido.time_entregado.hora_entregada = Date.now()
+                    let pedidoResponse={
+                        id: pedido.id,
+                        numero_pedido: pedido.numero_pedido,
+                        titulo:  pedido.titulo,
+                        descripcion: pedido.descripcion,
+                        origen: pedido.origen,
+                        destino: pedido.destino,
+                        realizado: pedido.realizado,
+                        created_date: pedido.created_date,
+                        time_recogido: pedido.time_recogido.hora_recogida,
+                        time_entregado: pedido.time_entregado.hora_entregada,
+                        asignacion: pedido.asignacion,
+                        client_phone:pedido.client_phone
+                    }
+                    pedido.save(function(err) {
+                        if(err) return res.status(500).send(err.message);
+                    res.status(200).jsonp(pedidoResponse);
+                    });
+                }
+            }else{
+                res.status(400).send({"message":"El biker no ha recogido el pedido, por tanto no puede entregarlo"});
+            }
         });
     },
     putAsignarPedido: (req,res,next)=>{

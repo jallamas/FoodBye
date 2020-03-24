@@ -22,6 +22,14 @@ const pedidoSchema = Schema({
     destino: String,
     realizado: {type: Boolean, default: false},
     created_date: { type: Date, default: Date.now },
+    time_recogido: {
+      recogido: {type: Boolean, default: false},
+      hora_recogida: { type: Date }
+    },
+    time_entregado: {
+      entregado: {type: Boolean, default: false},
+      hora_entregada: { type: Date }
+    },
     asignacion: asignacionSchema,
     client_phone: String,
     });

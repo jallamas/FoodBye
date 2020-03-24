@@ -11,5 +11,7 @@ router.get('/todos', middleware.ensureAuthenticatedAndAdmin, PedidoController.ge
 router.get('/sinasignar', middleware.ensureAuthenticated, PedidoController.getPedidosSinAsignar);
 router.get('/usuario/:id', middleware.ensureAuthenticated, PedidoController.getListaPedidosUsuario);
 router.put('/asignar/:id', middleware.ensureAuthenticated, PedidoController.putAsignarPedido);
+router.put('/recogido/:id', middleware.ensureAuthenticated, PedidoController.putPedidoRecogido);
+router.put('/entregado/:id', middleware.ensureAuthenticated, PedidoController.putPedidoEntregado);
 
 module.exports = router
