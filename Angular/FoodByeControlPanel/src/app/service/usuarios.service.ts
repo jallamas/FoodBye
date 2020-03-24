@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Usuario } from '../models/usuario.interface';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { UsuarioDto } from '../dto/usuario-dto';
 import { UsuarioEditResponse, UsuarioEditResponse2 } from '../models/usuario-edit-response.interface';
 import { EditUserDto } from '../dto/edit-dto';
 import { EditUserPasswordDto } from '../dto/usuario-edit-password.dto';
+import { environment } from 'src/environments/environment';
+import { catchError, retry } from 'rxjs/operators';
 
 
-const urlUsers = 'https://foodbye.herokuapp.com/api/users/';
-const urlUser = 'https://foodbye.herokuapp.com/api/user/';
-const urlAvatar = 'https://foodbye.herokuapp.com/api/avatar/';
+const urlUsers = `${environment.serverUrl}/users/`;
+const urlUser = `${environment.serverUrl}/user/`;
+const urlAvatar = `${environment.serverUrl}/avatar/`;
 const local ="http://localhost:3000/api/users/"
 const localAvatar ="http://localhost:3000/api/avatar/"
 
@@ -25,9 +27,9 @@ const requestOptions = {
 
 const requestOptions2 = {
   headers: new HttpHeaders({
-    //'Content-Type': 'application/json',
-    'responseType': 'arraybuffer, blob, json, text',
-    'Authorization': 'Bearer '+ localStorage.getItem('token')
+    'responseType': 'blob as json',
+    'Authorization': 'Bearer '+ localStorage.getItem('token'),
+    'Accept':"image/webp, */*"
   })
 };
 
@@ -86,15 +88,17 @@ export class UsuariosService {
     );
   }
 
-  getAvatar(_id:string): Observable<ArrayBuffer>{
-    return this.http.get<ArrayBuffer>(
-      urlAvatar+_id,requestOptions2
-    );
+  getAvatar(_id:string): Observable<Blob>{
+    let httpHeaders = new HttpHeaders()
+    .set('Accept', "image/webp,*/*")
+    .set('Authorization', 'Bearer '+ localStorage.getItem('token'));
+    return this.http.get(
+      urlAvatar+_id,{ headers: httpHeaders, responseType: 'blob' })
   }
 
-  getUsuario(_id:string): Observable<Usuario>{
+  getUsuario(id:string): Observable<Usuario>{
     return this.http.get<Usuario>(
-      urlUser+_id,requestOptions
+      urlUser+id,requestOptions
     );
   }
 
@@ -127,4 +131,4 @@ export class UsuariosService {
     );
   }
 
-}
+  }

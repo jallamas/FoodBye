@@ -6,6 +6,7 @@ import { Route } from '@angular/compiler/src/core';
 import { DialogBorrarUsuarioComponent } from '../dialog-borrar-usuario/dialog-borrar-usuario.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditarUsuarioComponent } from '../dialog-editar-usuario/dialog-editar-usuario.component';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 export interface DialogData {
   idUsuarioDetail: string;
@@ -21,11 +22,14 @@ export class DetalleUsuarioComponent implements OnInit {
   usuarioD: UsuarioDto;
   mostrarSpinner: boolean;
   idUsuarioDetail: string;
+  unsafeImageUrl: any;
+  imageUrl: SafeUrl;
   constructor(
     public dialogo: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private usuarioService: UsuariosService
+    private usuarioService: UsuariosService,
+    private sanitizer: DomSanitizer
   ) {
     this.mostrarSpinner=false;
     this.usuarioD = new UsuarioDto ("","","","","","",Boolean(),"",new Date())
@@ -40,6 +44,10 @@ export class DetalleUsuarioComponent implements OnInit {
       this.mostrarSpinner=true;
       this.idUsuarioDetail = params.get("id");
       this.usuarioService.getUsuario(this.idUsuarioDetail).subscribe(resp => {
+        this.usuarioService.getAvatar(this.idUsuarioDetail).subscribe(resp2 => {
+          this.unsafeImageUrl = URL.createObjectURL(resp2);
+          this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        });
         this.mostrarSpinner=false;
         this.usuarioD = resp;
       });

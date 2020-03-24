@@ -4,7 +4,7 @@ import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import { Usuario } from 'src/app/models/usuario.interface';
 import { Avatar } from 'src/app/models/avatar.interface';
 import { Observable, Observer } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AfterViewInit } from '@angular/core';
 import { UsuarioDto } from 'src/app/dto/usuario-dto';
@@ -20,6 +20,12 @@ import { DialogAddUsuarioComponent } from '../../dialog-add-usuario/dialog-add-u
 })
 export class TodosUsuariosComponent implements OnInit {
   listadoDeUsuarios: MatTableDataSource<Usuario>;
+
+  listaUsuariosConAvatar:Usuario[];
+  listaBikersConAvatar:Usuario[];
+  listaValidadosConAvatar:Usuario[];
+  listaNoValidadosConAvatar:Usuario[];
+
   listadoDeUsuariosBikers: MatTableDataSource<Usuario>;
   listadoDeUsuariosValidados: MatTableDataSource<Usuario>;
   listadoDeUsuariosNoValidados: MatTableDataSource<Usuario>;
@@ -36,16 +42,21 @@ export class TodosUsuariosComponent implements OnInit {
   @ViewChild('paginatorValidados', {static: true}) paginatorValidados: MatPaginator;
   @ViewChild('paginatorSinValidar', {static: true}) paginatorSinValidar: MatPaginator;
   mostrarSpinner: boolean;
-  mydata: any;
+  imageUrl: SafeUrl;
   pageIndexInhabilitado:number;
   pageIndexValidados:number;
   imageBlobUrl: string | ArrayBuffer;
   imageToShow: any;
-  isImageLoading: boolean;
+  unsafeImageUrl: any;
 
   constructor(private usuarioService: UsuariosService, private router: Router, private route: ActivatedRoute,private sanitizer: DomSanitizer,
     public dialogo: MatDialog,
     ) { 
+    this.listaUsuariosConAvatar=[];
+    this.listaBikersConAvatar=[];
+    this.listaValidadosConAvatar=[];
+    this.listaNoValidadosConAvatar=[];
+
     this.mostrarSpinner=false;
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
@@ -95,26 +106,39 @@ mostrarDialogo(): void {
   });
 } 
 
-
-loadUsuariosTotales(){
+  loadUsuariosTotales(){
     this.usuarioService.listarTodosUsuarios().subscribe(resp =>{
-      resp.forEach(element=>{
-        this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
-            this.mydata==resp2.byteLength.toString
+      resp.forEach(usuario=>{
+        this.usuarioService.getAvatar(usuario.id).subscribe(resp2=>{
+          this.unsafeImageUrl = URL.createObjectURL(resp2);
+          this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+          usuario.avatar=this.imageUrl;
+          this.listaUsuariosConAvatar.push(usuario)
+            this.listadoDeUsuarios = new MatTableDataSource<Usuario>(this.listaUsuariosConAvatar);
+            this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
+        },(error)=>{
+          usuario.avatar=null;
+          this.listaUsuariosConAvatar.push(usuario)
+        }
+        );
         });
-        });
-      this.listadoDeUsuarios = new MatTableDataSource<Usuario>(resp);
-      this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
     });
   }
+
 
 loadUsuariosBikers(){
   this.usuarioService.listarBikers().subscribe(resp =>{
     resp.forEach(element=>{
-      this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
-      });
-    this.listadoDeUsuariosBikers = new MatTableDataSource<Usuario>(resp);
-    this.listadoDeUsuariosBikers.paginator = this.paginatorbikers;
+      this.usuarioService.getAvatar(element.id).subscribe(resp2=>{
+        this.unsafeImageUrl = URL.createObjectURL(resp2);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        this.listaBikersConAvatar.push(element)
+        this.listadoDeUsuariosBikers = new MatTableDataSource<Usuario>(this.listaBikersConAvatar);
+        this.listadoDeUsuariosBikers.paginator = this.paginatorUsuarios;
+    },(error)=>{
+      element.avatar=null;
+      this.listaBikersConAvatar.push(element)
+    });
   });
 });
 }
@@ -122,10 +146,16 @@ loadUsuariosBikers(){
 loadUsuariosValidados(){
   this.usuarioService.listarValidados().subscribe(resp =>{
     resp.forEach(element=>{
-      this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
-      });
-    this.listadoDeUsuariosValidados = new MatTableDataSource<Usuario>(resp);
-    this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
+      this.usuarioService.getAvatar(element.id).subscribe(resp2=>{
+        this.unsafeImageUrl = URL.createObjectURL(resp2);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        this.listaValidadosConAvatar.push(element)
+        this.listadoDeUsuariosValidados = new MatTableDataSource<Usuario>(this.listaValidadosConAvatar);
+        this.listadoDeUsuariosValidados.paginator = this.paginatorUsuarios;
+    },(error)=>{
+      element.avatar=null;
+      this.listaValidadosConAvatar.push(element)
+    });
   });
 });
 }
@@ -133,17 +163,23 @@ loadUsuariosValidados(){
 loadUsuariosSinValidar(){
   this.usuarioService.listarSinValidar().subscribe(resp =>{
     resp.forEach(element=>{
-      this.usuarioService.getAvatar(element._id).subscribe(resp2=>{
-      });
-    this.listadoDeUsuariosNoValidados = new MatTableDataSource<Usuario>(resp);
-    this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
+      this.usuarioService.getAvatar(element.id).subscribe(resp2=>{
+        this.unsafeImageUrl = URL.createObjectURL(resp2);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        this.listaNoValidadosConAvatar.push(element)
+        this.listadoDeUsuariosNoValidados = new MatTableDataSource<Usuario>(this.listaNoValidadosConAvatar);
+        this.listadoDeUsuariosNoValidados.paginator = this.paginatorUsuarios;
+    },(error)=>{
+      element.avatar=null;
+      this.listaNoValidadosConAvatar.push(element)
+    });
   });
 });
 }
 
 botonValidar(userV: Usuario){
     this.mostrarSpinner=true;
-    this.usuarioService.validarUsuario(userV._id).subscribe(resp2=>{
+    this.usuarioService.validarUsuario(userV.id).subscribe(resp2=>{
       this.router.navigated = false;
       this.router.navigate([this.router.url]);
       this.mostrarSpinner=false;
@@ -152,7 +188,7 @@ botonValidar(userV: Usuario){
 
 botonInhabilitar(userI: Usuario){
     this.mostrarSpinner=true;
-    this.usuarioService.inhabilitarUsuario(userI._id).subscribe(resp3=>{   
+    this.usuarioService.inhabilitarUsuario(userI.id).subscribe(resp3=>{   
       this.router.navigated = false;
       this.router.navigate([this.router.url]);
       this.mostrarSpinner=false;

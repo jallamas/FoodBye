@@ -29,15 +29,15 @@
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
           <mat-cell *matCellDef="let usuario"
-          [routerLink]="['/usuarios/usuario/',usuario._id]">
-              <img [src]="mydata"> 
+          [routerLink]="['/usuarios/usuario/',usuario.id]">
+              <img [src]="usuario.avatar" width="50px"> 
               </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="fullname">
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
           <mat-cell *matCellDef="let usuario"
-          [routerLink]="['/usuarios/usuario/',usuario._id]"
+          [routerLink]="['/usuarios/usuario/',usuario.id]"
           > {{usuario.fullname}} </mat-cell>
         </ng-container>
         
@@ -45,7 +45,7 @@
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
           <mat-cell class="stilo" *matCellDef="let usuario" 
-          [routerLink]="['/usuarios/usuario/',usuario._id]"
+          [routerLink]="['/usuarios/usuario/',usuario.id]"
           > {{usuario.email}} </mat-cell>
         </ng-container>
 
@@ -66,22 +66,22 @@
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
           <mat-cell *matCellDef="let biker"
-          [routerLink]="['/usuarios/usuario/',biker._id]">
-              <img [src]="mydata">
+          [routerLink]="['/usuarios/usuario/',biker.id]">
+              <img [src]="biker.avatar">
               </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="fullname">
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
           <mat-cell *matCellDef="let biker"
-          [routerLink]="['/usuarios/usuario/',biker._id]">
+          [routerLink]="['/usuarios/usuario/',biker.id]">
           {{biker.fullname}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
           <mat-cell *matCellDef="let biker"
-          [routerLink]="['/usuarios/usuario/',biker._id]">
+          [routerLink]="['/usuarios/usuario/',biker.id]">
            {{biker.email}} </mat-cell>
         </ng-container>
 
@@ -103,22 +103,22 @@
               <ng-container matColumnDef="avatar">
                 <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
                 <mat-cell *matCellDef="let usuarioSinValidar"
-                [routerLink]="['/usuarios/usuario/',usuarioSinValidar._id]">
-                  <img [src]="mydata">
+                [routerLink]="['/usuarios/usuario/',usuarioSinValidar.id]">
+                  <img [src]="usuarioSinValidar.avatar">
                     </mat-cell>
               </ng-container>
       
               <ng-container matColumnDef="fullname">
                 <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
                 <mat-cell *matCellDef="let usuarioSinValidar"
-                [routerLink]="['/usuarios/usuario/',usuarioSinValidar._id]">
+                [routerLink]="['/usuarios/usuario/',usuarioSinValidar.id]">
                  {{usuarioSinValidar.fullname}} </mat-cell>
               </ng-container>
       
               <ng-container matColumnDef="email">
                 <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
                 <mat-cell *matCellDef="let usuarioSinValidar"
-                [routerLink]="['/usuarios/usuario/',usuarioSinValidar._id]">
+                [routerLink]="['/usuarios/usuario/',usuarioSinValidar.id]">
                  {{usuarioSinValidar.email}} </mat-cell>
               </ng-container>
 
@@ -147,22 +147,22 @@
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef> avatar </mat-header-cell>
           <mat-cell *matCellDef="let usuarioValidado"
-          [routerLink]="['/usuarios/usuario/',usuarioValidado._id]">
-              <img [src]="mydata">
+          [routerLink]="['/usuarios/usuario/',usuarioValidado.id]">
+              <img [src]="usuarioValidado.avatar">
               </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="fullname">
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
           <mat-cell *matCellDef="let usuarioValidado"
-          [routerLink]="['/usuarios/usuario/',usuarioValidado._id]">
+          [routerLink]="['/usuarios/usuario/',usuarioValidado.id]">
           {{usuarioValidado.fullname}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
           <mat-cell *matCellDef="let usuarioValidado"
-          [routerLink]="['/usuarios/usuario/',usuarioValidado._id]">
+          [routerLink]="['/usuarios/usuario/',usuarioValidado.id]">
           {{usuarioValidado.email}} </mat-cell>
         </ng-container>
 
