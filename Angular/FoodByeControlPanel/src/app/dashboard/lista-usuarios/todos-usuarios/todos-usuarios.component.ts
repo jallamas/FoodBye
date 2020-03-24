@@ -132,9 +132,10 @@ loadUsuariosBikers(){
       this.usuarioService.getAvatar(element.id).subscribe(resp2=>{
         this.unsafeImageUrl = URL.createObjectURL(resp2);
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        element.avatar=this.imageUrl;
         this.listaBikersConAvatar.push(element)
         this.listadoDeUsuariosBikers = new MatTableDataSource<Usuario>(this.listaBikersConAvatar);
-        this.listadoDeUsuariosBikers.paginator = this.paginatorUsuarios;
+        this.listadoDeUsuariosBikers.paginator = this.paginatorbikers;
     },(error)=>{
       element.avatar=null;
       this.listaBikersConAvatar.push(element)
@@ -149,9 +150,10 @@ loadUsuariosValidados(){
       this.usuarioService.getAvatar(element.id).subscribe(resp2=>{
         this.unsafeImageUrl = URL.createObjectURL(resp2);
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        element.avatar=this.imageUrl;
         this.listaValidadosConAvatar.push(element)
         this.listadoDeUsuariosValidados = new MatTableDataSource<Usuario>(this.listaValidadosConAvatar);
-        this.listadoDeUsuariosValidados.paginator = this.paginatorUsuarios;
+        this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
     },(error)=>{
       element.avatar=null;
       this.listaValidadosConAvatar.push(element)
@@ -166,9 +168,10 @@ loadUsuariosSinValidar(){
       this.usuarioService.getAvatar(element.id).subscribe(resp2=>{
         this.unsafeImageUrl = URL.createObjectURL(resp2);
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
+        element.avatar=this.imageUrl;
         this.listaNoValidadosConAvatar.push(element)
         this.listadoDeUsuariosNoValidados = new MatTableDataSource<Usuario>(this.listaNoValidadosConAvatar);
-        this.listadoDeUsuariosNoValidados.paginator = this.paginatorUsuarios;
+        this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
     },(error)=>{
       element.avatar=null;
       this.listaNoValidadosConAvatar.push(element)
