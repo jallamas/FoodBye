@@ -46,6 +46,7 @@ let controller = {
     getTodosPedidos: (req, res, next)=>{
         Pedido.find((err, pedidos)=> {
         if (err) return console.error(err);
+
         res.status(200).json(pedidos);
         });
     },
@@ -61,40 +62,59 @@ let controller = {
                 res.status(200).json(pedidos);
         });
     },
+    getPedido: (req, res, next)=>{
+        Pedido.findById(req.params.id,(err, pedido)=> {
+        if (err) return console.error(err);
+        res.status(200).json(pedido);
+        });
+    },
     putPedidoRecogido: function(req, res, next) {
         Pedido.findById(req.params.id, function(err, pedido) {
             if (err) return next(new error_types.Error404("El pedido con esta ID no existe"));
-            pedido.time_recogido.recogido  = true;
-            if(pedido.time_recogido.recogido==true){
-                pedido.time_recogido.hora_recogida=  Date.now()
-                            let pedidoResponse={
-                id: pedido.id,
-                numero_pedido: pedido.numero_pedido,
-                titulo:  pedido.titulo,
-                descripcion: pedido.descripcion,
-                origen: pedido.origen,
-                destino: pedido.destino,
-                realizado: pedido.realizado,
-                created_date: pedido.created_date,
-                time_recogido: pedido.time_recogido.hora_recogida,
-                time_entregado: pedido.time_entregado.hora_entregada,
-                asignacion: pedido.asignacion,
-                client_phone:pedido.client_phone
+            if(pedido.time_recogido!=null){
+                return next(new error_types.Error400("El pedido ya ha sido recogido"));
             }
-            pedido.save(function(err) {
-                if(err) return res.status(500).send(err.message);
-            res.status(200).jsonp(pedidoResponse);
-            });
+            if(pedido.asignacion==null){
+                return next(new error_types.Error404("El pedido no se ha asignado a nadie"));
+            }
+            else{
+                    pedido.time_recogido=  Date.now()
+                let pedidoResponse={
+                    id: pedido.id,
+                    numero_pedido: pedido.numero_pedido,
+                    titulo:  pedido.titulo,
+                    descripcion: pedido.descripcion,
+                    origen: pedido.origen,
+                    destino: pedido.destino,
+                    realizado: pedido.realizado,
+                    created_date: pedido.created_date,
+                    time_recogido: pedido.time_recogido,
+                    time_entregado: pedido.time_entregado,
+                    asignacion: pedido.asignacion,
+                    client_phone:pedido.client_phone
+                }
+                pedido.save(function(err) {
+                    if(err) return res.status(500).send(err.message);
+                res.status(200).jsonp(pedidoResponse);
+                });
             }
         });
     },
     putPedidoEntregado: function(req, res, next) {
         Pedido.findById(req.params.id, function(err, pedido) {
             if (err) return next(new error_types.Error404("El pedido con esta ID no existe"));
-            else if(pedido.time_recogido.recogido==true){
-                pedido.time_entregado.entregado  = true;
-                if(pedido.time_entregado.entregado==true){
-                    pedido.time_entregado.hora_entregada = Date.now()
+            if(pedido.asignacion==null){
+                return next(new error_types.Error404("El pedido no se ha asignado a nadie"));
+            }
+            if(pedido.time_recogido==null){
+                return next(new error_types.Error404("El biker no ha recogido el pedido, por tanto no puede entregarlo"));
+            }
+            if(pedido.time_entregado!=null){
+                return next(new error_types.Error400("El pedido ya se ha entregado"));
+            }
+            else if(pedido.time_recogido!=null){
+                if(pedido.time_entregado==null){
+                    pedido.time_entregado = Date.now()
                     let pedidoResponse={
                         id: pedido.id,
                         numero_pedido: pedido.numero_pedido,
@@ -104,8 +124,8 @@ let controller = {
                         destino: pedido.destino,
                         realizado: pedido.realizado,
                         created_date: pedido.created_date,
-                        time_recogido: pedido.time_recogido.hora_recogida,
-                        time_entregado: pedido.time_entregado.hora_entregada,
+                        time_recogido: pedido.time_recogido,
+                        time_entregado: pedido.time_entregado,
                         asignacion: pedido.asignacion,
                         client_phone:pedido.client_phone
                     }
@@ -114,8 +134,6 @@ let controller = {
                     res.status(200).jsonp(pedidoResponse);
                     });
                 }
-            }else{
-                res.status(400).send({"message":"El biker no ha recogido el pedido, por tanto no puede entregarlo"});
             }
         });
     },
