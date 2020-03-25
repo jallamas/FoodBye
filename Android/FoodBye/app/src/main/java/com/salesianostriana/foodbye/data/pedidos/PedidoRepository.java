@@ -20,11 +20,14 @@ public class PedidoRepository {
     IService service;
     MutableLiveData<PedidoResponse> pedido;
     MutableLiveData<List<PedidoResponse>> listaPedidos;
+    MutableLiveData<List<PedidoResponse>> listaPedidosSinAsignar;
 
     public PedidoRepository(){
         service = ServiceGenerator.createServiceWithToken(IService.class);
         pedido = new MutableLiveData<>();
         listaPedidos = new MutableLiveData<>();
+        listaPedidosSinAsignar = new MutableLiveData<>();
+
     }
 
     public MutableLiveData<List<PedidoResponse>> getPedidosByUser(String userId){
@@ -45,5 +48,83 @@ public class PedidoRepository {
             }
         });
         return listaPedidos;
+    }
+
+    public MutableLiveData<PedidoResponse> getPedido(String pedidoId){
+        Call<PedidoResponse> call = service.getPedido(pedidoId);
+        call.enqueue(new Callback<PedidoResponse>() {
+            @Override
+            public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {
+                if (response.isSuccessful()) {
+                    pedido.setValue(response.body());
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PedidoResponse> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return pedido;
+    }
+
+    public MutableLiveData<List<PedidoResponse>> getListaSinAsignar(){
+        Call<List<PedidoResponse>> call = service.getPedidosSinAsignar();
+        call.enqueue(new Callback<List<PedidoResponse>>() {
+            @Override
+            public void onResponse(Call<List<PedidoResponse>> call, Response<List<PedidoResponse>> response) {
+                if (response.isSuccessful()) {
+                    listaPedidosSinAsignar.setValue(response.body());
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<PedidoResponse>> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return listaPedidosSinAsignar;
+    }
+
+    public void putRecogerPedido(String pedidoId){
+        Call<PedidoResponse> call = service.putPedidoRecogido(pedidoId);
+        final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
+
+        call.enqueue(new Callback<PedidoResponse>() {
+            @Override
+            public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {
+                if (response.isSuccessful()) {
+                    pedidoEdit.setValue(response.body());
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PedidoResponse> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void putEntregarPedido(String pedidoId){
+        Call<PedidoResponse> call = service.putPedidoEntregado(pedidoId);
+        final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
+
+        call.enqueue(new Callback<PedidoResponse>() {
+            @Override
+            public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {
+                if (response.isSuccessful()) {
+                    pedidoEdit.setValue(response.body());
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PedidoResponse> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
