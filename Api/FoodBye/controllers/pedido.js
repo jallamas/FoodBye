@@ -114,7 +114,8 @@ let controller = {
             }
             else if(pedido.time_recogido!=null){
                 if(pedido.time_entregado==null){
-                    pedido.time_entregado = Date.now()
+                    pedido.time_entregado = Date.now();
+                    pedido.realizado= true;
                     let pedidoResponse={
                         id: pedido.id,
                         numero_pedido: pedido.numero_pedido,
