@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import {AuthGuard} from '../guards/auth.guard';
 import { TodosUsuariosComponent } from './lista-usuarios/todos-usuarios/todos-usuarios.component';
 import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 
 export const DashboardRoutes: Routes = [
   {
@@ -13,5 +14,6 @@ export const DashboardRoutes: Routes = [
   },
   { path:'usuarios', component:TodosUsuariosComponent, canActivate: [AuthGuard]},
   { path:'usuarios/usuario/:id', component:DetalleUsuarioComponent, canActivate: [AuthGuard]},
+  { path:'pedidos', component:ListaPedidosComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/inicio', pathMatch: 'full',canActivate: [AuthGuard]}
 ];

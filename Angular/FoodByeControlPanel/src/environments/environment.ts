@@ -12,6 +12,7 @@ export const environment = {
   serverUrl: 'https://foodbye.herokuapp.com/api',
   loginUrl: ' https://foodbye.herokuapp.com/api/login',
   signinUrl: 'https://foodbye.herokuapp.com/api/register',
+  pedidosUrl: 'https://foodbye.herokuapp.com/pedido',
 
   clientId: 'cemapp',
   clientSecret: 'secret'

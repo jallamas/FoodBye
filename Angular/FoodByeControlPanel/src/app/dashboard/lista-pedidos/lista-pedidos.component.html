@@ -1,0 +1,94 @@
+<div class="overlay"  *ngIf="mostrarSpinner" >
+<div class="center">
+  <mat-progress-spinner
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="value">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title class="titulo">Pedidos Totales</mat-card-title>
+        <mat-card-subtitle class="subtitulo">Pedidos</mat-card-subtitle>
+    </mat-card-header>
+    <div>
+    <button mat-raised-button color="primary" (click)="mostrarDialogo()">
+        <mat-icon class="example-tab-icon">add</mat-icon>Nuevo pedido</button>
+    </div>
+    <mat-card-content>
+        <mat-tab-group #tabGroup (selectedIndexChange)="_setDataSource($event)" >
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">group</mat-icon>
+                    Todos
+                </ng-template>
+                <mat-table #table [dataSource]="listadoDePedidos">
+                    <ng-container matColumnDef="numero_pedido">
+                        <mat-header-cell *matHeaderCellDef> Número </mat-header-cell>
+                        <mat-cell *matCellDef="let pedido"
+                        [routerLink]="['/pedidos/pedido/',pedido.id]"> 
+                        {{pedido.numero_pedido}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="titulo">
+                        <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+                        <mat-cell *matCellDef="let pedido"
+                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        {{pedido.titulo}} </mat-cell>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="origen">
+                        <mat-header-cell *matHeaderCellDef> Origen </mat-header-cell>
+                        <mat-cell class="stilo" *matCellDef="let pedido" 
+                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        {{pedido.origen}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="destino">
+                    <mat-header-cell *matHeaderCellDef> Destino </mat-header-cell>
+                    <mat-cell class="stilo" *matCellDef="let pedido" 
+                    [routerLink]="['/pedidos/pedido/',pedido.id]"
+                    > {{pedido.destino}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="created_date">
+                        <mat-header-cell *matHeaderCellDef> Emitido </mat-header-cell>
+                        <mat-cell class="stilo" *matCellDef="let pedido" 
+                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        {{pedido.created_date | date:'dd-MM-yyyy HH:mm'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="time_recogido">
+                        <mat-header-cell *matHeaderCellDef> Recogido </mat-header-cell>
+                        <mat-cell class="stilo" *matCellDef="let pedido" 
+                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        {{pedido.time_recogido | date:'dd-MM-yyyy HH:mm'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="time_entregado">
+                        <mat-header-cell *matHeaderCellDef> Entregado </mat-header-cell>
+                        <mat-cell class="stilo" *matCellDef="let pedido" 
+                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        {{pedido.time_entregado | date:'dd-MM-yyyy HH:mm'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="asignacion">
+                    <mat-header-cell *matHeaderCellDef> Asignado </mat-header-cell>
+                        <mat-cell class="stilo" *matCellDef="let pedido" 
+                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        {{pedido.asignacion != undefined ? (pedido.asignacion.fecha_asignacion | date:'dd-MM-yyyy HH:mm') : 'Sin asignar'}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="columsToDisplay"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: columsToDisplay;"></mat-row>
+
+                </mat-table>
+                <mat-paginator #paginatorPedidos [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

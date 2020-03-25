@@ -46,6 +46,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { UsuariosService } from './service/usuarios.service';
 import { AuthService } from './service/auth.service';
+import { PedidosService } from './service/pedidos.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -114,7 +115,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     UsuariosService,
-    AuthService
+    AuthService,
+    PedidosService
   ],
   bootstrap: [AppComponent]
 })

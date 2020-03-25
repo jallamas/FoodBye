@@ -20,10 +20,10 @@ export class MenuService {
         icon: 'group'
       },
       {
-        link: '/',
+        link: '/pedidos',
         label: this.translate.instant('Pedidos'),
         externalRedirect: true,
-        icon: 'local_library'
+        icon: 'assignment'
       }
     ];
   }

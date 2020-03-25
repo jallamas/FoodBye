@@ -35,6 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SnackBarUsuarioAgregadoComponent } from './snack-bar-usuario-agregado/snack-bar-usuario-agregado.component';
 import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-editar-usuario.component';
 import { SnackBarUsuarioEditadoComponent } from './snack-bar-usuario-editado/snack-bar-usuario-editado.component';
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 
 @NgModule({
   imports: [
@@ -71,7 +72,8 @@ import { SnackBarUsuarioEditadoComponent } from './snack-bar-usuario-editado/sna
     DialogAddUsuarioComponent, 
     SnackBarUsuarioAgregadoComponent, 
     DialogEditarUsuarioComponent,
-    SnackBarUsuarioEditadoComponent
+    SnackBarUsuarioEditadoComponent,
+    ListaPedidosComponent
   ],
   entryComponents:[
     DialogBorrarUsuarioComponent,

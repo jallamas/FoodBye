@@ -7,6 +7,7 @@ interface Config {
   serverUrl: string;
   loginUrl: string;
   signinUrl: string;
+  pedidosUrl: string;
   clientId: string;
   clientSecret: string;
 }
@@ -29,6 +30,7 @@ export class ConfigService {
       serverUrl: environment.serverUrl,
       loginUrl: environment.loginUrl,
       signinUrl: environment.signinUrl,
+      pedidosUrl: environment.pedidosUrl,
       clientId: environment.clientId,
       clientSecret: environment.clientSecret
     };

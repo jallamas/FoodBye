@@ -73,10 +73,10 @@ export class TodosUsuariosComponent implements OnInit {
 }
 
 ngAfterViewInit() {
-  this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
-  this.listadoDeUsuariosBikers.paginator = this.paginatorbikers;
-  this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
-  this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
+ // this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
+  // this.listadoDeUsuariosBikers.paginator = this.paginatorbikers;
+  // this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
+  // this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
 }
 
 _setDataSource(indexNumber) {
@@ -113,9 +113,10 @@ mostrarDialogo(): void {
           this.unsafeImageUrl = URL.createObjectURL(resp2);
           this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.unsafeImageUrl);
           usuario.avatar=this.imageUrl;
+          this.listadoDeUsuarios = new MatTableDataSource<Usuario>(this.listaUsuariosConAvatar);
+          this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
           this.listaUsuariosConAvatar.push(usuario)
-            this.listadoDeUsuarios = new MatTableDataSource<Usuario>(this.listaUsuariosConAvatar);
-            this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
+            
         },(error)=>{
           usuario.avatar=null;
           this.listaUsuariosConAvatar.push(usuario)
