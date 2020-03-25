@@ -4,6 +4,8 @@ package com.salesianostriana.foodbye.models.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class PedidoResponse {
 
     @SerializedName("realizado")
@@ -36,6 +38,12 @@ public class PedidoResponse {
     @SerializedName("asignacion")
     @Expose
     private Asignacion asignacion;
+    @SerializedName("time_recogido")
+    @Expose
+    private String timeRecogido;
+    @SerializedName("time_entregado")
+    @Expose
+    private String timeEntregado;
     @SerializedName("__v")
     @Expose
     private Integer v;
@@ -47,22 +55,7 @@ public class PedidoResponse {
     public PedidoResponse() {
     }
 
-    /**
-     * 
-     * @param descripcion
-     * @param asignacion
-     * @param createdDate
-     * @param realizado
-     * @param v
-     * @param titulo
-     * @param numeroPedido
-     * @param id
-     * @param origen
-     * @param destino
-     * @param clientPhone
-     */
-    public PedidoResponse(Boolean realizado, String id, String numeroPedido, String titulo, String descripcion, String origen, String destino, String clientPhone, String createdDate, Asignacion asignacion, Integer v) {
-        super();
+    public PedidoResponse(Boolean realizado, String id, String numeroPedido, String titulo, String descripcion, String origen, String destino, String clientPhone, String createdDate, Asignacion asignacion, String timeRecogido, String timeEntregado, Integer v) {
         this.realizado = realizado;
         this.id = id;
         this.numeroPedido = numeroPedido;
@@ -73,8 +66,28 @@ public class PedidoResponse {
         this.clientPhone = clientPhone;
         this.createdDate = createdDate;
         this.asignacion = asignacion;
+        this.timeRecogido = timeRecogido;
+        this.timeEntregado = timeEntregado;
         this.v = v;
     }
+
+    /**
+     *
+     * @param realizado
+     * @param id
+     * @param numeroPedido
+     * @param titulo
+     * @param descripcion
+     * @param origen
+     * @param destino
+     * @param clientPhone
+     * @param createdDate
+     * @param asignacion
+     * @param timeRecogido
+     * @param timeEntregado
+     * @param v
+     */
+
 
     public Boolean getRealizado() {
         return realizado;
@@ -164,4 +177,19 @@ public class PedidoResponse {
         this.v = v;
     }
 
+    public String getTimeRecogido() {
+        return timeRecogido;
+    }
+
+    public void setTimeRecogido(String timeRecogido) {
+        this.timeRecogido = timeRecogido;
+    }
+
+    public String getTimeEntregado() {
+        return timeEntregado;
+    }
+
+    public void setTimeEntregado(String timeEntregado) {
+        this.timeEntregado = timeEntregado;
+    }
 }

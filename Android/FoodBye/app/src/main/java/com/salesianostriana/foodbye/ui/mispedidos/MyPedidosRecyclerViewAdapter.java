@@ -51,6 +51,15 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
                 holder.ivRealizado.setVisibility(View.GONE);
                 holder.tvRealizado.setVisibility(View.GONE);
             }
+
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (pedidoViewModel != null) {
+                        pedidoViewModel.setPedidoId(holder.mItem.getId());
+                    }
+                }
+            });
         }
     }
 
