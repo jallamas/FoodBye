@@ -4,6 +4,7 @@ import { MatDialog, MatTableDataSource, MatPaginator, ThemePalette, ProgressSpin
 import { PedidosService } from 'src/app/service/pedidos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DialogAddPedidoComponent } from '../dialog-add-pedido/dialog-add-pedido.component';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -55,17 +56,23 @@ export class ListaPedidosComponent implements OnInit {
     });
   }
 
-  loadPedidos() {
+  mostrarDialogo(): void {
+    const dialogRef = this.dialogo.open(DialogAddPedidoComponent, {
+      width: '550px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  } 
 
+  loadPedidos() {
     this.pedidosService.listarTodosPedidos().subscribe(resp=>{
+      resp.sort((a, b) => new Date(b.created_date).getTime() - new Date(a.created_date).getTime());
       resp.forEach(pedido=>{
         this.listadoDePedidos = new MatTableDataSource<Pedido>(this.listaPedidos);
         this.listadoDePedidos.paginator = this.paginatorPedidos;
         this.listaPedidos.push(pedido)
       });
-      this.listaPedidos.sort((a, b) => new Date(b.created_date).getTime() - new Date(a.created_date).getTime());
     });
-    
   }
 
 }

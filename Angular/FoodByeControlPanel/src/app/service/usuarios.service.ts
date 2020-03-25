@@ -80,9 +80,9 @@ export class UsuariosService {
     );
   }
 
-  inhabilitarUsuario(usurioValidadoId:String): Observable<Usuario>{
+  inhabilitarUsuario(usuarioValidadoId:String): Observable<Usuario>{
     return this.http.put<Usuario>(
-      urlUsers+"inhabilitar/"+usurioValidadoId,
+      urlUsers+"inhabilitar/"+usuarioValidadoId,
       null,
       requestOptions,
     );

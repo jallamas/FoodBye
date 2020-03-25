@@ -1,0 +1,44 @@
+<form [formGroup]="form" (ngSubmit)="confirmado()">
+  <div class="text-xs-center pb-1">
+    <div fxLayout="column" fxLayoutAlign="space-around">
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Título" type="titulo" [(ngModel)]="pedidoNuevoDto.titulo" [formControl]="form.controls['titulo']">
+        </mat-form-field>
+        <small *ngIf="form.controls['titulo'].hasError('required') && form.controls['titulo'].touched" class="mat-text-warn">Debe añadir un título</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Descripción" type="text"  [(ngModel)]="pedidoNuevoDto.descripcion" [formControl]="form.controls['descripcion']">
+        </mat-form-field>
+        <small *ngIf="form.controls['descripcion'].hasError('required') && form.controls['descripcion'].touched" class="mat-text-warn">Debe añadir una descripción.</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Origen" type="text"  [(ngModel)]="pedidoNuevoDto.origen" [formControl]="form.controls['origen']">
+        </mat-form-field>
+        <small *ngIf="form.controls['origen'].hasError('required') && form.controls['origen'].touched" class="mat-text-warn">Debe introducir la dirección de origen.</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Destino" type="text"  [(ngModel)]="pedidoNuevoDto.destino" [formControl]="form.controls['destino']">
+        </mat-form-field>
+        <small *ngIf="form.controls['destino'].hasError('required') && form.controls['destino'].touched" class="mat-text-warn">Debe introducir la dirección de destino.</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Teléfono del Cliente" type="text"  [(ngModel)]="pedidoNuevoDto.client_phone" [formControl]="form.controls['client_phone']">
+        </mat-form-field>
+        <small *ngIf="form.controls['client_phone'].hasError('required') && form.controls['client_phone'].touched" class="mat-text-warn">Debe incluir el teléfono del cliente/destinatario.</small>
+        </div>
+    
+        <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">Crear Pedido</button>
+    </div>
+  </div>
+</form>
+  

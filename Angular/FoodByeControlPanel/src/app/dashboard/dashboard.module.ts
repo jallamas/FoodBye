@@ -36,6 +36,7 @@ import { SnackBarUsuarioAgregadoComponent } from './snack-bar-usuario-agregado/s
 import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-editar-usuario.component';
 import { SnackBarUsuarioEditadoComponent } from './snack-bar-usuario-editado/snack-bar-usuario-editado.component';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
+import { DialogAddPedidoComponent } from './dialog-add-pedido/dialog-add-pedido.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
     SnackBarUsuarioAgregadoComponent, 
     DialogEditarUsuarioComponent,
     SnackBarUsuarioEditadoComponent,
-    ListaPedidosComponent
+    ListaPedidosComponent,
+    DialogAddPedidoComponent
   ],
   entryComponents:[
     DialogBorrarUsuarioComponent,
@@ -81,7 +83,8 @@ import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
     DialogAddUsuarioComponent,
     SnackBarUsuarioAgregadoComponent,
     DialogEditarUsuarioComponent,
-    SnackBarUsuarioEditadoComponent
+    SnackBarUsuarioEditadoComponent,
+    DialogAddPedidoComponent
   ],
 })
 export class DashboardModule {}

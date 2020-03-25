@@ -73,7 +73,7 @@ export class TodosUsuariosComponent implements OnInit {
 }
 
 ngAfterViewInit() {
- // this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
+  // this.listadoDeUsuarios.paginator = this.paginatorUsuarios;
   // this.listadoDeUsuariosBikers.paginator = this.paginatorbikers;
   // this.listadoDeUsuariosNoValidados.paginator = this.paginatorSinValidar;
   // this.listadoDeUsuariosValidados.paginator = this.paginatorValidados;
