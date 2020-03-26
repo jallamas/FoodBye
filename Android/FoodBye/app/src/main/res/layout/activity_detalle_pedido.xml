@@ -272,6 +272,7 @@
                     android:layout_height="@dimen/spacing_large" />
 
                 <LinearLayout
+                    android:id="@+id/linearApartadoInfo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">

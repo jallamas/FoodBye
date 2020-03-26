@@ -133,7 +133,8 @@
     <string name="mensaje_pedido_recogido">¿Ha recogido el pedido?</string>
     <string name="mensaje_pedido_entregado">¿Ha entregado el pedido?</string>
     <string name="cancel">Cancelar</string>
-    <string name="ok">Recogido</string>
+    <string name="aceptar_recoger">Recoger</string>
+    <string name="aceptar_entregar">Entregar</string>
     <string name="text_realizado">Realizado</string>
     <string name="text_informacion">Información</string>
     <string name="text_asignar">Asignar</string>
@@ -141,6 +142,10 @@
     <string name="text_de_origen">"De: "</string>
     <string name="text_a_destino">"A: "</string>
     <string name="titulo_abandonar_pedido">Abandonar Pedido</string>
+    <string name="titulo_asignar_pedido">Realizar Pedido</string>
     <string name="mensaje_abandonar_pedido">¿Está seguro de querer abandonar el pedido?</string>
+    <string name="mensaje_asignar_pedido">¿Quieres realizar este pedido?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 
 </resources>

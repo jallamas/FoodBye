@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.salesianostriana.foodbye.R;
 import com.salesianostriana.foodbye.common.Constantes;
 import com.salesianostriana.foodbye.common.MyApp;
@@ -102,11 +103,13 @@ public class EditUserFragment extends Fragment {
                     Glide
                             .with(MyApp.getContext())
                             .load(glideUrl)
+                            .apply(RequestOptions.circleCropTransform())
                             .into(ivFoto);
                 } else {
                     Glide
                             .with(MyApp.getContext())
                             .load(R.drawable.ic_account_circle_white_24dp)
+                            .apply(RequestOptions.circleCropTransform())
                             .into(ivFoto);
                 }
             }

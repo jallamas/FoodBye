@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
     CheckBox cbRecogido, cbEntregado;
     ProgressBar pbLoading;
     NestedScrollView nsvContenidoDetalle;
+    LinearLayout lyInformacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,18 +115,38 @@ public class DetallePedidoActivity extends AppCompatActivity {
                 if(pedidoResponse.getAsignacion()==null){
                     btnAsignar.setVisibility(View.VISIBLE);
                     cbRecogido.setVisibility(View.GONE);
+                    lyInformacion.setVisibility(View.GONE);
+                    btnAsignar.setText(R.string.text_asignar);
+                    btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     btnAsignar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                btnAsignar.setText(R.string.text_abandonar);
-                                btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                                pedidoDetallesViewModel.putAsignarPedidoUsuario(idUse);
-                                recreate();
+                            AlertDialog.Builder dialogoRecogido = new AlertDialog.Builder(DetallePedidoActivity.this);
+                            dialogoRecogido.setMessage(R.string.mensaje_asignar_pedido)
+                                    .setTitle(R.string.titulo_asignar_pedido);
+                            dialogoRecogido.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    btnAsignar.setText(R.string.text_abandonar);
+                                    btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                                    pedidoDetallesViewModel.putAsignarPedidoUsuario(idUse);
+                                    recreate();
+                                }
+                            });
+                            dialogoRecogido.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    cbRecogido.setChecked(false);
+                                    cbRecogido.setEnabled(true);
+                                }
+                            });
+                            AlertDialog dialog = dialogoRecogido.create();
+                            dialog.show();
                             }
                         });
                 }
                 else if(pedidoResponse.getAsignacion()!=null && pedidoResponse.getTimeRecogido()==null){
+                    lyInformacion.setVisibility(View.VISIBLE);
                     btnAsignar.setVisibility(View.VISIBLE);
+                    cbRecogido.setVisibility(View.VISIBLE);
                     btnAsignar.setText(R.string.text_abandonar);
                     btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                     btnAsignar.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +155,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
                             AlertDialog.Builder dialogoRecogido = new AlertDialog.Builder(DetallePedidoActivity.this);
                             dialogoRecogido.setMessage(R.string.mensaje_abandonar_pedido)
                                     .setTitle(R.string.titulo_abandonar_pedido);
-                            dialogoRecogido.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            dialogoRecogido.setPositiveButton(R.string.text_abandonar, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     btnAsignar.setText(R.string.text_asignar);
                                     btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -153,6 +175,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
                     });
                 }
                 else{
+                    lyInformacion.setVisibility(View.VISIBLE);
                     btnAsignar.setVisibility(View.GONE);
                 }
 
@@ -173,7 +196,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
             AlertDialog.Builder dialogoRecogido = new AlertDialog.Builder(this);
             dialogoRecogido.setMessage(R.string.mensaje_pedido_recogido)
                     .setTitle(R.string.titulo_pedido_recogido);
-            dialogoRecogido.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            dialogoRecogido.setPositiveButton(R.string.aceptar_recoger, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     cbRecogido.setChecked(true);
                     cbRecogido.setEnabled(false);
@@ -181,6 +204,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
                     cbEntregado.setEnabled(true);
                     cbEntregado.setVisibility(View.VISIBLE);
                     pedidoDetallesViewModel.putPedidoRecoger(idUse);
+                    recreate();
 
                 }
             });
@@ -199,17 +223,19 @@ public class DetallePedidoActivity extends AppCompatActivity {
             AlertDialog.Builder dialogoEntregado = new AlertDialog.Builder(this);
             dialogoEntregado.setMessage(R.string.mensaje_pedido_recogido)
                     .setTitle(R.string.titulo_pedido_entregado);
-            dialogoEntregado.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            dialogoEntregado.setPositiveButton(R.string.aceptar_entregar, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     cbEntregado.setChecked(true);
                     cbEntregado.setEnabled(false);
                     pedidoDetallesViewModel.putPedidoEntregar(idUse);
+                    recreate();
                 }
             });
             dialogoEntregado.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     cbEntregado.setChecked(false);
                     cbEntregado.setEnabled(true);
+                    recreate();
                 }
             });
             AlertDialog dialog = dialogoEntregado.create();
@@ -231,9 +257,11 @@ public class DetallePedidoActivity extends AppCompatActivity {
         nsvContenidoDetalle = findViewById(R.id.contenidoDetalle);
         tvRealizado = findViewById(R.id.textViewRealizado);
         btnAsignar = findViewById(R.id.buttonAsignar);
+        lyInformacion = findViewById(R.id.linearApartadoInfo);
 
         nsvContenidoDetalle.setVisibility(View.GONE);
         pbLoading.setVisibility(View.VISIBLE);
+        lyInformacion.setVisibility(View.GONE);
     }
 
     @Override
