@@ -39,6 +39,7 @@ import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { DialogAddPedidoComponent } from './dialog-add-pedido/dialog-add-pedido.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { DialogEditarPedidoComponent } from './dialog-editar-pedido/dialog-editar-pedido.component';
+import { DialogBorrarPedidoComponent } from './dialog-borrar-pedido/dialog-borrar-pedido.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { DialogEditarPedidoComponent } from './dialog-editar-pedido/dialog-edita
     ListaPedidosComponent,
     DialogAddPedidoComponent,
     DetallePedidoComponent,
-    DialogEditarPedidoComponent
+    DialogEditarPedidoComponent,
+    DialogBorrarPedidoComponent
   ],
   entryComponents:[
     DialogBorrarUsuarioComponent,
@@ -89,7 +91,8 @@ import { DialogEditarPedidoComponent } from './dialog-editar-pedido/dialog-edita
     DialogEditarUsuarioComponent,
     SnackBarUsuarioEditadoComponent,
     DialogAddPedidoComponent,
-    DialogEditarPedidoComponent
+    DialogEditarPedidoComponent,
+    DialogBorrarPedidoComponent
   ],
 })
 export class DashboardModule {}

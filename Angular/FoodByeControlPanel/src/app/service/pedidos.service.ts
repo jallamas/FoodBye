@@ -53,7 +53,8 @@ export class PedidosService {
 
   deletePedido(id:string): Observable<Pedido>{
     return this.http.delete<Pedido>(
-      urlPedido+id,requestOptions
+      urlPedido+id,
+      requestOptions
     );
   }
   editPedido(id:string,pedidoEditado:PedidoEditDto): Observable<Pedido>{
