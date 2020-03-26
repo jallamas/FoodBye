@@ -17,7 +17,6 @@ let controller = {
                 descripcion: req.body.descripcion,
                 origen: req.body.origen,
                 destino: req.body.destino,
-                // asignacion: mongoose.Types.ObjectId(req.body.asignacion._id),
                 client_phone: req.body.client_phone
             })
 
@@ -144,6 +143,34 @@ let controller = {
                 next(new error_types.Error404("No se ha encontrado ningún pedido con ese ID"))
             else
                 res.status(200).json(pedido);
+        });
+    },
+    editPedido: function(req, res) {
+        Pedido.findById(req.params.id, function(err, pedido) {
+            pedido.numero_pedido = req.body.numero_pedido;
+            pedido.titulo = req.body.titulo;
+            pedido.descripcion = req.body.descripcion;
+            pedido.origen = req.body.origen;
+            pedido.destino = req.body.destino;
+            pedido.client_phone = req.body.client_phone;
+                        
+            let pedidoResponse={
+                id: pedido.id,
+                numero_pedido: pedido.numero_pedido,
+                titulo: pedido.titulo,
+                descripcion: pedido.descripcion,
+                origen: pedido.origen,
+                destino: pedido.destino,
+                client_phone: pedido.client_phone,
+                time_recogido: pedido.time_recogido,
+                time_entregado: pedido.time_entregado,
+                asignacion: pedido.asignacion,
+                realizado: pedido.realizado
+            }
+            pedido.save(function(err) {
+                if(err) return res.status(500).send(err.message);
+            res.status(200).jsonp(pedidoResponse);
+            });
         });
     }
 }

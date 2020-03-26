@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/service/pedidos.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { DialogData } from '../detalle-pedido/detalle-pedido.component';
 
 @Component({
   selector: 'app-dialog-add-pedido',
@@ -19,7 +20,7 @@ export class DialogAddPedidoComponent implements OnInit {
   
   constructor(
     public dialogo: MatDialogRef<DialogAddPedidoComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private router:Router,
     private fb: FormBuilder,
     public pedidosService:PedidosService,
