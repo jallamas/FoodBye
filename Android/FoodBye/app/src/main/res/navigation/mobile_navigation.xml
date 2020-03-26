@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_pedidos"
-        android:name="com.salesianostriana.foodbye.ui.pedidos.PedidosFragment"
+        android:name="com.salesianostriana.foodbye.ui.pedidos.PedidosListSinAsignarFragment"
         android:label="@string/title_pedidos"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_pedidos_list_sin_asignar_list" />
 
     <fragment
         android:id="@+id/navigation_profile"

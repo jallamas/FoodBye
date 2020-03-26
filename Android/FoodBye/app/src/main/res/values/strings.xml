@@ -137,6 +137,8 @@
     <string name="text_realizado">Realizado</string>
     <string name="text_informacion">Información</string>
     <string name="text_asignar">Asignar</string>
+    <string name="text_de_origen">"De: "</string>
+    <string name="text_a_destino">"A: "</string>
 
 
 </resources>

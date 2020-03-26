@@ -54,7 +54,7 @@ public interface IService {
     @GET("/pedido/usuario/{id}")
     Call<List<PedidoResponse>> getPedidosUsuario(@Path("id") String idUser);
 
-    @GET("/pedido/sin-asignar/")
+    @GET("/pedido/sinasignar/")
     Call<List<PedidoResponse>> getPedidosSinAsignar();
 
     @GET("/pedido/{id}")
