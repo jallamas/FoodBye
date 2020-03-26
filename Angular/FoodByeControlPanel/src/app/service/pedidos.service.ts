@@ -69,7 +69,8 @@ export class PedidosService {
 
   listarPedidosUsuario(id:String): Observable<Pedido[]>{
     return this.http.get<Pedido[]>(
-      urlPedidoUsuario+id,requestOptions
+      urlPedidoUsuario+id,
+      requestOptions
     );
   }
 
