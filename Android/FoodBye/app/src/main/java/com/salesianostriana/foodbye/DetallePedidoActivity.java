@@ -106,9 +106,33 @@ public class DetallePedidoActivity extends AppCompatActivity {
                     tvRealizado.setVisibility(View.GONE);
                 }
 
+
                 if(pedidoResponse.getAsignacion()==null){
                     btnAsignar.setVisibility(View.VISIBLE);
-                }else{
+                    cbRecogido.setVisibility(View.GONE);
+                    btnAsignar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                btnAsignar.setText("ABANDONAR");
+                                btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                                onRestart();
+                            }
+                        });
+                }
+                else if(!pedidoResponse.getRealizado() && pedidoResponse.getAsignacion()!=null){
+                    btnAsignar.setVisibility(View.VISIBLE);
+                    btnAsignar.setText("ABANDONAR");
+                    btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                    btnAsignar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            btnAsignar.setText(R.string.text_asignar);
+                            btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            recreate();
+                        }
+                    });
+                }
+                else{
                     btnAsignar.setVisibility(View.GONE);
                 }
 
@@ -220,7 +244,4 @@ public class DetallePedidoActivity extends AppCompatActivity {
 
         return convertedDate;
     }
-
-
-
 }
