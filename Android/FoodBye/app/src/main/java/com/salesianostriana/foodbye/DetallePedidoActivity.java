@@ -22,7 +22,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.salesianostriana.foodbye.common.Constantes;
+import com.salesianostriana.foodbye.common.SharedPreferencesManager;
 import com.salesianostriana.foodbye.data.pedidos.PedidoDetallesViewModel;
+import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
 import com.salesianostriana.foodbye.models.response.PedidoResponse;
 
 import org.joda.time.DateTime;
@@ -44,13 +46,17 @@ public class DetallePedidoActivity extends AppCompatActivity {
     CheckBox cbRecogido, cbEntregado;
     ProgressBar pbLoading;
     NestedScrollView nsvContenidoDetalle;
+    String usuarioID;
+    RequestAsignarPedido usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_pedido);
         initVariables();
 
-
+        usuarioID = SharedPreferencesManager.getSomeStringValue("userId");
+        usuario = new RequestAsignarPedido(usuarioID);
         pedidoDetallesViewModel = new ViewModelProvider(this).get(PedidoDetallesViewModel.class);
         bundle = getIntent().getExtras();
         idUse = bundle.getString(Constantes.EXTRA_ID_PEDIDO);
@@ -115,11 +121,12 @@ public class DetallePedidoActivity extends AppCompatActivity {
                         public void onClick(View v) {
                                 btnAsignar.setText("ABANDONAR");
                                 btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                                pedidoDetallesViewModel.putAsignarPedidoUsuario(idUse,usuario);
                                 onRestart();
                             }
                         });
                 }
-                else if(!pedidoResponse.getRealizado() && pedidoResponse.getAsignacion()!=null){
+                else if(pedidoResponse.getAsignacion()!=null && pedidoResponse.getTimeRecogido()==null){
                     btnAsignar.setVisibility(View.VISIBLE);
                     btnAsignar.setText("ABANDONAR");
                     btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -128,6 +135,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             btnAsignar.setText(R.string.text_asignar);
                             btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            pedidoDetallesViewModel.putAbandonarPedido(idUse);
                             recreate();
                         }
                     });

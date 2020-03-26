@@ -1,5 +1,6 @@
 package com.salesianostriana.foodbye.retrofit;
 
+import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
 import com.salesianostriana.foodbye.models.request.RequestEditPassword;
 import com.salesianostriana.foodbye.models.request.RequestEditUser;
 import com.salesianostriana.foodbye.models.request.RequestLogin;
@@ -65,4 +66,11 @@ public interface IService {
 
     @PUT("/pedido/entregado/{id}")
     Call<PedidoResponse> putPedidoEntregado(@Path("id") String idPedido);
+
+    @PUT("/pedido/abandonar/{id}")
+    Call<PedidoResponse> putAbandonarPedido(@Path("id") String idPedido);
+
+    @PUT("/pedido/asignar/{id}")
+    Call<PedidoResponse> putAsignarPedido(@Path("id") String idPedido,
+                                          @Body RequestAsignarPedido usuarioId);
 }
