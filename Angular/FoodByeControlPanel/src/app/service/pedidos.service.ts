@@ -9,6 +9,7 @@ import { PedidoEditDto } from '../dto/pedido-edit-dto';
 
 const urlPedidos = `${environment.pedidosUrl}/todos/`;
 const urlPedidoNuevo = `${environment.pedidosUrl}/nuevo/`;
+const urlPedidoUsuario = `${environment.pedidosUrl}/usuario/`;
 const urlPedido = `${environment.pedidosUrl}/`;
 
 const requestOptions = {
@@ -57,11 +58,18 @@ export class PedidosService {
       requestOptions
     );
   }
+  
   editPedido(id:string,pedidoEditado:PedidoEditDto): Observable<Pedido>{
     return this.http.put<Pedido>(
       urlPedido+id,
       pedidoEditado,
       requestOptions
+    );
+  }
+
+  listarPedidosUsuario(id:String): Observable<Pedido[]>{
+    return this.http.get<Pedido[]>(
+      urlPedidoUsuario+id,requestOptions
     );
   }
 
