@@ -47,10 +47,10 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
             holder.tvDestino.setText(holder.mItem.getDestino());
             holder.tvCodigo.setText(holder.mItem.getNumeroPedido());
 
-            if (holder.mItem.getRealizado()==true){
+            if (holder.mItem.getRealizado()){
                 holder.ivRealizado.setVisibility(View.GONE);
-                holder.tvRealizado.setVisibility(View.GONE);
             }
+            holder.ivRealizado.setVisibility(View.VISIBLE);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

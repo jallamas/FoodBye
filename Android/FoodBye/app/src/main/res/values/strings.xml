@@ -140,6 +140,7 @@
     <string name="text_abandonar">Abandonar</string>
     <string name="text_de_origen">"De: "</string>
     <string name="text_a_destino">"A: "</string>
-
+    <string name="titulo_abandonar_pedido">Abandonar Pedido</string>
+    <string name="mensaje_abandonar_pedido">¿Está seguro de querer abandonar el pedido?</string>
 
 </resources>

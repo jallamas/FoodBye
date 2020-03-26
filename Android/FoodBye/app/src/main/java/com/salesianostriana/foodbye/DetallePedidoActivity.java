@@ -48,18 +48,12 @@ public class DetallePedidoActivity extends AppCompatActivity {
     CheckBox cbRecogido, cbEntregado;
     ProgressBar pbLoading;
     NestedScrollView nsvContenidoDetalle;
-    String usuarioID;
-    RequestAsignarPedido usuario;
-    Asignacion asignacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_pedido);
         initVariables();
 
-        //usuarioID = SharedPreferencesManager.getSomeStringValue("userId");
-        //asignacion= new Asignacion("",usuarioID);
-        //usuario = new RequestAsignarPedido(asignacion);
         pedidoDetallesViewModel = new ViewModelProvider(this).get(PedidoDetallesViewModel.class);
         bundle = getIntent().getExtras();
         idUse = bundle.getString(Constantes.EXTRA_ID_PEDIDO);
@@ -124,7 +118,6 @@ public class DetallePedidoActivity extends AppCompatActivity {
                         public void onClick(View v) {
                                 btnAsignar.setText(R.string.text_abandonar);
                                 btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                            //Toast.makeText(DetallePedidoActivity.this,"mensaje"+usuarioID,Toast.LENGTH_SHORT).show();
                                 pedidoDetallesViewModel.putAsignarPedidoUsuario(idUse);
                                 recreate();
                             }
@@ -138,15 +131,14 @@ public class DetallePedidoActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             AlertDialog.Builder dialogoRecogido = new AlertDialog.Builder(DetallePedidoActivity.this);
-                            dialogoRecogido.setMessage(R.string.mensaje_pedido_recogido)
-                                    .setTitle(R.string.titulo_pedido_recogido);
+                            dialogoRecogido.setMessage(R.string.mensaje_abandonar_pedido)
+                                    .setTitle(R.string.titulo_abandonar_pedido);
                             dialogoRecogido.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     btnAsignar.setText(R.string.text_asignar);
                                     btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                                     pedidoDetallesViewModel.putAbandonarPedido(idUse);
                                     recreate();
-
                                 }
                             });
                             dialogoRecogido.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

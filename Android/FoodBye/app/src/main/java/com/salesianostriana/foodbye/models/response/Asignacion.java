@@ -13,6 +13,10 @@ public class Asignacion {
     @Expose
     private String id;
 
+    @SerializedName("user_id")
+    @Expose
+    private String idUsuario;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -21,14 +25,15 @@ public class Asignacion {
     }
 
     /**
-     * 
+     *
      * @param fechaAsignacion
      * @param id
+     * @param idUsuario
      */
-    public Asignacion(String fechaAsignacion, String id) {
-        super();
+    public Asignacion(String fechaAsignacion, String id, String idUsuario) {
         this.fechaAsignacion = fechaAsignacion;
         this.id = id;
+        this.idUsuario = idUsuario;
     }
 
     public String getFechaAsignacion() {
@@ -47,4 +52,11 @@ public class Asignacion {
         this.id = id;
     }
 
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 }
