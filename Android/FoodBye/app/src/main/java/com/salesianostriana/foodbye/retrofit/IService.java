@@ -55,8 +55,8 @@ public interface IService {
                                   @Part MultipartBody.Part avatar,
                                   @Part("fullname") RequestBody fullname);
 
-    @GET("/pedido/usuario/{id}")
-    Call<List<PedidoResponse>> getPedidosUsuario(@Path("id") String idUser);
+    @GET("/pedido/usuario/{user_id}")
+    Call<List<PedidoResponse>> getPedidosUsuario(@Path("user_id") String idUser);
 
     @GET("/pedido/sinasignar/")
     Call<List<PedidoResponse>> getPedidosSinAsignar();
