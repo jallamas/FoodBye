@@ -38,6 +38,8 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class DetallePedidoActivity extends AppCompatActivity {
 
@@ -60,10 +62,10 @@ public class DetallePedidoActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         idUse = bundle.getString(Constantes.EXTRA_ID_PEDIDO);
         pedidoDetallesViewModel.getPedido(idUse).observe(this, new Observer<PedidoResponse>() {
-
+            TimeZone timeZone = TimeZone.getTimeZone("GMT-0800");
             @Override
             public void onChanged(PedidoResponse pedidoResponse) {
-                DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM yyyy HH:mm:ss");
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM yyyy HH:mm:ss").withLocale(new Locale("ES"));
 
                 pbLoading.setVisibility(View.GONE);
                 nsvContenidoDetalle.setVisibility(View.VISIBLE);
@@ -221,9 +223,9 @@ public class DetallePedidoActivity extends AppCompatActivity {
             cbEntregado.setChecked(false);
             cbEntregado.setEnabled(true);
             AlertDialog.Builder dialogoEntregado = new AlertDialog.Builder(this);
-            dialogoEntregado.setMessage(R.string.mensaje_pedido_recogido)
+            dialogoEntregado.setMessage(R.string.mensaje_pedido_entregado)
                     .setTitle(R.string.titulo_pedido_entregado);
-            dialogoEntregado.setPositiveButton(R.string.aceptar_entregar, new DialogInterface.OnClickListener() {
+            dialogoEntregado.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     cbEntregado.setChecked(true);
                     cbEntregado.setEnabled(false);
@@ -231,7 +233,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
                     recreate();
                 }
             });
-            dialogoEntregado.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            dialogoEntregado.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     cbEntregado.setChecked(false);
                     cbEntregado.setEnabled(true);
