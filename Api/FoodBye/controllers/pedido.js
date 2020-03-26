@@ -172,6 +172,18 @@ let controller = {
             res.status(200).jsonp(pedidoResponse);
             });
         });
+    },
+    deletePedido: ({ params },res,next) =>{
+        Pedido.findByIdAndRemove({ _id: mongoose.Types.ObjectId(params.id) }, (err, pedido) => {
+        if (err) return next(new error_types.Error500(err.message));
+        else if(!pedido) return next(new error_types.Error404("No se ha encontrado ningún pedido con ese ID"+params.id))
+        else{
+            const response = {
+                message: "pedido borrado",
+            };
+            return res.status(200).send(response);
+        }
+        });
     }
 }
 

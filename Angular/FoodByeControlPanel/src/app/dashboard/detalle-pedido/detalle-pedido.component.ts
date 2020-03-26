@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PedidosService } from 'src/app/service/pedidos.service';
 import { UsuariosService } from 'src/app/service/usuarios.service';
 import { DialogEditarPedidoComponent } from '../dialog-editar-pedido/dialog-editar-pedido.component';
+import { DialogBorrarPedidoComponent } from '../dialog-borrar-pedido/dialog-borrar-pedido.component';
 
 export interface DialogData {
   idPedidoDetail: string;
@@ -64,16 +65,16 @@ export class DetallePedidoComponent implements OnInit {
     });
   }
 
-  // mostrarDialogo(): void {
-  //   const dialogRef = this.dialogo.open(DialogBorrarPedidoComponent, {
-  //     width: '350px',
-  //     data: {idPedidoDetail: this.idPedidoDetail}
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
+  mostrarDialogo(): void {
+    const dialogRef = this.dialogo.open(DialogBorrarPedidoComponent, {
+      width: '350px',
+      data: {idPedidoDetail: this.idPedidoDetail}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
 
-  //   });
-  // }
+    });
+  }
 
   mostrarDialogoToEdit(): void {
     const dialogRef = this.dialogo.open(DialogEditarPedidoComponent, {
