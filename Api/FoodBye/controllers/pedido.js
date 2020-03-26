@@ -138,12 +138,30 @@ let controller = {
         });
     },
     putAsignarPedido: (req,res,next)=>{
-        Pedido.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'asignacion._id': mongoose.Types.ObjectId(req.body.asignacion)}} ,{new: true}, (err, pedido) => {
+        Pedido.findById (mongoose.Types.ObjectId(req.params.id),(err, pedido) => {
             if (err) next(new error_types.Error500(err.message));
             else if (pedido == null) 
                 next(new error_types.Error404("No se ha encontrado ningún pedido con ese ID"))
             else
-                res.status(200).json(pedido);
+            pedido.asignacion._id=mongoose.Types.ObjectId(req.body.asignacion);
+            let pedidoResponse={
+                id: pedido.id,
+                numero_pedido: pedido.numero_pedido,
+                titulo:  pedido.titulo,
+                descripcion: pedido.descripcion,
+                origen: pedido.origen,
+                destino: pedido.destino,
+                realizado: pedido.realizado,
+                created_date: pedido.created_date,
+                time_recogido: pedido.time_recogido,
+                time_entregado: pedido.time_entregado,
+                asignacion: pedido.asignacion,
+                client_phone:pedido.client_phone
+            }
+            pedido.save(function(err) {
+                if(err) return res.status(500).send(err.message);
+            res.status(200).jsonp(pedidoResponse);
+            });
         });
     },
     editPedido: function(req, res) {
