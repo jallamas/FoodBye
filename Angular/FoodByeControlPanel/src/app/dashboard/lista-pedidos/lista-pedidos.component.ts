@@ -27,7 +27,8 @@ export class ListaPedidosComponent implements OnInit {
 
   mostrarSpinner: boolean;
 
-  constructor(private pedidosService: PedidosService, private router: Router, private route: ActivatedRoute,private sanitizer: DomSanitizer,
+  constructor(private pedidosService: PedidosService,
+     private router: Router,
     public dialogo: MatDialog) {
       this.listaPedidos=[];
 
@@ -40,10 +41,6 @@ export class ListaPedidosComponent implements OnInit {
   ngOnInit() {
     this.loadPedidos();
     
-  }
-
-  ngAfterViewInit() {
-    // this.listadoDePedidos.paginator = this.paginatorPedidos;
   }
 
   _setDataSource(indexNumber) {

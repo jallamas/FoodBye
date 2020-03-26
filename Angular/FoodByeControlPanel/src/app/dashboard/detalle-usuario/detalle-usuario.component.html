@@ -50,6 +50,9 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-icon-button color="warn" [routerLink]="['/pedidos/usuario',usuarioD.id]">
+                <mat-icon class="icon-display">assignment</mat-icon>
+            </button>
             <button mat-icon-button color="primary"  (click)="mostrarDialogoToEdit()">
                 <mat-icon class="icon-display">edit</mat-icon>
             </button>
