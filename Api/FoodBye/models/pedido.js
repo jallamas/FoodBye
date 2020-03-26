@@ -14,6 +14,8 @@ const asignacionSchema = new Schema({
     }
 });
 
+module.exports = mongoose.model('Asignacion', asignacionSchema);
+
 const pedidoSchema = Schema({
     numero_pedido: String,
     titulo: String,
