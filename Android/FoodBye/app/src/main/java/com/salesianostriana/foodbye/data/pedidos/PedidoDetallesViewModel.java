@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
+import com.salesianostriana.foodbye.models.response.Asignacion;
 import com.salesianostriana.foodbye.models.response.PedidoResponse;
 
 import java.util.List;
@@ -38,8 +39,8 @@ public class PedidoDetallesViewModel extends AndroidViewModel {
         pedidoRepository.putAbandonarPedido(id);
     }
 
-    public void putAsignarPedidoUsuario (String id, RequestAsignarPedido idUsuario){
-        pedidoRepository.putAsignarUsuarioAPedido(id,idUsuario);
+    public void putAsignarPedidoUsuario (String id){
+        pedidoRepository.putAsignarUsuarioAPedido(id);
     }
 
 

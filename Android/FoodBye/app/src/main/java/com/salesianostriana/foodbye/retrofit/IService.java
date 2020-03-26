@@ -4,6 +4,7 @@ import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
 import com.salesianostriana.foodbye.models.request.RequestEditPassword;
 import com.salesianostriana.foodbye.models.request.RequestEditUser;
 import com.salesianostriana.foodbye.models.request.RequestLogin;
+import com.salesianostriana.foodbye.models.response.Asignacion;
 import com.salesianostriana.foodbye.models.response.PedidoResponse;
 import com.salesianostriana.foodbye.models.response.ResponseLogin;
 import com.salesianostriana.foodbye.models.response.UserResponse;
@@ -11,6 +12,7 @@ import com.salesianostriana.foodbye.models.response.UserResponse;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,6 +22,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface IService {
 
@@ -72,5 +75,5 @@ public interface IService {
 
     @PUT("/pedido/asignar/{id}")
     Call<PedidoResponse> putAsignarPedido(@Path("id") String idPedido,
-                                          @Body RequestAsignarPedido usuarioId);
+                                          @Body PedidoResponse usuario);
 }

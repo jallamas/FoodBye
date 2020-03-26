@@ -8,17 +8,17 @@ public class RequestAsignarPedido {
 
     @SerializedName("asignacion")
     @Expose
-    private String asignacion;
+    private String id;
 
-    public RequestAsignarPedido(String asignacion) {
-        this.asignacion = asignacion;
+    public RequestAsignarPedido(String id) {
+        this.id = id;
     }
 
     public String getAsignacion() {
-        return asignacion;
+        return id;
     }
 
-    public void setAsignacion(String asignacion) {
-        this.asignacion = asignacion;
+    public void setAsignacion(String id) {
+        this.id = id;
     }
 }

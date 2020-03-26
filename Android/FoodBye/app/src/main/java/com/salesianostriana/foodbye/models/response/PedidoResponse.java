@@ -192,4 +192,8 @@ public class PedidoResponse {
     public void setTimeEntregado(String timeEntregado) {
         this.timeEntregado = timeEntregado;
     }
+
+    public PedidoResponse(String id) {
+        this.id = id;
+    }
 }

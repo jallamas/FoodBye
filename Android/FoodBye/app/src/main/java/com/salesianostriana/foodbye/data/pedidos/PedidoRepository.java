@@ -5,7 +5,9 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 
 import com.salesianostriana.foodbye.common.MyApp;
+import com.salesianostriana.foodbye.common.SharedPreferencesManager;
 import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
+import com.salesianostriana.foodbye.models.response.Asignacion;
 import com.salesianostriana.foodbye.models.response.PedidoResponse;
 import com.salesianostriana.foodbye.retrofit.IService;
 import com.salesianostriana.foodbye.retrofit.ServiceGenerator;
@@ -129,8 +131,10 @@ public class PedidoRepository {
         });
     }
 
-    public void putAsignarUsuarioAPedido(String pedidoId, RequestAsignarPedido usuarioId){
-        Call<PedidoResponse> call = service.putAsignarPedido(pedidoId, usuarioId);
+    public void putAsignarUsuarioAPedido(String pedidoId){
+        String usuarioID = SharedPreferencesManager.getSomeStringValue("userId");
+        PedidoResponse d= new PedidoResponse(usuarioID);
+        Call<PedidoResponse> call = service.putAsignarPedido(pedidoId, d);
         final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
         call.enqueue(new Callback<PedidoResponse>() {
             @Override
@@ -138,7 +142,7 @@ public class PedidoRepository {
                 if (response.isSuccessful()) {
                     pedidoEdit.setValue(response.body());
                 } else {
-                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error"+response.body(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
