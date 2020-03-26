@@ -56,7 +56,7 @@ let controller = {
         });
     },
     getListaPedidosUsuario: ({ params }, res, next)=>{
-            Pedido.find({'asignacion._id': params.id},(err,pedidos)=>{
+            Pedido.find({'asignacion.user_id': params.id},(err,pedidos)=>{
                 if (err) return console.error(err);
                 res.status(200).json(pedidos);
         });
@@ -138,12 +138,16 @@ let controller = {
         });
     },
     putAsignarPedido: (req,res,next)=>{
-        Pedido.findById (mongoose.Types.ObjectId(req.params.id),(err, pedido) => {
+        Pedido.findById (req.params.id,(err, pedido) => {
             if (err) next(new error_types.Error500(err.message));
             else if (pedido == null) 
                 next(new error_types.Error404("No se ha encontrado ningún pedido con ese ID"))
+            else if(pedido.asignacion!=null){
+                next(new error_types.Error404("No puedes asignar este pedido porque ya se encuentra asignado"))
+            }
             else
-            pedido.asignacion._id=mongoose.Types.ObjectId(req.body.asignacion);
+            pedido.asignacion=mongoose.Types.ObjectId();
+            pedido.asignacion.user_id=req.body.asignacion;
             let pedidoResponse={
                 id: pedido.id,
                 numero_pedido: pedido.numero_pedido,
