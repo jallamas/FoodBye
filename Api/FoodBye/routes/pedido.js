@@ -15,5 +15,6 @@ router.put('/:id', middleware.ensureAuthenticatedAndAdmin, PedidoController.edit
 router.put('/asignar/:id', middleware.ensureAuthenticated, PedidoController.putAsignarPedido);
 router.put('/recogido/:id', middleware.ensureAuthenticated, PedidoController.putPedidoRecogido);
 router.put('/entregado/:id', middleware.ensureAuthenticated, PedidoController.putPedidoEntregado);
+router.put('/abandonar/:id', middleware.ensureAuthenticated, PedidoController.putAbandonarPedido);
 
 module.exports = router
