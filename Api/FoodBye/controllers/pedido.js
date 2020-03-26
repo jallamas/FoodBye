@@ -139,7 +139,7 @@ let controller = {
         });
     },
     putAsignarPedido: (req,res,next)=>{
-        Pedido.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'asignacion': mongoose.Types.ObjectId(req.body.asignacion)}} ,{new: true}, (err, pedido) => {
+        Pedido.findByIdAndUpdate (mongoose.Types.ObjectId(req.params.id),{$set: {'asignacion._id': mongoose.Types.ObjectId(req.body.asignacion)}} ,{new: true}, (err, pedido) => {
             if (err) next(new error_types.Error500(err.message));
             else if (pedido == null) 
                 next(new error_types.Error404("No se ha encontrado ningún pedido con ese ID"))
