@@ -112,4 +112,8 @@ public class UserResponse {
         this.phone = phone;
     }
 
+
+    public UserResponse(String id) {
+        this.id = id;
+    }
 }

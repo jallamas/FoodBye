@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.salesianostriana.foodbye.common.Constantes;
+import com.salesianostriana.foodbye.common.SharedPreferencesManager;
 import com.salesianostriana.foodbye.data.pedidos.PedidoDetallesViewModel;
+import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
+import com.salesianostriana.foodbye.models.response.Asignacion;
 import com.salesianostriana.foodbye.models.response.PedidoResponse;
 
 import org.joda.time.DateTime;
@@ -44,13 +48,18 @@ public class DetallePedidoActivity extends AppCompatActivity {
     CheckBox cbRecogido, cbEntregado;
     ProgressBar pbLoading;
     NestedScrollView nsvContenidoDetalle;
+    String usuarioID;
+    RequestAsignarPedido usuario;
+    Asignacion asignacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_pedido);
         initVariables();
 
-
+        //usuarioID = SharedPreferencesManager.getSomeStringValue("userId");
+        //asignacion= new Asignacion("",usuarioID);
+        //usuario = new RequestAsignarPedido(asignacion);
         pedidoDetallesViewModel = new ViewModelProvider(this).get(PedidoDetallesViewModel.class);
         bundle = getIntent().getExtras();
         idUse = bundle.getString(Constantes.EXTRA_ID_PEDIDO);
@@ -106,9 +115,52 @@ public class DetallePedidoActivity extends AppCompatActivity {
                     tvRealizado.setVisibility(View.GONE);
                 }
 
+
                 if(pedidoResponse.getAsignacion()==null){
                     btnAsignar.setVisibility(View.VISIBLE);
-                }else{
+                    cbRecogido.setVisibility(View.GONE);
+                    btnAsignar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                btnAsignar.setText(R.string.text_abandonar);
+                                btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                            //Toast.makeText(DetallePedidoActivity.this,"mensaje"+usuarioID,Toast.LENGTH_SHORT).show();
+                                pedidoDetallesViewModel.putAsignarPedidoUsuario(idUse);
+                                recreate();
+                            }
+                        });
+                }
+                else if(pedidoResponse.getAsignacion()!=null && pedidoResponse.getTimeRecogido()==null){
+                    btnAsignar.setVisibility(View.VISIBLE);
+                    btnAsignar.setText(R.string.text_abandonar);
+                    btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                    btnAsignar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder dialogoRecogido = new AlertDialog.Builder(DetallePedidoActivity.this);
+                            dialogoRecogido.setMessage(R.string.mensaje_pedido_recogido)
+                                    .setTitle(R.string.titulo_pedido_recogido);
+                            dialogoRecogido.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    btnAsignar.setText(R.string.text_asignar);
+                                    btnAsignar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    pedidoDetallesViewModel.putAbandonarPedido(idUse);
+                                    recreate();
+
+                                }
+                            });
+                            dialogoRecogido.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    cbRecogido.setChecked(false);
+                                    cbRecogido.setEnabled(true);
+                                }
+                            });
+                            AlertDialog dialog = dialogoRecogido.create();
+                            dialog.show();
+                        }
+                    });
+                }
+                else{
                     btnAsignar.setVisibility(View.GONE);
                 }
 
@@ -220,7 +272,4 @@ public class DetallePedidoActivity extends AppCompatActivity {
 
         return convertedDate;
     }
-
-
-
 }

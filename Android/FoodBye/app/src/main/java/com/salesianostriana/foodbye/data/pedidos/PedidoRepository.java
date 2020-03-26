@@ -5,6 +5,9 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 
 import com.salesianostriana.foodbye.common.MyApp;
+import com.salesianostriana.foodbye.common.SharedPreferencesManager;
+import com.salesianostriana.foodbye.models.request.RequestAsignarPedido;
+import com.salesianostriana.foodbye.models.response.Asignacion;
 import com.salesianostriana.foodbye.models.response.PedidoResponse;
 import com.salesianostriana.foodbye.retrofit.IService;
 import com.salesianostriana.foodbye.retrofit.ServiceGenerator;
@@ -112,6 +115,47 @@ public class PedidoRepository {
         Call<PedidoResponse> call = service.putPedidoEntregado(pedidoId);
         final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
 
+        call.enqueue(new Callback<PedidoResponse>() {
+            @Override
+            public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {
+                if (response.isSuccessful()) {
+                    pedidoEdit.setValue(response.body());
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PedidoResponse> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void putAsignarUsuarioAPedido(String pedidoId){
+        String usuarioID = SharedPreferencesManager.getSomeStringValue("userId");
+        RequestAsignarPedido d= new RequestAsignarPedido(usuarioID);
+        final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
+        Call<PedidoResponse> call = service.putAsignarPedido(pedidoId, d);
+        call.enqueue(new Callback<PedidoResponse>() {
+            @Override
+            public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {
+                if (response.isSuccessful()) {
+                    pedidoEdit.setValue(response.body());
+                } else {
+                    Toast.makeText(MyApp.getContext(), "Se produjo un error"+response.body(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PedidoResponse> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void putAbandonarPedido(String pedidoId){
+        Call<PedidoResponse> call = service.putAbandonarPedido(pedidoId);
+        final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
         call.enqueue(new Callback<PedidoResponse>() {
             @Override
             public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {
