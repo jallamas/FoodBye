@@ -133,9 +133,9 @@ public class PedidoRepository {
 
     public void putAsignarUsuarioAPedido(String pedidoId){
         String usuarioID = SharedPreferencesManager.getSomeStringValue("userId");
-        PedidoResponse d= new PedidoResponse(usuarioID);
-        Call<PedidoResponse> call = service.putAsignarPedido(pedidoId, d);
+        RequestAsignarPedido d= new RequestAsignarPedido(usuarioID);
         final MutableLiveData<PedidoResponse> pedidoEdit = new MutableLiveData<>();
+        Call<PedidoResponse> call = service.putAsignarPedido(pedidoId, d);
         call.enqueue(new Callback<PedidoResponse>() {
             @Override
             public void onResponse(Call<PedidoResponse> call, Response<PedidoResponse> response) {

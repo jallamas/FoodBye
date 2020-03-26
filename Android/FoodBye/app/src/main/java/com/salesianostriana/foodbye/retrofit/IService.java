@@ -75,5 +75,5 @@ public interface IService {
 
     @PUT("/pedido/asignar/{id}")
     Call<PedidoResponse> putAsignarPedido(@Path("id") String idPedido,
-                                          @Body PedidoResponse usuario);
+                                          @Body RequestAsignarPedido usuario);
 }
