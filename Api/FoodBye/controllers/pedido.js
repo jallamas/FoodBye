@@ -45,7 +45,6 @@ let controller = {
     getTodosPedidos: (req, res, next)=>{
         Pedido.find((err, pedidos)=> {
         if (err) return console.error(err);
-
         res.status(200).json(pedidos);
         });
     },
@@ -145,7 +144,7 @@ let controller = {
             else if(pedido.asignacion!=null){
                 next(new error_types.Error404("No puedes asignar este pedido porque ya se encuentra asignado"))
             }
-            else
+            else{
             pedido.asignacion=mongoose.Types.ObjectId();
             pedido.asignacion.user_id=req.body.asignacion;
             let pedidoResponse={
@@ -165,7 +164,8 @@ let controller = {
             pedido.save(function(err) {
                 if(err) return res.status(500).send(err.message);
             res.status(200).jsonp(pedidoResponse);
-            });
+                });
+            }
         });
     },
     editPedido: function(req, res) {
@@ -197,7 +197,7 @@ let controller = {
                 next(new error_types.Error404("No se puede abandonar si no tiene a nadie asignado"))
             else{
                 pedido.asignacion = null;
-                pedido.realizado= true;
+                pedido.realizado = false;
                 let pedidoResponse={
                     id: pedido.id,
                     numero_pedido: pedido.numero_pedido,
