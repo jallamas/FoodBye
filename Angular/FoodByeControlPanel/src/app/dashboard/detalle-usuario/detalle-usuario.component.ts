@@ -74,4 +74,6 @@ export class DetalleUsuarioComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  
+
 }

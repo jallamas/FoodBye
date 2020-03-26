@@ -40,6 +40,7 @@ import { DialogAddPedidoComponent } from './dialog-add-pedido/dialog-add-pedido.
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { DialogEditarPedidoComponent } from './dialog-editar-pedido/dialog-editar-pedido.component';
 import { DialogBorrarPedidoComponent } from './dialog-borrar-pedido/dialog-borrar-pedido.component';
+import { ListaPedidosUsuarioComponent } from './lista-pedidos-usuario/lista-pedidos-usuario.component';
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import { DialogBorrarPedidoComponent } from './dialog-borrar-pedido/dialog-borra
     DialogAddPedidoComponent,
     DetallePedidoComponent,
     DialogEditarPedidoComponent,
-    DialogBorrarPedidoComponent
+    DialogBorrarPedidoComponent,
+    ListaPedidosUsuarioComponent
   ],
   entryComponents:[
     DialogBorrarUsuarioComponent,
