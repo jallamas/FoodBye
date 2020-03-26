@@ -1,0 +1,89 @@
+<div class="overlay"  *ngIf="mostrarSpinner" >
+    <div class="center">
+      <mat-progress-spinner
+            class="example-margin"
+            [color]="color"
+            [mode]="mode"
+            [value]="value">
+        </mat-progress-spinner>
+      </div>
+    </div>
+    <div fxFlex
+    class="fxClass-all"
+    ngClass.xs="fxClass-xs"
+    [ngClass.sm]="{'fxClass-sm': hasStyle}"
+    [ngClass.md]="{'fxClass-md': hasStyle, 'fxClass-md2': hasStyle}"
+    [ngClass.lg]="['fxClass-lg', 'fxClass-lg2']">
+    <mat-card>
+    <mat-card-header>
+        <mat-card-title class="titulo">Detalle de Pedido</mat-card-title>
+        <mat-card-subtitle class="subtitulo">Pedidos</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="space-around" >
+            <div fxLayout="column" fxLayoutAlign="start" >
+                <div>
+                    <h1>Número</h1>
+                    <p class="item">{{pedidoDto.numero_pedido}}</p>
+                </div>
+                <div>
+                    <h1>Titulo</h1>
+                    <p class="item">{{pedidoDto.titulo}}</p>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start" >
+                <div>
+                    <h1>Comentarios</h1>
+                    <p class="item">{{pedidoDto.descripcion}}</p>
+                </div>
+                <div>
+                    <h1>Teléfono del cliente</h1>
+                   <p class="item">{{pedidoDto.client_phone}}</p> 
+                </div>
+                <div>
+                    <h1>Emisión del pedido</h1>
+                   <p class="item">{{pedidoDto.created_date | date:'dd-MM-yyyy HH:mm'}}</p> 
+                </div>
+                <div>
+                    <h1>Origen</h1>
+                   <p class="item">{{pedidoDto.origen}}</p> 
+                </div>
+                <div>
+                    <h1>Destino</h1>
+                   <p class="item">{{pedidoDto.destino}}</p> 
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start" >
+                <div>
+                    <h1>Hora de asignación</h1>
+                   <p class="item">{{pedidoDto.time_asignado | date:'HH:mm'}}</p> 
+                </div>
+                <div>
+                    <h1>Hora de recogida</h1>
+                   <p class="item">{{pedidoDto.time_recogido | date:'HH:mm'}}</p> 
+                </div>
+                <div>
+                    <h1>Hora de entrega</h1>
+                   <p class="item">{{pedidoDto.time_entregado | date:'HH:mm'}}</p> 
+                </div>
+                <div>
+                    <h1>Nombre del biker</h1>
+                   <p class="item">{{pedidoDto.name_asignado}}</p> 
+                </div>
+                <div>
+                    <h1>Teléfono del biker</h1>
+                   <p class="item">{{pedidoDto.phone_asignado}}</p> 
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-icon-button color="primary"  (click)="mostrarDialogoToEdit()">
+                <mat-icon class="icon-display">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="mostrarDialogo()">
+                <mat-icon class="icon-display">delete</mat-icon>
+            </button>
+        </div>
+    </mat-card-content>
+    </mat-card>
+    </div>

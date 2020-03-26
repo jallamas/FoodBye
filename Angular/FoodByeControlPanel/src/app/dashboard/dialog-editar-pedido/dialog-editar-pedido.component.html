@@ -1,0 +1,51 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  
+  <mat-step [stepControl]="firstFormGroup">
+<form [formGroup]="form" (ngSubmit)="confirmado()">
+    <div class="text-xs-center pb-1">
+    <div fxLayout="column" fxLayoutAlign="space-around">
+      <ng-template matStepLabel>Cambiar datos</ng-template>
+      <div class="pb-1">
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Título" value="{{pedidoDto.titulo}}" type="text" [(ngModel)]="pedidoDto.titulo" [formControl]="form.controls['titulo']">
+        </mat-form-field>
+        <small *ngIf="form.controls['titulo'].hasError('required') && form.controls['titulo'].touched" class="mat-text-warn">Debes añadir un Título</small>
+      </div>
+
+      <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Descripción" value="{{pedidoDto.descripcion}}" type="text"  [(ngModel)]="pedidoDto.descripcion" [formControl]="form.controls['descripcion']">
+        </mat-form-field>
+        <small *ngIf="form.controls['descripcion'].hasError('required') && form.controls['descripcion'].touched" class="mat-text-warn">Debe añadir una descripción.</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Origen" value="{{pedidoDto.origen}}" type="text"  [(ngModel)]="pedidoDto.origen" [formControl]="form.controls['origen']">
+        </mat-form-field>
+        <small *ngIf="form.controls['origen'].hasError('required') && form.controls['origen'].touched" class="mat-text-warn">Debe introducir la dirección de origen.</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Destino" value="{{pedidoDto.destino}}" type="text"  [(ngModel)]="pedidoDto.destino" [formControl]="form.controls['destino']">
+        </mat-form-field>
+        <small *ngIf="form.controls['destino'].hasError('required') && form.controls['destino'].touched" class="mat-text-warn">Debe introducir la dirección de destino.</small>
+        </div>
+
+        <div class="pb-1">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Teléfono del Cliente" value="{{pedidoDto.client_phone}}" type="text"  [(ngModel)]="pedidoDto.client_phone" [formControl]="form.controls['client_phone']">
+        </mat-form-field>
+        <small *ngIf="form.controls['client_phone'].hasError('required') && form.controls['client_phone'].touched" class="mat-text-warn">Debe incluir el teléfono del cliente/destinatario.</small>
+        </div>
+      <button mat-raised-button color="primary" class="btn-block" type="submit" >Editar Pedido</button>
+    </div>
+    </div>
+  </form>
+</mat-step>
+</mat-vertical-stepper>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()"  color="primary" cdkFocusInitial>Cancelar</button>
+</div>

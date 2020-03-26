@@ -29,56 +29,56 @@
                     <ng-container matColumnDef="numero_pedido">
                         <mat-header-cell *matHeaderCellDef> Número </mat-header-cell>
                         <mat-cell *matCellDef="let pedido"
-                        [routerLink]="['/pedidos/pedido/',pedido.id]"> 
+                        [routerLink]="['/pedidos/',pedido._id]"> 
                         {{pedido.numero_pedido}}</mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="titulo">
                         <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
                         <mat-cell *matCellDef="let pedido"
-                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        [routerLink]="['/pedidos/',pedido._id]">
                         {{pedido.titulo}} </mat-cell>
                     </ng-container>
                     
                     <ng-container matColumnDef="origen">
                         <mat-header-cell *matHeaderCellDef> Origen </mat-header-cell>
                         <mat-cell class="stilo" *matCellDef="let pedido" 
-                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        [routerLink]="['/pedidos/',pedido._id]">
                         {{pedido.origen}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="destino">
                     <mat-header-cell *matHeaderCellDef> Destino </mat-header-cell>
                     <mat-cell class="stilo" *matCellDef="let pedido" 
-                    [routerLink]="['/pedidos/pedido/',pedido.id]"
+                    [routerLink]="['/pedidos/',pedido._id]"
                     > {{pedido.destino}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="created_date">
                         <mat-header-cell *matHeaderCellDef> Emitido </mat-header-cell>
                         <mat-cell class="stilo" *matCellDef="let pedido" 
-                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        [routerLink]="['/pedidos/',pedido._id]">
                         {{pedido.created_date | date:'dd-MM-yyyy HH:mm'}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="time_recogido">
                         <mat-header-cell *matHeaderCellDef> Recogido </mat-header-cell>
                         <mat-cell class="stilo" *matCellDef="let pedido" 
-                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        [routerLink]="['/pedidos/',pedido._id]">
                         {{pedido.time_recogido | date:'dd-MM-yyyy HH:mm'}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="time_entregado">
                         <mat-header-cell *matHeaderCellDef> Entregado </mat-header-cell>
                         <mat-cell class="stilo" *matCellDef="let pedido" 
-                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        [routerLink]="['/pedidos/',pedido._id]">
                         {{pedido.time_entregado | date:'dd-MM-yyyy HH:mm'}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="asignacion">
                     <mat-header-cell *matHeaderCellDef> Asignado </mat-header-cell>
                         <mat-cell class="stilo" *matCellDef="let pedido" 
-                        [routerLink]="['/pedidos/pedido/',pedido.id]">
+                        [routerLink]="['/pedidos/',pedido._id]">
                         {{pedido.asignacion != undefined ? (pedido.asignacion.fecha_asignacion | date:'dd-MM-yyyy HH:mm') : 'Sin asignar'}}
                         </mat-cell>
                     </ng-container>
