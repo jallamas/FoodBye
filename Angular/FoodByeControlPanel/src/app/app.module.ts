@@ -27,7 +27,7 @@ import {
   MatSnackBarModule,
 } from '@angular/material';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -116,7 +116,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     UsuariosService,
     AuthService,
-    PedidosService
+    PedidosService,
+    { provide: MAT_DIALOG_DATA, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

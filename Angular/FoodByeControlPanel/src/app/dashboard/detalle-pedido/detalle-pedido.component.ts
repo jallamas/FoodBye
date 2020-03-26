@@ -56,7 +56,7 @@ export class DetallePedidoComponent implements OnInit {
         
         if (resp.asignacion != undefined){
             this.pedidoDto.time_asignado = resp.asignacion.fecha_asignacion;
-            this.usuarioService.getUsuario(resp.asignacion._id).subscribe(resp2 =>{
+            this.usuarioService.getUsuario(resp.asignacion.user_id).subscribe(resp2 =>{
               this.pedidoDto.name_asignado = resp2.fullname;
               this.pedidoDto.phone_asignado = resp2.phone;
             });
