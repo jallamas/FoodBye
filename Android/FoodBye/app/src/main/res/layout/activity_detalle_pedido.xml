@@ -21,6 +21,7 @@
         android:clipToPadding="false"
         android:scrollbars="none"
         android:scrollingCache="true"
+        app:layout_anchorGravity="center"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:visibility="visible">
 
@@ -73,7 +74,6 @@
                             android:id="@+id/textViewTituloDetallePedido"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_large"
                             android:text="@string/text_titulo_pedido"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                             android:textColor="@color/grey_90" />
@@ -131,7 +131,7 @@
 
                             <TextView
                                 android:id="@+id/textViewOrigen"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_middle"
                                 android:lineSpacingExtra="2dp"
@@ -139,6 +139,34 @@
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_60" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearOrigen"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/imageButton2"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="0"
+                                android:background="@color/colorAccent"
+                                app:srcCompat="@drawable/ic_navigation_white_24dp" />
+
+                            <TextView
+                                android:id="@+id/textViewIrOrigen"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/text_ir_ruta"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -163,8 +191,38 @@
                                 android:layout_marginTop="@dimen/spacing_middle"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/text_origen_destino"
+                                android:textAlignment="viewStart"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_60" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearDestino"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/imageButtonIrAOrigen"
+                                style="@style/Widget.AppCompat.ImageButton"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="0"
+                                android:background="@color/colorAccent"
+                                app:srcCompat="@drawable/ic_navigation_white_24dp" />
+
+                            <TextView
+                                android:id="@+id/textViewIrDestino"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/text_ir_ruta"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -382,4 +440,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

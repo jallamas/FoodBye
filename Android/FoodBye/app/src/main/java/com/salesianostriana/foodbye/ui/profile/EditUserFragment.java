@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,8 @@ public class EditUserFragment extends Fragment {
     private TextView tvChangePassword;
     private Button btnSaveProfile;
     private UserViewModel userViewModel;
+    private ProgressBar progressBarPerfil;
+    private LinearLayout dataprofile;
 
     public static EditUserFragment newInstance(){
         return new EditUserFragment();
@@ -61,6 +65,11 @@ public class EditUserFragment extends Fragment {
         etPhone = v.findViewById(R.id.editTextProfilePhone);
         tvChangePassword = v.findViewById(R.id.textViewProfileChangePassword);
         btnSaveProfile = v.findViewById(R.id.buttonProfileSave);
+        progressBarPerfil = v.findViewById(R.id.progressBarPerfil);
+        dataprofile = v.findViewById(R.id.linearLayoutdataPerfil);
+
+        dataprofile.setVisibility(View.GONE);
+        progressBarPerfil.setVisibility(View.VISIBLE);
 
         btnSaveProfile.setOnClickListener(view -> {
             String fullname = etFullname.getText().toString();
@@ -94,6 +103,9 @@ public class EditUserFragment extends Fragment {
                 etFullname.setText(userResponse.getFullname());
                 etEmail.setText(userResponse.getEmail());
                 etPhone.setText(userResponse.getPhone());
+
+                dataprofile.setVisibility(View.VISIBLE);
+                progressBarPerfil.setVisibility(View.GONE);
 
                 if(userResponse.getAvatar()!=null){
                     GlideUrl glideUrl = new GlideUrl(Constantes.URL_BASE + "/api/avatar/" + userResponse.getId()
