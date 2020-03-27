@@ -54,3 +54,4 @@ Carpeta con toda la documentación generada. Incluye:
   - Sketching de las aplicaciones de Android y Angular tanto en formato para AdobeXD como en PDF.
   - Documentos iniciales del proyecto.
   - Memoria Final tanto en formato [MsWord](https://github.com/jallamas/FoodBye/blob/develop-docs/Documentaci%C3%B3n/Memoria%20de%20Proyecto%20Final.docx) como en formato [PDF](https://github.com/jallamas/FoodBye/blob/develop-docs/Documentaci%C3%B3n/Memoria%20de%20Proyecto%20Final.pdf) 
+  - [Documento de seguimiento del proyecto](https://github.com/jallamas/FoodBye/blob/master/Documentaci%C3%B3n/DSP%20-%20Documento%20de%20seguimiento%20del%20proyecto.xlsx)
