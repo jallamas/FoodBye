@@ -1,6 +1,7 @@
 package com.salesianostriana.foodbye.ui.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -9,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.salesianostriana.foodbye.R;
 import com.salesianostriana.foodbye.common.Constantes;
 import com.salesianostriana.foodbye.common.MyApp;
@@ -29,6 +32,8 @@ public class EditPasswordActivity extends AppCompatActivity {
     private EditText etPassword,etNewPassword1,etNewPassword2;
     private Button btnSave;
     private UserViewModel userViewModel;
+    private NestedScrollView ntData;
+    private ProgressBar pbCambioPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,11 @@ public class EditPasswordActivity extends AppCompatActivity {
         etNewPassword1 = findViewById(R.id.editTextProfileNewPassword1);
         etNewPassword2 = findViewById(R.id.editTextProfileNewPassword2);
         btnSave = findViewById(R.id.buttonProfileChangePassword);
+        ntData= findViewById(R.id.DataCambioPass);
+        pbCambioPassword = findViewById(R.id.progressBarPassword);
+
+        pbCambioPassword.setVisibility(View.VISIBLE);
+        ntData.setVisibility(View.GONE);
 
         btnSave.setOnClickListener(view -> {
             String password = etPassword.getText().toString();
@@ -65,6 +75,10 @@ public class EditPasswordActivity extends AppCompatActivity {
         userViewModel.getUserById(userId).observe(this, new Observer<UserResponse>() {
             @Override
             public void onChanged(UserResponse userResponse) {
+
+                pbCambioPassword.setVisibility(View.GONE);
+                ntData.setVisibility(View.VISIBLE);
+
                 if(userResponse.getAvatar()!=null){
                     GlideUrl glideUrl = new GlideUrl(Constantes.URL_BASE + "/api/avatar/" + userResponse.getId()
                             ,new LazyHeaders.Builder()
@@ -73,11 +87,13 @@ public class EditPasswordActivity extends AppCompatActivity {
                     Glide
                             .with(MyApp.getContext())
                             .load(glideUrl)
+                            .apply(RequestOptions.circleCropTransform())
                             .into(ivFoto);
                 } else {
                     Glide
                             .with(MyApp.getContext())
                             .load(getDrawable(R.drawable.ic_account_circle_white_24dp))
+                            .apply(RequestOptions.circleCropTransform())
                             .into(ivFoto);
                 }
             }
