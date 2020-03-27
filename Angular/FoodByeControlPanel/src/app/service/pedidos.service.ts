@@ -74,5 +74,14 @@ export class PedidosService {
     );
   }
 
+  desasignarPedido(id:String): Observable<Pedido>{
+    console.log(localStorage.getItem('token'));
+    
+    return this.http.put<Pedido>(
+      urlPedido +'abandonar/'+id,
+      null,
+      requestOptions
+    );
+  }
 
 }

@@ -38,7 +38,7 @@ export class SigninComponent implements OnInit {
     this.authentication.login(this.loginDto).subscribe(result => {
       this.authentication.setToken(result.token);
       localStorage.setItem('token',result.token);
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/pedidos']);
     },
     error => {
       console.log("ERROR");

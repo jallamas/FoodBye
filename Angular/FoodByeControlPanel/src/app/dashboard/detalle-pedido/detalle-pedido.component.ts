@@ -39,6 +39,8 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   getDataPedido(){
+    this.pedidoDto.time_asignado=null;
+    
     this.route.paramMap.subscribe(params => {
       this.mostrarSpinner=true;
       this.idPedidoDetail = params.get("id");
@@ -63,6 +65,41 @@ export class DetallePedidoComponent implements OnInit {
         }
       });
     });
+  }
+
+  desasignar():void{
+    this.route.paramMap.subscribe(params => {
+      this.mostrarSpinner=true;
+      this.idPedidoDetail = params.get("id");
+      this.pedidosService.desasignarPedido(this.idPedidoDetail).subscribe(resp => {
+        this.mostrarSpinner=false;
+        this.pedidoDto.titulo = resp.titulo;
+        this.pedidoDto.descripcion = resp.descripcion;
+        this.pedidoDto.created_date = resp.created_date;
+        this.pedidoDto.client_phone = resp.client_phone;
+        this.pedidoDto.origen = resp.origen;
+        this.pedidoDto.destino = resp.destino;
+        this.pedidoDto.numero_pedido = resp.numero_pedido;
+        this.pedidoDto.time_recogido = resp.time_recogido;
+        this.pedidoDto.time_entregado = resp.time_entregado;
+        
+        if (resp.asignacion != undefined){
+            this.pedidoDto.time_asignado = resp.asignacion.fecha_asignacion;
+            this.usuarioService.getUsuario(resp.asignacion.user_id).subscribe(resp2 =>{
+              this.pedidoDto.name_asignado = resp2.fullname;
+              this.pedidoDto.phone_asignado = resp2.phone;
+            });
+        }
+      });
+    });
+  }
+
+  mostrarDesasignar():boolean{
+    if (this.pedidoDto.time_recogido==undefined && this.pedidoDto.time_asignado!=undefined){
+      return true;
+    } else{
+      return false;
+    }
   }
 
   mostrarDialogo(): void {
