@@ -79,6 +79,7 @@ export class PedidosService {
     
     return this.http.put<Pedido>(
       urlPedido +'abandonar/'+id,
+      null,
       requestOptions
     );
   }

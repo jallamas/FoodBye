@@ -39,6 +39,8 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   getDataPedido(){
+    this.pedidoDto.time_asignado=null;
+    
     this.route.paramMap.subscribe(params => {
       this.mostrarSpinner=true;
       this.idPedidoDetail = params.get("id");
@@ -93,7 +95,7 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   mostrarDesasignar():boolean{
-    if (this.pedidoDto.time_recogido==undefined){
+    if (this.pedidoDto.time_recogido==undefined && this.pedidoDto.time_asignado!=undefined){
       return true;
     } else{
       return false;
