@@ -72,22 +72,13 @@ public class DetallePedidoActivity extends AppCompatActivity {
 
                 pbLoading.setVisibility(View.GONE);
                 nsvContenidoDetalle.setVisibility(View.VISIBLE);
-/*
-                FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent mapa = new Intent(DetallePedidoActivity.this,MapRutaActivity.class);
-                        mapa.putExtra(Constantes.IR_A_RUTA,pedidoResponse.getDestino());
-                        startActivity(mapa);
-                    }
-                });*/
+
 
                 lyOrigen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent mapa = new Intent(DetallePedidoActivity.this,MapRutaActivity.class);
-                        mapa.putExtra(Constantes.IR_A_RUTA,pedidoResponse.getDestino());
+                        mapa.putExtra(Constantes.IR_A_RUTA,pedidoResponse.getOrigen());
                         startActivity(mapa);
                     }
                 });
