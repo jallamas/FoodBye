@@ -11,21 +11,21 @@
 
         <div class="pb-1">
         <mat-form-field style="width: 100%">
-            <input matInput placeholder="Descripción" type="text"  [(ngModel)]="pedidoNuevoDto.descripcion" [formControl]="form.controls['descripcion']">
+            <input matInput placeholder="Descripción / Comentarios" type="text"  [(ngModel)]="pedidoNuevoDto.descripcion" [formControl]="form.controls['descripcion']">
         </mat-form-field>
         <small *ngIf="form.controls['descripcion'].hasError('required') && form.controls['descripcion'].touched" class="mat-text-warn">Debe añadir una descripción.</small>
         </div>
 
         <div class="pb-1">
         <mat-form-field style="width: 100%">
-            <input matInput placeholder="Origen" type="text"  [(ngModel)]="pedidoNuevoDto.origen" [formControl]="form.controls['origen']">
+            <input matInput placeholder="Origen (calle/avenida nombrecalle, número y piso, localidad)" type="text"  [(ngModel)]="pedidoNuevoDto.origen" [formControl]="form.controls['origen']">
         </mat-form-field>
         <small *ngIf="form.controls['origen'].hasError('required') && form.controls['origen'].touched" class="mat-text-warn">Debe introducir la dirección de origen.</small>
         </div>
 
         <div class="pb-1">
         <mat-form-field style="width: 100%">
-            <input matInput placeholder="Destino" type="text"  [(ngModel)]="pedidoNuevoDto.destino" [formControl]="form.controls['destino']">
+            <input matInput placeholder="Destino (calle/avenida nombrecalle, número y piso, localidad)" type="text"  [(ngModel)]="pedidoNuevoDto.destino" [formControl]="form.controls['destino']">
         </mat-form-field>
         <small *ngIf="form.controls['destino'].hasError('required') && form.controls['destino'].touched" class="mat-text-warn">Debe introducir la dirección de destino.</small>
         </div>
