@@ -49,8 +49,13 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
 
             if (holder.mItem.getRealizado()){
                 holder.ivRealizado.setVisibility(View.GONE);
+                holder.ivDone.setVisibility(View.VISIBLE);
+                holder.tvRealizado.setText(R.string.text_realizado);
+            }else {
+                holder.ivRealizado.setVisibility(View.VISIBLE);
+                holder.ivDone.setVisibility(View.GONE);
+                holder.tvRealizado.setText(R.string.pedido_list_alert);
             }
-            holder.ivRealizado.setVisibility(View.VISIBLE);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,7 +92,7 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
         public final View mView;
         public PedidoResponse mItem;
         public TextView tvTitle, tvOrigen, tvDestino, tvRealizado, tvCodigo;
-        public ImageView ivMenu, ivRealizado;
+        public ImageView ivMenu, ivRealizado, ivDone;
 
         public ViewHolder(View view) {
             super(view);
@@ -99,6 +104,7 @@ public class MyPedidosRecyclerViewAdapter extends RecyclerView.Adapter<MyPedidos
             tvRealizado = view.findViewById(R.id.textViewPendiente);
             ivRealizado = view.findViewById(R.id.imageViewPendiente);
             tvCodigo = view.findViewById(R.id.textViewMyPedidoCodigo);
+            ivDone = view.findViewById(R.id.imageViewDone);
         }
     }
 

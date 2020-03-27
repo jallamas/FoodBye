@@ -147,5 +147,8 @@
     <string name="mensaje_asignar_pedido">¿Quieres realizar este pedido?</string>
     <string name="si">Si</string>
     <string name="no">No</string>
+    <string name="title_activity_map_ruta">Map</string>
+    <string name="text_ir_ruta">Ver ruta en el mapa</string>
+    <string name="text_cod_pedido">Código de pedido</string>
 
 </resources>

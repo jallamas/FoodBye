@@ -1,6 +1,7 @@
 package com.salesianostriana.foodbye;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,7 +52,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
     CheckBox cbRecogido, cbEntregado;
     ProgressBar pbLoading;
     NestedScrollView nsvContenidoDetalle;
-    LinearLayout lyInformacion;
+    LinearLayout lyInformacion, lyOrigen, lyDestino;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,8 @@ public class DetallePedidoActivity extends AppCompatActivity {
         pedidoDetallesViewModel = new ViewModelProvider(this).get(PedidoDetallesViewModel.class);
         bundle = getIntent().getExtras();
         idUse = bundle.getString(Constantes.EXTRA_ID_PEDIDO);
+
+
         pedidoDetallesViewModel.getPedido(idUse).observe(this, new Observer<PedidoResponse>() {
             TimeZone timeZone = TimeZone.getTimeZone("GMT-0800");
             @Override
@@ -69,11 +72,40 @@ public class DetallePedidoActivity extends AppCompatActivity {
 
                 pbLoading.setVisibility(View.GONE);
                 nsvContenidoDetalle.setVisibility(View.VISIBLE);
+/*
+                FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent mapa = new Intent(DetallePedidoActivity.this,MapRutaActivity.class);
+                        mapa.putExtra(Constantes.IR_A_RUTA,pedidoResponse.getDestino());
+                        startActivity(mapa);
+                    }
+                });*/
+
+                lyOrigen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent mapa = new Intent(DetallePedidoActivity.this,MapRutaActivity.class);
+                        mapa.putExtra(Constantes.IR_A_RUTA,pedidoResponse.getDestino());
+                        startActivity(mapa);
+                    }
+                });
+
+                lyDestino.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent mapa = new Intent(DetallePedidoActivity.this,MapRutaActivity.class);
+                        mapa.putExtra(Constantes.IR_A_RUTA,pedidoResponse.getDestino());
+                        startActivity(mapa);
+                    }
+                });
 
                 if(pedidoResponse.getTimeRecogido()!=null){
                     cbEntregado.setVisibility(View.VISIBLE);
                     cbRecogido.setChecked(true);
                     cbRecogido.setEnabled(false);
+
                     cbEntregado.setChecked(false);
                     cbEntregado.setEnabled(true);
                 }else{
@@ -260,6 +292,8 @@ public class DetallePedidoActivity extends AppCompatActivity {
         tvRealizado = findViewById(R.id.textViewRealizado);
         btnAsignar = findViewById(R.id.buttonAsignar);
         lyInformacion = findViewById(R.id.linearApartadoInfo);
+        lyOrigen = findViewById(R.id.linearOrigen);
+        lyDestino = findViewById(R.id.linearDestino);
 
         nsvContenidoDetalle.setVisibility(View.GONE);
         pbLoading.setVisibility(View.VISIBLE);
