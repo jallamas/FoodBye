@@ -8,11 +8,7 @@ export class MenuService {
 
   getAll() {
     return [
-      {
-        link: '/inicio',
-        label: this.translate.instant('Inicio'),
-        icon: 'home'
-      },
+
       {
         link: '/usuarios',
         label: this.translate.instant('Usuarios'),

@@ -9,15 +9,10 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
 import { ListaPedidosUsuarioComponent } from './lista-pedidos-usuario/lista-pedidos-usuario.component';
 
 export const DashboardRoutes: Routes = [
-  {
-    path: 'inicio',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
   { path:'usuarios', component:TodosUsuariosComponent, canActivate: [AuthGuard]},
   { path:'usuarios/usuario/:id', component:DetalleUsuarioComponent, canActivate: [AuthGuard]},
   { path:'pedidos', component:ListaPedidosComponent, canActivate: [AuthGuard]},
   { path:'pedidos/:id', component:DetallePedidoComponent, canActivate: [AuthGuard]},
   { path:'pedidos/usuario/:id', component:ListaPedidosUsuarioComponent, canActivate: [AuthGuard]},
-  { path: '', redirectTo: '/inicio', pathMatch: 'full',canActivate: [AuthGuard]}
+  { path: '', redirectTo: '/pedidos', pathMatch: 'full',canActivate: [AuthGuard]}
 ];

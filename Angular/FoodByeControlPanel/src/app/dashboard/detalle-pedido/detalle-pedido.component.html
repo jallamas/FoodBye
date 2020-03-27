@@ -77,6 +77,10 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end end">
+            <div *ngIf="mostrarDesasignar()">
+            <button mat-raised-button color="primary" (click)="desasignar()">
+                <mat-icon class="example-tab-icon">speaker_notes_off</mat-icon> Desasignar pedido</button>
+            </div>
             <button mat-icon-button color="primary"  (click)="mostrarDialogoToEdit()">
                 <mat-icon class="icon-display">edit</mat-icon>
             </button>
