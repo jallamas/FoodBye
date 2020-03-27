@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -40,7 +41,7 @@ public class EditUserFragment extends Fragment {
     private Button btnSaveProfile;
     private UserViewModel userViewModel;
     private ProgressBar progressBarPerfil;
-    private LinearLayout dataprofile;
+    private NestedScrollView dataprofile;
 
     public static EditUserFragment newInstance(){
         return new EditUserFragment();
@@ -66,7 +67,7 @@ public class EditUserFragment extends Fragment {
         tvChangePassword = v.findViewById(R.id.textViewProfileChangePassword);
         btnSaveProfile = v.findViewById(R.id.buttonProfileSave);
         progressBarPerfil = v.findViewById(R.id.progressBarPerfil);
-        dataprofile = v.findViewById(R.id.linearLayoutdataPerfil);
+        dataprofile = v.findViewById(R.id.nestedDataPerfil);
 
         dataprofile.setVisibility(View.GONE);
         progressBarPerfil.setVisibility(View.VISIBLE);

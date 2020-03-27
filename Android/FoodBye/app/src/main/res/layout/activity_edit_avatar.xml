@@ -1,73 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.EditAvatarActivity">
 
-    <ImageView
-        android:id="@+id/imageViewLogo2"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewProfileFoto2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_logo_foodbye" />
+    <ProgressBar
+        android:id="@+id/progressBarAvatar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/imageViewProfileFoto2"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLogo2"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedAvatarData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewProfileChangeAvatarTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/profile_title_changeavatar"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonProfileChangeAvatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/imageButtonProfileChangeAvatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSaveNewAvatar"
-        app:layout_constraintEnd_toEndOf="@+id/textViewProfileChangeAvatarTitle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/textViewProfileChangeAvatarTitle"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfileChangeAvatarTitle"
-        app:srcCompat="@drawable/ic_add_immage" />
+            <ImageView
+                android:id="@+id/imageViewLogo2"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewProfileFoto2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_logo_foodbye" />
 
-    <Button
-        android:id="@+id/buttonSaveNewAvatar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/holo_orange_light"
-        android:text="@string/btn_save_newavatar"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewProfileFoto2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageViewLogo2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonProfileChangeAvatar" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewProfileChangeAvatarTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/profile_title_changeavatar"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imageButtonProfileChangeAvatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo2" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
+
+                <ImageView
+                    android:id="@+id/imageViewProfileFoto2"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewLogo2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonProfileChangeAvatar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageViewProfileFoto2"
+                    app:layout_constraintEnd_toEndOf="@+id/imageViewProfileFoto2"
+                    app:srcCompat="@drawable/ic_create_black_24dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/buttonSaveNewAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorAccent"
+                android:text="@string/btn_save_newavatar"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewProfileFoto2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/imageViewLogo2"
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonProfileChangeAvatar" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

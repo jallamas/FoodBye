@@ -2,6 +2,7 @@ package com.salesianostriana.foodbye.ui.profile;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
@@ -47,6 +49,8 @@ public class EditAvatarActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     private Uri uriSelected;
     private IService service;
+    private NestedScrollView nestedAvatarData;
+    private ProgressBar pbLoadingAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,11 @@ public class EditAvatarActivity extends AppCompatActivity {
         ivNewFoto = findViewById(R.id.imageViewProfileFoto2);
         ibNewFoto = findViewById(R.id.imageButtonProfileChangeAvatar);
         btnSaveAvatar = findViewById(R.id.buttonSaveNewAvatar);
+        nestedAvatarData= findViewById(R.id.nestedAvatarData);
+        pbLoadingAvatar=findViewById(R.id.progressBarAvatar);
+
+        pbLoadingAvatar.setVisibility(View.VISIBLE);
+        nestedAvatarData.setVisibility(View.GONE);
 
         ibNewFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +119,8 @@ public class EditAvatarActivity extends AppCompatActivity {
         userViewModel.getUserById(userId).observe(this, new Observer<UserResponse>() {
             @Override
             public void onChanged(UserResponse userResponse) {
+                pbLoadingAvatar.setVisibility(View.GONE);
+                nestedAvatarData.setVisibility(View.VISIBLE);
                 SharedPreferencesManager.setSomeStringValue("fullname", userResponse.getFullname());
                 if(userResponse.getAvatar()!=null){
                     GlideUrl glideUrl = new GlideUrl(Constantes.URL_BASE + "/api/avatar/" + userResponse.getId()
