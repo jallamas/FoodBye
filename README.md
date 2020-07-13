@@ -1,5 +1,5 @@
 # FOODBYE
-Proyecto de fin de ciclo
+Proyecto final de Ciclo Formativo de Grado Superior "Desarrollo de Aplicaciones Multiplataforma"
 
 Tecnologías usadas : Angular, Android, Node.js, Express, Mongoose, Passport
 
